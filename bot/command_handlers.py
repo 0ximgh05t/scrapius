@@ -67,6 +67,11 @@ class CommandHandlers:
             await self._handle_setsystem(bot_token, chat_id, conn, arg)
         elif command == '/setprompt':
             await self._handle_setprompt(bot_token, chat_id, conn, arg)
+        # NEW: Cookie management commands
+        elif command == '/cookies':
+            await self._handle_cookies(bot_token, chat_id, conn)
+        elif command == '/clearcookies':
+            await self._handle_clearcookies(bot_token, chat_id, conn)
         else:
             send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
     
@@ -130,6 +135,10 @@ class CommandHandlers:
 
 🔐 <b>Facebook Login:</b>
 /login - Login to Facebook
+/cookies - Check cookie status & expiration
+/clearcookies - Clear saved cookies
+
+⚠️ <b>Cookie Expiration:</b> Your cookies expire on <b>September 2, 2026</b>
 """
         send_telegram_message(bot_token, chat_id, help_text, parse_mode="HTML")
     
@@ -373,7 +382,11 @@ Current Settings:
         """Handle /login command."""
         login_msg = """🔐 <b>Facebook Login</b>
 
-Choose login method:"""
+Choose login method:
+
+⚠️ <b>Server Environment Note:</b>
+• <b>Manual Browser</b> requires GUI (won't work on headless Linux servers)
+• <b>Import Cookies</b> works everywhere and is recommended for servers"""
         
         keyboard = {
             "inline_keyboard": [
@@ -717,3 +730,76 @@ Please try again with the correct format."""
             send_telegram_message(bot_token, chat_id, "✅ <b>User prompt updated.</b>", parse_mode="HTML")
         else:
             send_telegram_message(bot_token, chat_id, "📝 <b>Usage:</b> /setprompt &lt;text&gt;", parse_mode="HTML")
+
+    async def _handle_cookies(self, bot_token: str, chat_id: str, conn) -> None:
+        """Handle /cookies command - show cookie status."""
+        try:
+            import os
+            import json
+            from datetime import datetime
+            
+            cookie_path = get_cookie_store_path()
+            
+            if os.path.exists(cookie_path):
+                # Read cookie file to get expiration info
+                with open(cookie_path, 'r') as f:
+                    cookies = json.load(f)
+                
+                # Find the earliest expiration date
+                earliest_expiry = None
+                cookie_count = len(cookies)
+                
+                for cookie in cookies:
+                    if 'expirationDate' in cookie:
+                        expiry_timestamp = cookie['expirationDate']
+                        expiry_date = datetime.fromtimestamp(expiry_timestamp)
+                        if earliest_expiry is None or expiry_date < earliest_expiry:
+                            earliest_expiry = expiry_date
+                
+                # Check session validity
+                driver = create_reliable_webdriver(headless=True)
+                cookies_loaded = load_cookies(driver, cookie_path)
+                session_valid = False
+                
+                if cookies_loaded:
+                    session_valid = is_facebook_session_valid(driver)
+                
+                driver.quit()
+                
+                # Format expiration date
+                expiry_str = earliest_expiry.strftime("%B %d, %Y at %H:%M") if earliest_expiry else "Unknown"
+                
+                status_msg = f"""🍪 <b>Cookie Status:</b>
+
+📊 <b>Count:</b> {cookie_count} cookies
+🔐 <b>Session:</b> {'✅ Active' if session_valid else '❌ Invalid'}
+⏰ <b>Expires:</b> {expiry_str}
+📁 <b>File:</b> {os.path.basename(cookie_path)}
+
+{'✅ <b>All good!</b> Cookies are working.' if session_valid else '❌ <b>Session expired!</b> Use /login to refresh.'}"""
+                
+                send_telegram_message(bot_token, chat_id, status_msg, parse_mode="HTML")
+            else:
+                send_telegram_message(bot_token, chat_id, "❌ <b>No cookies found.</b>\n\nUse /login to authenticate with Facebook.", parse_mode="HTML")
+                
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error checking cookies:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error checking cookie status: {e}")
+
+    async def _handle_clearcookies(self, bot_token: str, chat_id: str, conn) -> None:
+        """Handle /clearcookies command - clear all cookies."""
+        try:
+            import os
+            cookie_path = get_cookie_store_path()
+            
+            if os.path.exists(cookie_path):
+                send_telegram_message(bot_token, chat_id, "🧹 <b>Clearing cookies...</b>", parse_mode="HTML")
+                os.remove(cookie_path)
+                logging.info(f"Cleared cookies from {cookie_path}")
+                send_telegram_message(bot_token, chat_id, "✅ <b>Cookies cleared successfully!</b>\n\nUse /login to authenticate again.", parse_mode="HTML")
+            else:
+                send_telegram_message(bot_token, chat_id, "❌ <b>No cookies to clear.</b>", parse_mode="HTML")
+                
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error clearing cookies:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error clearing cookies: {e}")
