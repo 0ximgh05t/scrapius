@@ -1,0 +1,22 @@
+# Core Dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+python-dotenv>=1.0.0
+
+# Selenium & WebDriver
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# AI & Processing
+openai>=1.0.0
+dateparser>=1.1.8
+tenacity>=8.2.0
+
+# System & Utilities
+pyperclip>=1.8.2
+
+# Optional: Telegram Bot Library (if using telegram_bot_controller.py)
+# python-telegram-bot>=20.0
+
+# Windows-specific (automatically installed on Windows)
+# pywin32  # Installed automatically on Windows Python
