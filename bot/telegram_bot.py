@@ -107,10 +107,26 @@ class ScrapiusTelegramBot:
                     await self.command_handlers.handle_callback_query(upd, self.bot_token, self.chat_ids, conn)
                     continue
                 
-                # Handle text commands
-                cmd = extract_commands(upd)
-                if cmd and cmd['chat_id'] in self.chat_ids:
-                    await self.command_handlers.handle_text_command(cmd, self.bot_token, conn)
+                # Handle text messages
+                if 'message' in upd and 'text' in upd['message']:
+                    msg = upd['message']
+                    chat_id = str(msg.get('chat', {}).get('id', ''))
+                    text = msg.get('text', '')
+                    
+                    # Only process messages from allowed chat IDs
+                    if chat_id not in self.chat_ids:
+                        continue
+                    
+                    # Check if user is in a login flow state (waiting for cookies, etc.)
+                    if chat_id in self.command_handlers.login_states:
+                        # Process as login flow message (cookies, credentials, etc.)
+                        await self.command_handlers._handle_login_flow(self.bot_token, chat_id, conn, '', text)
+                        continue
+                    
+                    # Handle regular commands (starting with /)
+                    cmd = extract_commands(upd)
+                    if cmd:
+                        await self.command_handlers.handle_text_command(cmd, self.bot_token, conn)
             
             # Save last update ID
             botsettings_set(conn, 'last_update_id', str(self.last_update_id))
