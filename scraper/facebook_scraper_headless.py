@@ -1041,8 +1041,23 @@ def scrape_authenticated_group(
                     # Process all posts regardless of URL availability
                     # URLs are nice to have but not required for content processing
                     
-                    # For incremental scraping, we'll check content hash after extraction
-                    # No early stopping here - we need the content first
+                    # EARLY DUPLICATE CHECK: Get basic content before "See more" clicking
+                    if most_recent_hash:
+                        try:
+                            # Get basic text content without expanding
+                            basic_text = post_element.text.strip()[:200] if post_element.text else ""
+                            if basic_text:
+                                # Quick hash check - if this matches recent hash, skip expensive operations
+                                import hashlib
+                                basic_normalized = ' '.join(basic_text.split())
+                                basic_hash = hashlib.md5(basic_normalized.encode('utf-8')).hexdigest()
+                                if basic_hash == most_recent_hash:
+                                    logging.info(f"🚀 Early duplicate detected - skipping 'See more' click for {temp_post_id or 'unknown'}")
+                                    duplicate_found = True
+                                    extracted_count = num_posts  # Force completion
+                                    break
+                        except Exception:
+                            pass  # If early check fails, continue with normal processing
 
                     # First, try to click "See more" to expand content
                     try:

@@ -57,15 +57,13 @@ def load_cookies(driver: WebDriver, file_path: str, target_url: str = None) -> b
             except Exception:
                 continue
         
-        # Navigate to target URL or refresh current page
+        # Only navigate to target URL if specified, otherwise cookies are ready
         if target_url:
             driver.get(target_url)
-        else:
-            driver.refresh()
         
-        # Add delay to let session stabilize and avoid bot detection
+        # Minimal delay for session stability (reduced from 3s to 1s)
         import time
-        time.sleep(3)
+        time.sleep(1)
             
         return True
     except Exception:
