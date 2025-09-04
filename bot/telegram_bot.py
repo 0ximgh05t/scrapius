@@ -95,14 +95,9 @@ class ScrapiusTelegramBot:
     async def handle_telegram_updates(self, conn) -> None:
         """Handle incoming Telegram messages and commands."""
         try:
-            # Debug: Log Telegram API call
+            # Get Telegram updates
             offset = self.last_update_id + 1 if self.last_update_id else None
-            logging.info(f"🔍 Calling Telegram API with offset: {offset}")
-            
             updates = get_updates(self.bot_token, offset=offset, timeout=1)
-            
-            # Debug: Log API response
-            logging.info(f"🔍 Telegram API response: ok={updates.get('ok')}, result_count={len(updates.get('result', []))}")
             
             if not updates.get('ok') or not updates.get('result'):
                 return
@@ -248,8 +243,8 @@ class ScrapiusTelegramBot:
         try:
             while True:
                 loop_count += 1
-                # Heartbeat every 100 loops (roughly every 10 seconds)
-                if loop_count % 100 == 0:
+                # Heartbeat every 600 loops (roughly every 60 seconds)
+                if loop_count % 600 == 0:
                     logging.info(f"💓 Bot heartbeat - loop {loop_count} - responsive and running")
                 conn = get_db_connection()
                 if not conn:
@@ -267,10 +262,6 @@ class ScrapiusTelegramBot:
                     
                     # Very short delay for maximum responsiveness during manual login
                     await asyncio.sleep(0.1)
-                    
-                    # Debug: Log every 10 loops to see if main loop is running
-                    if loop_count % 10 == 0:
-                        logging.info(f"🔍 Main loop running - iteration {loop_count}")
                     
                 finally:
                     conn.close()
