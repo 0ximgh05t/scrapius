@@ -459,13 +459,10 @@ Choose login method:
                                 server_ip = "YOUR_SERVER_IP"
                             
                             send_telegram_message(bot_token, chat_id, 
-                                "🖥️ <b>Virtual display & VNC started!</b>\n\n"
-                                "📱 <b>VNC APP METHOD (Recommended):</b>\n"
-                                "1. Download <b>VNC Viewer</b> app\n"
-                                "2. Connect to: <code>" + server_ip + ":5901</code>\n"
-                                "3. No password needed\n\n"
-                                "🌐 <b>Web VNC will be available shortly...</b>\n\n"
-                                "Browser opening in 5 seconds...", 
+                                "🖥️ <b>VNC Ready!</b>\n\n"
+                                "Connect: <code>" + server_ip + ":5901</code>\n"
+                                "Or: <code>ufrg.l.dedikuoti.lt:5901</code>\n\n"
+                                "Opening Facebook browser...", 
                                 parse_mode="HTML")
                         except Exception as vnc_error:
                             send_telegram_message(bot_token, chat_id, 
@@ -493,17 +490,15 @@ Choose login method:
                                     time.sleep(3)
                                     
                                     send_telegram_message(bot_token, chat_id, 
-                                        "🌐 <b>WEB VNC AVAILABLE!</b>\n\n"
-                                        "🎉 <b>EASIEST METHOD:</b>\n"
-                                        "Open browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
-                                        "Click 'Connect' - no app needed!\n\n"
-                                        "📱 Or use VNC Viewer app: <code>" + server_ip + ":5901</code>", 
+                                        "🌐 <b>Web VNC Ready!</b>\n\n"
+                                        "Browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
+                                        "Or: <code>http://ufrg.l.dedikuoti.lt:6080/vnc.html</code>", 
                                         parse_mode="HTML")
                                 else:
                                     send_telegram_message(bot_token, chat_id, 
-                                        "⚠️ <b>VNC server not ready yet</b>\n\n"
-                                        "Use VNC Viewer app: <code>" + server_ip + ":5901</code>\n"
-                                        "Wait 10-15 seconds before connecting.", 
+                                        "⚠️ <b>VNC starting...</b>\n\n"
+                                        "Connect: <code>" + server_ip + ":5901</code>\n"
+                                        "Wait 10 seconds before connecting.", 
                                         parse_mode="HTML")
                         except Exception as web_vnc_error:
                             logging.warning(f"Web VNC setup failed: {web_vnc_error}")
@@ -528,16 +523,18 @@ Choose login method:
                             parse_mode="HTML")
                         return
                 
-                # Create browser with display
+                # Create browser with display (ensure it uses the virtual display)
                 manual_driver = create_reliable_webdriver(headless=False)
+                
+                # Navigate to Facebook and maximize window
                 manual_driver.get("https://www.facebook.com/")
-                logging.info("✅ Manual login browser opened")
+                manual_driver.maximize_window()  # Make sure window is visible
+                logging.info("✅ Manual login browser opened on virtual display")
                 
                 send_telegram_message(bot_token, chat_id, 
-                    "✅ <b>Browser opened!</b>\n\n"
-                    "🔗 Navigate to Facebook and complete login\n"
-                    "🍪 Cookies will be saved automatically\n"
-                    "⏱️ Browser will close after successful login", 
+                    "✅ <b>Facebook opened!</b>\n\n"
+                    "You should now see Facebook in your VNC connection.\n"
+                    "Complete the login and cookies will be saved automatically.", 
                     parse_mode="HTML")
                 
                 # Monitor for login completion
