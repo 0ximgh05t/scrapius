@@ -37,6 +37,7 @@ class CommandHandlers:
         arg = cmd.get('arg', '')
         
         logging.info(f"🔍 handle_text_command called: {command} from {chat_id}")
+        logging.info(f"🔍 Command type: {type(command)}, repr: {repr(command)}")
         
         # Handle login flow states
         if chat_id in self.login_states:
@@ -44,6 +45,7 @@ class CommandHandlers:
             return
         
         # Regular commands
+        logging.info(f"🔍 Starting command routing for: '{command}'")
         if command == '/start':
             await self._handle_start(bot_token, chat_id, conn)
         elif command == '/config':
@@ -80,6 +82,9 @@ class CommandHandlers:
             await self._handle_updategroup(bot_token, chat_id, conn, arg)
         elif command == '/done':
             logging.info(f"🔍 Routing to _handle_done for {chat_id}")
+            await self._handle_done(bot_token, chat_id, conn)
+        elif command.strip() == '/done':  # Try with strip
+            logging.info(f"🔍 Routing to _handle_done (stripped) for {chat_id}")
             await self._handle_done(bot_token, chat_id, conn)
         elif command == '/cancel':
             logging.info(f"🔍 Routing to _handle_cancel for {chat_id}")
