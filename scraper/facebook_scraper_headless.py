@@ -841,10 +841,28 @@ def scrape_authenticated_group(
             session_invalid = True
             error_type = "Account blocked/restricted"
         
-        if session_invalid:
-             logging.error(f"❌ SESSION INVALID! {error_type}")
-             logging.error(f"❌ Current URL: {driver.current_url}")
-             logging.error(f"❌ You need to refresh your cookies or complete verification!")
+                if session_invalid:
+            logging.error(f"❌ SESSION INVALID! {error_type}")
+            logging.error(f"❌ Current URL: {driver.current_url}")
+            
+            # DEBUG: Let's see what Facebook is actually showing
+            try:
+                page_title = driver.title
+                logging.error(f"❌ Page Title: {page_title}")
+                
+                # Look for specific error messages or content
+                body_text = driver.find_element(By.TAG_NAME, "body").text[:500]
+                logging.error(f"❌ Page Content (first 500 chars): {body_text}")
+                
+                # Check for specific Facebook error elements
+                error_elements = driver.find_elements(By.CSS_SELECTOR, "[role='alert'], .error, .warning, [data-testid*='error']")
+                if error_elements:
+                    for elem in error_elements[:3]:  # First 3 error elements
+                        logging.error(f"❌ Error Element: {elem.text[:200]}")
+            except Exception as debug_e:
+                logging.error(f"❌ Could not get page debug info: {debug_e}")
+            
+            logging.error(f"❌ You need to refresh your cookies or complete verification!")
              
              # Send Telegram notification about session failure
              try:
