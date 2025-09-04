@@ -1,95 +1,66 @@
 🤖 Starting Scrapius - Clean Architecture Version
-2025-09-05 01:43:28,135 - INFO - Database 'insights.db' initialized with Groups and Posts tables created or verified.
-2025-09-05 01:43:28,136 - INFO - ✅ Database initialized
-2025-09-05 01:43:28,136 - INFO - 🤖 Scrapius Telegram Bot initialized
-2025-09-05 01:43:28,137 - INFO - 🔧 Allowed chat IDs: ['-1002910329593', '632575874']
-2025-09-05 01:43:28,137 - INFO - 🤖 Bot token length: 46
-2025-09-05 01:43:28,137 - INFO - 🚀 Scrapius bot started - entering main loop
-2025-09-05 01:43:29,381 - INFO - 📊 Hourly limit changed from 6 to 1 - regenerating schedule
-2025-09-05 01:43:45,487 - INFO - 📊 Hourly limit changed from 1 to 30 - regenerating schedule
-2025-09-05 01:45:54,876 - INFO - 🎯 Found 2 groups to scrape
-2025-09-05 01:45:54,876 - INFO - 🆕 Creating new headless browser for scraping with unique profile
-2025-09-05 01:45:56,904 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
-2025-09-05 01:45:56,904 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
-2025-09-05 01:45:58,006 - INFO - ✅ Chrome remote debugging ready
-2025-09-05 01:45:58,265 - INFO - ====== WebDriver manager ======
-2025-09-05 01:46:00,128 - INFO - Get LATEST chromedriver version for google-chrome
-2025-09-05 01:46:00,511 - INFO - Get LATEST chromedriver version for google-chrome
-2025-09-05 01:46:00,740 - INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
-2025-09-05 01:46:00,742 - INFO - 🔧 Set executable permissions on ChromeDriver
-2025-09-05 01:46:00,762 - INFO - ✅ ChromeDriver test successful
-2025-09-05 01:46:00,953 - INFO - 🥷 WebDriver traces removed successfully
-2025-09-05 01:46:00,954 - INFO - ✅ Remote debugging WebDriver created successfully
-2025-09-05 01:46:00,955 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
-2025-09-05 01:46:00,955 - INFO - 🍪 Cookie file exists - loading...
-2025-09-05 01:46:28,743 - INFO - ✅ Cookies loaded successfully
-2025-09-05 01:46:28,744 - INFO - Checking Facebook session validity...
-2025-09-05 01:46:43,947 - INFO - ✅ Scraper manager initialized successfully
-2025-09-05 01:46:45,275 - INFO - 🔍 [1/2] Scraping group: https://www.facebook.com/groups/spauskcia
-2025-09-05 01:46:47,317 - INFO - ✅ Virtual display started using /usr/bin/Xvfb
-2025-09-05 01:46:47,318 - INFO - 🖥️ Virtual display ready - clipboard operations enabled
-2025-09-05 01:46:47,321 - INFO - Navigating to group: https://www.facebook.com/groups/spauskcia?sorting_setting=CHRONOLOGICAL (chronological sorting)
-2025-09-05 01:47:04,335 - INFO - 📋 Found existing group 5 -> Group_12479b7059
-2025-09-05 01:47:04,342 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-2025-09-05 01:47:26,342 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/spauskcia using 5 workers...
-2025-09-05 01:47:33,853 - INFO - Scroll 1: Found 11 potential posts. Scraped: 0/5. Active tasks: 0.
-2025-09-05 01:47:43,159 - INFO - ✅ Clicked 'See more' for post 3062447020600815
-2025-09-05 01:47:53,172 - INFO - ✅ Clicked 'See more' for post 3062172117294972
-2025-09-05 01:47:54,821 - INFO - Found content indicators (text=True, images=False, links=True, divs=True), marking as valid candidate
-2025-09-05 01:47:56,612 - INFO - ℹ️ No 'See more' button found for post generated_4b29767f2964
-2025-09-05 01:47:58,713 - INFO - ℹ️ No 'See more' button found for post 3062034800642037
-2025-09-05 01:47:59,083 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
-2025-09-05 01:48:00,337 - INFO - ℹ️ No 'See more' button found for post generated_3aee2c72f8cf
-2025-09-05 01:48:00,361 - INFO - 🛑 Found duplicate content (hash: 6070cbd4...)
-2025-09-05 01:48:00,370 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-2025-09-05 01:48:00,370 - INFO - Target of 5 posts reached. Finalizing...
-2025-09-05 01:48:00,370 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
-2025-09-05 01:48:00,372 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
-2025-09-05 01:48:00,372 - INFO - Finished scraping generator. Total posts yielded: 0.
-2025-09-05 01:48:00,373 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
-2025-09-05 01:48:00,393 - INFO - ✅ Virtual display cleaned up
-2025-09-05 01:48:00,404 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/spauskcia
-2025-09-05 01:48:00,405 - INFO - ⏳ Waiting 30s before next group (reliability)
-2025-09-05 01:48:31,668 - INFO - 🔍 [2/2] Scraping group: https://www.facebook.com/groups/501702489979518
-2025-09-05 01:48:33,680 - INFO - ✅ Virtual display started using /usr/bin/Xvfb
-2025-09-05 01:48:33,680 - INFO - 🖥️ Virtual display ready - clipboard operations enabled
-2025-09-05 01:48:33,682 - INFO - Navigating to group: https://www.facebook.com/groups/501702489979518?sorting_setting=CHRONOLOGICAL (chronological sorting)
-2025-09-05 01:48:50,097 - INFO - 📋 Found existing group 6 -> Group_501702489979518
-2025-09-05 01:48:50,099 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-2025-09-05 01:48:52,150 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/501702489979518 using 5 workers...
-2025-09-05 01:49:07,349 - INFO - Scroll 1: Found 4 potential posts. Scraped: 0/5. Active tasks: 0.
-2025-09-05 01:49:11,811 - INFO - Found content indicators (text=True, images=False, links=False, divs=True), marking as valid candidate
-2025-09-05 01:49:13,022 - INFO - ℹ️ No 'See more' button found for post generated_b1a201934a54
-2025-09-05 01:49:14,980 - INFO - Found content indicators (text=True, images=True, links=True, divs=True), marking as valid candidate
-2025-09-05 01:49:24,331 - INFO - ✅ Clicked 'See more' for post generated_eadfa66f949c
-2025-09-05 01:49:31,559 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
-2025-09-05 01:49:33,328 - INFO - ℹ️ No 'See more' button found for post generated_458db8f0abac
-2025-09-05 01:49:37,316 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
-2025-09-05 01:49:40,764 - INFO - ℹ️ No 'See more' button found for post generated_ebf2453c3061
-2025-09-05 01:49:41,459 - INFO - ✅ First post is new - continuing incremental scrape
-2025-09-05 01:50:25,898 - INFO - Scroll 2: Found 10 potential posts. Scraped: 1/5. Active tasks: 1.
-2025-09-05 01:50:29,587 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
-2025-09-05 01:50:33,937 - INFO - ℹ️ No 'See more' button found for post generated_ada6abaf81fd
-2025-09-05 01:50:40,055 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
-2025-09-05 01:50:43,975 - INFO - ℹ️ No 'See more' button found for post generated_092b05a56dc3
-2025-09-05 01:50:49,452 - INFO - Found content indicators (text=False, images=False, links=True, divs=True), marking as valid candidate
-2025-09-05 01:50:52,187 - INFO - ℹ️ No 'See more' button found for post generated_c97330696ab9
-2025-09-05 01:50:57,408 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
-2025-09-05 01:50:59,713 - INFO - ℹ️ No 'See more' button found for post generated_751f0a6ddb36
-2025-09-05 01:51:04,877 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
-2025-09-05 01:51:08,236 - INFO - ℹ️ No 'See more' button found for post generated_c365d352c068
-2025-09-05 01:51:08,826 - INFO - 🛑 Found duplicate content (hash: 6d05f938...)
-2025-09-05 01:51:08,826 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-2025-09-05 01:51:08,826 - INFO - Target of 5 posts reached. Finalizing...
-2025-09-05 01:51:08,827 - INFO - Scroll attempts finished or target reached. Waiting for 2 remaining tasks...
-2025-09-05 01:51:09,181 - INFO - Yielding 2 posts in reverse order (newest gets highest ID)
-2025-09-05 01:51:09,181 - INFO - Finished scraping generator. Total posts yielded: 2.
-2025-09-05 01:51:09,181 - WARNING - Generator finished, but only yielded 2 posts, less than requested 5.
-2025-09-05 01:51:09,353 - INFO - ✅ Virtual display cleaned up
-2025-09-05 01:51:09,353 - INFO - 📊 Found 2 new posts in group https://www.facebook.com/groups/501702489979518
-2025-09-05 01:51:15,224 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2025-09-05 01:51:15,395 - INFO - 🤖 AI processed post: True
-2025-09-05 01:51:15,403 - INFO - 🔄 Updating existing post 1 with new content (hash changed: 6d05f9383e15... → f355ee63f163...)
-2025-09-05 01:51:16,255 - INFO - 📱 Notification sent to group -1002910329593
-2025-09-05 01:51:17,263 - INFO - 🔄 Skipping duplicate post (hash: f355ee63f163...)
-2025-09-05 01:51:17,795 - INFO - 🧹 Scraper manager cleaned up
+2025-09-05 02:39:31,377 - INFO - Database 'insights.db' initialized with Groups and Posts tables created or verified.
+2025-09-05 02:39:31,377 - INFO - ✅ Database initialized
+2025-09-05 02:39:31,378 - INFO - 🤖 Scrapius Telegram Bot initialized
+2025-09-05 02:39:31,379 - INFO - 🔧 Allowed chat IDs: ['-1002910329593', '632575874']
+2025-09-05 02:39:31,379 - INFO - 🤖 Bot token length: 46
+2025-09-05 02:39:31,379 - INFO - 🚀 Scrapius bot started - entering main loop
+2025-09-05 02:39:32,623 - INFO - 📊 Hourly limit changed from 6 to 1 - regenerating schedule
+2025-09-05 02:39:38,143 - INFO - 📊 Hourly limit changed from 1 to 30 - regenerating schedule
+2025-09-05 02:41:49,467 - INFO - 🎯 Found 2 groups to scrape
+2025-09-05 02:41:49,467 - INFO - 🆕 Creating browser for scraping
+2025-09-05 02:41:51,497 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
+2025-09-05 02:41:51,498 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
+2025-09-05 02:41:52,559 - INFO - ✅ Chrome remote debugging ready
+2025-09-05 02:41:53,013 - INFO - ====== WebDriver manager ======
+2025-09-05 02:41:54,777 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 02:41:55,031 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 02:41:55,361 - INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+2025-09-05 02:41:55,362 - INFO - 🔧 Set executable permissions on ChromeDriver
+2025-09-05 02:41:55,376 - INFO - ✅ ChromeDriver test successful
+2025-09-05 02:41:55,578 - INFO - 🥷 WebDriver traces removed successfully
+2025-09-05 02:41:55,579 - INFO - ✅ Remote debugging WebDriver created successfully
+2025-09-05 02:42:00,492 - INFO - ✅ Cookies loaded
+2025-09-05 02:42:00,492 - INFO - ✅ Scraper ready
+2025-09-05 02:42:01,702 - INFO - 🔍 [1/2] Scraping group: https://www.facebook.com/groups/spauskcia
+2025-09-05 02:42:01,709 - INFO - 🚀 Quick duplicate check - navigating to group first
+2025-09-05 02:42:40,657 - INFO - 📋 Found existing group 5 -> Group_12479b7059
+2025-09-05 02:42:40,657 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+2025-09-05 02:42:46,076 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/spauskcia using 5 workers...
+2025-09-05 02:43:04,926 - INFO - Scroll 1: Found 5 potential posts. Scraped: 0/5. Active tasks: 0.
+2025-09-05 02:43:27,118 - INFO - ✅ First post is new - continuing incremental scrape
+2025-09-05 02:43:29,820 - INFO - Scroll 2: Found 14 potential posts. Scraped: 1/5. Active tasks: 1.
+2025-09-05 02:44:16,142 - INFO - Target of 5 posts reached. Finalizing...
+2025-09-05 02:44:16,142 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+2025-09-05 02:44:16,242 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+2025-09-05 02:44:16,243 - INFO - Finished scraping generator. Total posts yielded: 5.
+2025-09-05 02:44:16,243 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/spauskcia
+2025-09-05 02:44:16,245 - INFO - 🔄 Skipping duplicate post (hash: 503e830c0418...)
+2025-09-05 02:44:17,248 - INFO - 🔄 Skipping duplicate post (hash: 6ac49515a51c...)
+2025-09-05 02:44:18,250 - INFO - 🔄 Skipping duplicate post (hash: ee922454bbbb...)
+2025-09-05 02:44:22,552 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 02:44:22,601 - INFO - 🤖 AI processed post: True
+2025-09-05 02:44:22,602 - INFO - 🔄 Updating existing post 13 with new content (hash changed: 5a3185b0deec... → a12154f55eee...)
+2025-09-05 02:44:22,849 - INFO - 📱 Notification sent to group -1002910329593
+2025-09-05 02:44:25,465 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 02:44:25,480 - INFO - 🤖 AI processed post: True
+2025-09-05 02:44:25,487 - INFO - 🔄 Updating existing post 14 with new content (hash changed: 6070cbd4104e... → 2c2454a48ce2...)
+2025-09-05 02:44:26,268 - INFO - 📱 Notification sent to group -1002910329593
+2025-09-05 02:44:26,269 - INFO - ⏳ Waiting 30s before next group (reliability)
+2025-09-05 02:44:56,690 - INFO - 🔍 [2/2] Scraping group: https://www.facebook.com/groups/501702489979518
+2025-09-05 02:44:56,691 - INFO - 🚀 Quick duplicate check - navigating to group first
+2025-09-05 02:45:51,557 - INFO - 📋 Found existing group 6 -> Group_501702489979518
+2025-09-05 02:45:51,557 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+2025-09-05 02:45:54,185 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/501702489979518 using 5 workers...
+2025-09-05 02:46:08,490 - INFO - Scroll 1: Found 4 potential posts. Scraped: 0/5. Active tasks: 0.
+2025-09-05 02:46:41,260 - INFO - 🛑 Found duplicate content (hash: f355ee63...)
+2025-09-05 02:46:41,260 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+2025-09-05 02:46:41,262 - INFO - Target of 5 posts reached. Finalizing...
+2025-09-05 02:46:41,278 - INFO - Scroll attempts finished or target reached. Waiting for 2 remaining tasks...
+2025-09-05 02:46:41,291 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+2025-09-05 02:46:41,291 - INFO - Finished scraping generator. Total posts yielded: 0.
+2025-09-05 02:46:41,291 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
+2025-09-05 02:46:41,291 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/501702489979518
+2025-09-05 02:46:42,139 - INFO - 🧹 Scraper manager cleaned up
+2025-09-05 02:46:43,539 - INFO - 📊 Hourly limit changed from 30 to 1 - regenerating schedule
+

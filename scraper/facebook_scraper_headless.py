@@ -457,8 +457,25 @@ def _get_post_identifiers_from_element(driver: WebDriver, post_element: Any, gro
                         if id_match:
                             post_id = id_match.group(1)
         
-        # Process all post elements - no need for content validation
-        is_valid_post_candidate = True
+        if not is_valid_post_candidate:
+            # Check if this looks like a post container with content
+            try:
+                # Look for any text content or images - basic post indicators
+                has_text = len(post_element.text.strip()) > 5  # Lower threshold
+                has_images = len(post_element.find_elements(By.TAG_NAME, "img")) > 0
+                has_links = len(post_element.find_elements(By.TAG_NAME, "a")) > 0
+                has_divs = len(post_element.find_elements(By.TAG_NAME, "div")) > 3  # Structural indicator
+                
+                if has_text or has_images or has_links or has_divs:
+                    # Valid post candidate found
+                    is_valid_post_candidate = True
+                else:
+                    logging.debug(f"No content indicators found, not a valid candidate")
+                    is_valid_post_candidate = False
+            except Exception:
+                # If we can't check content, assume it's valid and let Share->Copy try
+                logging.info(f"Could not check content, assuming valid candidate for Share->Copy")
+                is_valid_post_candidate = True
 
         # Share->Copy method removed - only use direct permalink detection
         # This is much more reliable and eliminates the noise in logs
@@ -733,7 +750,7 @@ def scrape_authenticated_group(
     """
     # Skip virtual display - we don't use clipboard operations anymore
     virtual_display_setup = False
-            # No virtual display needed
+    logging.info("🚀 Skipping virtual display - not needed for direct scraping")
     
     # Ensure chronological sorting for newest posts first
     if '?' in group_url:
@@ -741,7 +758,7 @@ def scrape_authenticated_group(
     else:
         chronological_url = f"{group_url}?sorting_setting=CHRONOLOGICAL"
     
-            # Navigate to group
+    logging.info(f"Navigating to group: {chronological_url} (chronological sorting)")
     try:
         driver.get(chronological_url)
         logging.debug(f"Successfully navigated to {group_url}")
@@ -794,7 +811,26 @@ def scrape_authenticated_group(
         else:
             logging.info(f"🆕 No existing posts found - this is a fresh scrape")
 
-        # Quick check already done in scraper manager
+        # SIMPLE CHECK: Get first post content and compare hash with database
+        if most_recent_hash:  # If we have existing posts
+            try:
+                # Find first post element
+                first_post_elements = driver.find_elements(POST_CONTAINER_S[0], POST_CONTAINER_S[1])
+                if first_post_elements:
+                    first_post = first_post_elements[0]
+                    # Get basic text content
+                    first_post_text = first_post.text.strip() if first_post.text else ""
+                    if first_post_text:
+                        # Generate hash same way as in _extract_data_from_post_html
+                        import hashlib
+                        normalized_content = ' '.join(first_post_text.split())
+                        first_post_hash = hashlib.md5(normalized_content.encode('utf-8')).hexdigest()
+                        
+                        if first_post_hash == most_recent_hash:
+                            logging.info(f"🚀 First post content matches most recent - skipping entire group")
+                            return  # Skip entire group
+            except Exception as e:
+                logging.debug(f"Quick check failed: {e}")
         
         # Enhanced session validation - check for various Facebook security/verification scenarios
         current_url = driver.current_url.lower()

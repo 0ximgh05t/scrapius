@@ -59,20 +59,26 @@ class ScraperManager:
                 logging.error("❌ Failed to create WebDriver")
                 return False
             
-            # Load cookies only for new browser
+            # Load cookies
             cookie_path = get_cookie_store_path()
-            if os.path.exists(cookie_path):
-                if load_cookies(self.driver, cookie_path):
-                    logging.info("✅ Cookies loaded")
-                else:
-                    logging.warning("⚠️ Cookie loading failed")
-            else:
-                logging.warning("⚠️ No cookies found")
+            logging.info(f"🍪 Attempting to load cookies from: {cookie_path}")
             
-            # Skip session validation for reused browser - we'll find out when we navigate
+            if os.path.exists(cookie_path):
+                logging.info("🍪 Cookie file exists - loading...")
+                if load_cookies(self.driver, cookie_path):
+                    logging.info("✅ Cookies loaded successfully")
+                else:
+                    logging.warning("⚠️ Failed to load cookies - may be invalid")
+            else:
+                logging.warning("⚠️ No cookie file found - need fresh login")
+            
+            # Validate session
+            if not is_facebook_session_valid(self.driver):
+                logging.error("❌ Facebook session invalid - need to login")
+                return False
             
             self.initialized = True
-            logging.info("✅ Scraper ready")
+            logging.info("✅ Scraper manager initialized successfully")
             return True
             
         except Exception as e:
@@ -117,29 +123,10 @@ class ScraperManager:
             most_recent_fb_id = get_most_recent_facebook_post_id(conn, table_name)
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
             
-            # QUICK CHECK: If we have recent content, try to skip expensive scraping
-            if most_recent_hash:
-                logging.info(f"🚀 Quick duplicate check - navigating to group first")
-                # Navigate once to check first post
-                try:
-                    self.driver.get(f"{group_url}?sorting_setting=CHRONOLOGICAL")
-                    import time
-                    time.sleep(2)  # Let page load
-                    
-                    # Find first post and check content
-                    from selenium.webdriver.common.by import By
-                    first_posts = self.driver.find_elements(By.CSS_SELECTOR, 'div.x1yztbdb.x1n2onr6.xh8yej3.x1ja2u2z, div[role="article"]')
-                    if first_posts:
-                        first_text = first_posts[0].text.strip()[:200] if first_posts[0].text else ""
-                        if first_text:
-                            import hashlib
-                            normalized = ' '.join(first_text.split())
-                            first_hash = hashlib.md5(normalized.encode('utf-8')).hexdigest()
-                            if first_hash == most_recent_hash:
-                                logging.info(f"🚀 First post matches database - skipping group entirely")
-                                return  # Skip this group
-                except Exception as e:
-                    logging.debug(f"Quick check failed: {e}")
+            # Quick check: if we can get the first post ID from Facebook and it matches database, skip entirely
+            if most_recent_fb_id:
+                logging.info(f"🔍 Most recent post in database: {most_recent_fb_id}")
+                # TODO: Add quick Facebook first post check here
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
             # Pass database connection and most recent hash for proper incremental scraping
