@@ -112,9 +112,15 @@ class ScraperManager:
         logging.info(f"🔍 [{group_index + 1}/{total_groups}] Scraping group: {group_url}")
         
         try:
-            # Get most recent post hash for incremental scraping
-            from database.simple_per_group import get_most_recent_post_content_hash
+            # SUPER SIMPLE CHECK: Get most recent Facebook post ID from database
+            from database.simple_per_group import get_most_recent_facebook_post_id, get_most_recent_post_content_hash
+            most_recent_fb_id = get_most_recent_facebook_post_id(conn, table_name)
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
+            
+            # Quick check: if we can get the first post ID from Facebook and it matches database, skip entirely
+            if most_recent_fb_id:
+                logging.info(f"🔍 Most recent post in database: {most_recent_fb_id}")
+                # TODO: Add quick Facebook first post check here
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
             # Pass database connection and most recent hash for proper incremental scraping

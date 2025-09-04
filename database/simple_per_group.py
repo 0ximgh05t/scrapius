@@ -297,6 +297,36 @@ def add_post_to_group(db_conn: sqlite3.Connection, table_suffix: str, post_data:
         db_conn.rollback()
         return None
 
+def get_most_recent_facebook_post_id(db_conn: sqlite3.Connection, table_suffix: str) -> str | None:
+    """
+    Get the most recent Facebook post ID from database for super simple duplicate checking.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Group table suffix (e.g., 'Group_123456')
+        
+    Returns:
+        Most recent facebook_post_id or None if no posts exist
+    """
+    try:
+        cursor = db_conn.cursor()
+        posts_table = f"Posts_{table_suffix}"
+        
+        cursor.execute(f"""
+            SELECT facebook_post_id FROM {posts_table} 
+            WHERE facebook_post_id IS NOT NULL AND facebook_post_id != ''
+            AND facebook_post_id NOT LIKE 'generated_%'
+            ORDER BY internal_post_id DESC
+            LIMIT 1
+        """)
+        
+        result = cursor.fetchone()
+        return result[0] if result else None
+        
+    except sqlite3.Error as e:
+        logging.error(f"❌ Error getting most recent Facebook post ID from {table_suffix}: {e}")
+        return None
+
 def get_most_recent_post_content_hash(db_conn: sqlite3.Connection, table_suffix: str) -> str | None:
     """
     Get the most recent post content_hash from a specific group table for incremental scraping.
