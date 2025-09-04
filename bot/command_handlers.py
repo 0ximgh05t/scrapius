@@ -140,9 +140,36 @@ class CommandHandlers:
 /login - Login to Facebook
 /cookies - Check cookie status & expiration
 /clearcookies - Clear saved cookies
-
-⚠️ <b>Cookie Expiration:</b> Your cookies expire on <b>September 2, 2026</b>
 """
+        
+        # Add cookie status if cookies exist
+        cookie_path = get_cookie_store_path()
+        if os.path.exists(cookie_path):
+            try:
+                import json
+                from datetime import datetime, timezone
+                
+                with open(cookie_path, 'r') as f:
+                    cookies = json.load(f)
+                
+                # Find the earliest expiry date
+                earliest_expiry = None
+                for cookie in cookies:
+                    if 'expiry' in cookie:
+                        expiry_date = datetime.fromtimestamp(cookie['expiry'], tz=timezone.utc)
+                        if earliest_expiry is None or expiry_date < earliest_expiry:
+                            earliest_expiry = expiry_date
+                
+                if earliest_expiry:
+                    expiry_str = earliest_expiry.strftime("%B %d, %Y")
+                    help_text += f"\n⚠️ <b>Cookie Expiration:</b> Your cookies expire on <b>{expiry_str}</b>"
+                else:
+                    help_text += f"\n🍪 <b>Cookies:</b> Available (no expiration data)"
+                    
+            except Exception as e:
+                help_text += f"\n🍪 <b>Cookies:</b> Available (could not read expiration)"
+        else:
+            help_text += f"\n❌ <b>No cookies found</b> - Use /login to authenticate"
         send_telegram_message(bot_token, chat_id, help_text, parse_mode="HTML")
     
     async def _handle_config(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
@@ -524,12 +551,25 @@ Choose login method:
                         return
                 
                 # Create browser with display (ensure it uses the virtual display)
+                logging.info(f"🖥️ Creating browser on display: {os.environ.get('DISPLAY', 'NOT SET')}")
                 manual_driver = create_reliable_webdriver(headless=False)
+                logging.info("✅ Browser driver created successfully")
                 
                 # Navigate to Facebook and maximize window
+                logging.info("🌐 Navigating to Facebook...")
                 manual_driver.get("https://www.facebook.com/")
+                logging.info("📏 Maximizing window...")
                 manual_driver.maximize_window()  # Make sure window is visible
                 logging.info("✅ Manual login browser opened on virtual display")
+                
+                # Debug: Get window info
+                try:
+                    window_size = manual_driver.get_window_size()
+                    window_pos = manual_driver.get_window_position()
+                    logging.info(f"🔍 Window size: {window_size}, position: {window_pos}")
+                    logging.info(f"🔍 Current URL: {manual_driver.current_url}")
+                except Exception as debug_error:
+                    logging.warning(f"⚠️ Debug info failed: {debug_error}")
                 
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
