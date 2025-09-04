@@ -227,10 +227,15 @@ class ScraperManager:
                     if group_match:
                         group_identifier = group_match.group(1)
                         cursor = conn.cursor()
-                        cursor.execute("SELECT group_name FROM Groups WHERE group_url LIKE ?", (f'%{group_identifier}%',))
+                        # Try exact URL match first, then partial match
+                        cursor.execute("SELECT group_name FROM Groups WHERE group_url = ? OR group_url LIKE ?", 
+                                     (f'https://www.facebook.com/groups/{group_identifier}', f'%{group_identifier}%'))
                         result = cursor.fetchone()
                         if result:
                             group_name = result[0]
+                            # Clean up the group name for display
+                            if group_name.startswith("Group from "):
+                                group_name = group_name.replace("Group from https://www.facebook.com/groups/", "")
                             logging.debug(f"Found group name: {group_name}")
                         else:
                             logging.debug(f"No group found for identifier: {group_identifier}")
@@ -246,8 +251,9 @@ class ScraperManager:
             
             # Format notification message using Lithuanian format
             title = "Naujas įrašas"
-            # Use actual post content, not AI summary
-            short_text = content[:500] + '...' if len(content) > 500 else content
+            # Use actual post content, not AI summary (limit to 300 chars and clean up)
+            clean_content = content.replace('See more', '').replace('Show more', '').strip()
+            short_text = clean_content[:300] + '...' if len(clean_content) > 300 else clean_content
             
             message = format_post_message(title, short_text, post_url, author, group_name)
             

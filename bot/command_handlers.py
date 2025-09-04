@@ -72,6 +72,8 @@ class CommandHandlers:
             await self._handle_cookies(bot_token, chat_id, conn)
         elif command == '/clearcookies':
             await self._handle_clearcookies(bot_token, chat_id, conn)
+        elif command == '/updategroup':
+            await self._handle_updategroup(bot_token, chat_id, conn, arg)
         else:
             send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
     
@@ -843,3 +845,34 @@ Please try again with the correct format."""
         except Exception as e:
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error clearing cookies:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error clearing cookies: {e}")
+    
+    async def _handle_updategroup(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
+        """Handle /updategroup command - update group name from Facebook."""
+        if not arg:
+            send_telegram_message(bot_token, chat_id, "📝 <b>Usage:</b> /updategroup &lt;group_id&gt; &lt;new_name&gt;\n\nExample: /updategroup 1 Marketing Professionals Lithuania", parse_mode="HTML")
+            return
+            
+        try:
+            parts = arg.split(' ', 1)
+            if len(parts) != 2:
+                send_telegram_message(bot_token, chat_id, "❌ <b>Invalid format.</b>\n\nUsage: /updategroup &lt;group_id&gt; &lt;new_name&gt;", parse_mode="HTML")
+                return
+                
+            group_id = int(parts[0])
+            new_name = parts[1].strip()
+            
+            cursor = conn.cursor()
+            cursor.execute("UPDATE Groups SET group_name = ? WHERE group_id = ?", (new_name, group_id))
+            
+            if cursor.rowcount > 0:
+                conn.commit()
+                send_telegram_message(bot_token, chat_id, f"✅ <b>Group {group_id} name updated to:</b> {new_name}", parse_mode="HTML")
+                logging.info(f"Updated group {group_id} name to: {new_name}")
+            else:
+                send_telegram_message(bot_token, chat_id, f"❌ <b>Group {group_id} not found.</b>", parse_mode="HTML")
+                
+        except ValueError:
+            send_telegram_message(bot_token, chat_id, "❌ <b>Invalid group ID.</b> Must be a number.", parse_mode="HTML")
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error updating group:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error updating group: {e}")

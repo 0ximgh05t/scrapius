@@ -157,12 +157,15 @@ def get_or_create_group(db_conn: sqlite3.Connection, group_url: str, group_name:
             if not group_name:
                 group_name = f"Group from {group_url}"
         
+        logging.info(f"🔍 Attempting to create group: name='{group_name}', url='{group_url}', table='{table_suffix}'")
+        
         cursor.execute(
             "INSERT INTO Groups (group_name, group_url, table_name) VALUES (?, ?, ?)",
             (group_name, group_url, table_suffix)
         )
         
         group_id = cursor.lastrowid
+        logging.info(f"✅ Group created with ID: {group_id}")
         
         # Create dedicated posts table for this group
         if create_group_posts_table(db_conn, table_suffix):
@@ -172,6 +175,22 @@ def get_or_create_group(db_conn: sqlite3.Connection, group_url: str, group_name:
         else:
             raise Exception("Failed to create group posts table")
             
+    except sqlite3.IntegrityError as e:
+        # Handle unique constraint violations - group might already exist
+        logging.warning(f"⚠️ Integrity error (likely duplicate): {e}")
+        db_conn.rollback()
+        
+        # Try to find the existing group again
+        cursor = db_conn.cursor()
+        cursor.execute("SELECT group_id, table_name FROM Groups WHERE group_url = ? OR table_name = ?", (group_url, table_suffix))
+        result = cursor.fetchone()
+        if result:
+            group_id, existing_table_suffix = result
+            logging.info(f"📋 Found existing group after integrity error: {group_id} -> {existing_table_suffix}")
+            return group_id, existing_table_suffix
+        else:
+            logging.error(f"❌ Could not find group after integrity error: {e}")
+            raise
     except sqlite3.Error as e:
         logging.error(f"❌ Error in get_or_create_group: {e}")
         db_conn.rollback()
