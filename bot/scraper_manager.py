@@ -117,10 +117,29 @@ class ScraperManager:
             most_recent_fb_id = get_most_recent_facebook_post_id(conn, table_name)
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
             
-            # Quick check: if we can get the first post ID from Facebook and it matches database, skip entirely
-            if most_recent_fb_id:
-                logging.info(f"🔍 Most recent post in database: {most_recent_fb_id}")
-                # TODO: Add quick Facebook first post check here
+            # QUICK CHECK: If we have recent content, try to skip expensive scraping
+            if most_recent_hash:
+                logging.info(f"🚀 Quick duplicate check - navigating to group first")
+                # Navigate once to check first post
+                try:
+                    self.driver.get(f"{group_url}?sorting_setting=CHRONOLOGICAL")
+                    import time
+                    time.sleep(2)  # Let page load
+                    
+                    # Find first post and check content
+                    from selenium.webdriver.common.by import By
+                    first_posts = self.driver.find_elements(By.CSS_SELECTOR, 'div.x1yztbdb.x1n2onr6.xh8yej3.x1ja2u2z, div[role="article"]')
+                    if first_posts:
+                        first_text = first_posts[0].text.strip()[:200] if first_posts[0].text else ""
+                        if first_text:
+                            import hashlib
+                            normalized = ' '.join(first_text.split())
+                            first_hash = hashlib.md5(normalized.encode('utf-8')).hexdigest()
+                            if first_hash == most_recent_hash:
+                                logging.info(f"🚀 First post matches database - skipping group entirely")
+                                return  # Skip this group
+                except Exception as e:
+                    logging.debug(f"Quick check failed: {e}")
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
             # Pass database connection and most recent hash for proper incremental scraping
