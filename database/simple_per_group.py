@@ -22,6 +22,8 @@ def _scrape_group_name_from_page(driver) -> Optional[str]:
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.common.exceptions import TimeoutException, NoSuchElementException
     try:
+        logging.info(f"🔍 Starting group name extraction. Current URL: {driver.current_url}")
+        
         # Enhanced selectors for Facebook group names (based on actual FB structure)
         selectors = [
             'h1[dir="auto"] span a',  # Most specific: h1 > span > a (contains actual name)
@@ -34,10 +36,12 @@ def _scrape_group_name_from_page(driver) -> Optional[str]:
         
         for selector in selectors:
             try:
+                logging.debug(f"🔍 Trying selector: {selector}")
                 element = WebDriverWait(driver, 5).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, selector))
                 )
                 text = element.text.strip()
+                logging.debug(f"📝 Found text with selector '{selector}': '{text}'")
                 
                 # Filter out common Facebook UI elements and improve validation
                 if (text and 
@@ -55,8 +59,11 @@ def _scrape_group_name_from_page(driver) -> Optional[str]:
                     
                     logging.info(f"✅ Scraped group name: '{text}' using selector: {selector}")
                     return text
+                else:
+                    logging.debug(f"❌ Text '{text}' filtered out (doesn't meet criteria)")
                     
-            except (TimeoutException, NoSuchElementException):
+            except (TimeoutException, NoSuchElementException) as e:
+                logging.debug(f"❌ Selector '{selector}' failed: {e}")
                 continue
                 
         logging.warning("❌ Could not scrape group name from page")
@@ -157,10 +164,18 @@ def get_or_create_group(db_conn: sqlite3.Connection, group_url: str, group_name:
         if not group_name:
             # Try to scrape group name from Facebook if driver is provided
             if driver:
+                logging.info(f"🔍 Attempting to scrape group name from Facebook page...")
                 group_name = _scrape_group_name_from_page(driver)
+                if group_name:
+                    logging.info(f"✅ Successfully scraped group name: '{group_name}'")
+                else:
+                    logging.warning(f"❌ Failed to scrape group name from Facebook page")
+            else:
+                logging.warning(f"❌ No driver provided for group name scraping")
             
             # Fallback to URL-based name
             if not group_name:
+                logging.info(f"🔄 Using fallback group name for {group_url}")
                 group_name = f"Group from {group_url}"
         
         logging.info(f"🔍 Attempting to create group: name='{group_name}', url='{group_url}', table='{table_suffix}'")
