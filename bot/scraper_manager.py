@@ -117,11 +117,16 @@ class ScraperManager:
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
+            # Pass database connection and most recent hash for proper incremental scraping
             posts = list(scrape_authenticated_group(
                 self.driver,
                 group_url,
                 num_posts=reliability['max_posts_per_group'],
-                fields_to_scrape=["content_text", "post_image_url"]
+                fields_to_scrape=["content_text", "post_image_url"],
+                stop_at_url=None,
+                skip_virtual_display=False,
+                db_conn=conn,
+                most_recent_hash=most_recent_hash
             ))
             
             if not posts:

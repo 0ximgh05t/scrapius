@@ -732,7 +732,9 @@ def scrape_authenticated_group(
     num_posts: int,
     fields_to_scrape: List[str] | None = None,
     stop_at_url: str | None = None,
-    skip_virtual_display: bool = False
+    skip_virtual_display: bool = False,
+    db_conn = None,
+    most_recent_hash: str | None = None
 ) -> Iterator[Dict[str, Any]]:
     """
     Scrapes posts from a Facebook group, yielding data for each post.
@@ -778,7 +780,13 @@ def scrape_authenticated_group(
         from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group, _scrape_group_name_from_page
         from database.crud import get_db_connection
         
-        db_conn = get_db_connection()
+        # Use provided database connection or create new one
+        if db_conn is None:
+            db_conn = get_db_connection()
+            should_close_conn = True
+        else:
+            should_close_conn = False
+            
         group_id, table_suffix = get_or_create_group(db_conn, group_url)  # Create with fallback name first
         
         # Check if this group has a fallback name - if so, scrape the real name
@@ -800,8 +808,9 @@ def scrape_authenticated_group(
         processed_post_ids: set[str] = set()
         processed_content_hashes: set[str] = set()
         
-        # Get most recent content hash for incremental scraping (FIXED normalization)
-        most_recent_hash = get_most_recent_post_content_hash(db_conn, table_suffix)
+        # Use provided most_recent_hash or get from database
+        if most_recent_hash is None:
+            most_recent_hash = get_most_recent_post_content_hash(db_conn, table_suffix)
         duplicate_found = False  # Global flag to stop all processing
         
         if most_recent_hash:
@@ -1139,6 +1148,10 @@ def scrape_authenticated_group(
         # Cleanup virtual display
         if virtual_display_setup:
             cleanup_virtual_display()
+        
+        # Cleanup database connection if we created it
+        if should_close_conn and db_conn:
+            db_conn.close()
 
 
 @production_retry()
