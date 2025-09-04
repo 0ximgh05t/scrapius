@@ -213,7 +213,7 @@ class ScraperManager:
         """Send Telegram notification for relevant post."""
         try:
             # Get group name from database
-            from database.db_setup import get_db_connection
+            from database.crud import get_db_connection
             conn = get_db_connection()
             
             # Extract group info from current scraping context
