@@ -33,9 +33,9 @@ class ScraperManager:
             if self.initialized:
                 return True
             
-            # Create new headless WebDriver - simple and reliable
-            logging.info("🆕 Creating new headless browser for scraping")
-            self.driver = create_reliable_webdriver(headless=True)
+            # Create new non-headless WebDriver to match manual login environment
+            logging.info("🆕 Creating new non-headless browser for scraping (to match manual login)")
+            self.driver = create_reliable_webdriver(headless=False)
             self.reused_manual_browser = False
                 
             if not self.driver:
