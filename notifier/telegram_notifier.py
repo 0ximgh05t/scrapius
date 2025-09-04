@@ -67,13 +67,32 @@ def escape_html(text: str) -> str:
     return html.escape(text or "")
 
 
-def format_post_message(title: str, short_text: str, url: str, author: Optional[str] = None) -> str:
-    title_html = escape_html(title)
-    short_html = escape_html(short_text)
-    author_html = escape_html(author) if author else "Unknown"
-    url_html = escape_html(url)
-    return (
-        f"<b>{title_html}</b> • <i>{author_html}</i>\n"
-        f"{short_html}\n\n"
-        f"<a href=\"{url_html}\">View post</a>"
-    ) 
+def format_post_message(title: str, short_text: str, url: str, author: Optional[str] = None, group_name: Optional[str] = None) -> str:
+    """Format post message in beautiful Lithuanian format."""
+    # Clean up group name - remove "Group from " prefix
+    clean_group_name = group_name or "Unknown Group"
+    if clean_group_name.startswith("Group from "):
+        clean_group_name = clean_group_name.replace("Group from ", "")
+    clean_group_name = clean_group_name.replace("https://www.facebook.com/groups/", "")
+    
+    # Use short_text as the main content
+    content = escape_html(short_text or "")
+    
+    if url and url != "#":
+        # Has URL - show group name + post link
+        msg = f"""📩 <b>Naujas įrašas</b>
+
+📍 <b>Grupė:</b> <i>{escape_html(clean_group_name)}</i>
+
+{content}
+
+<a href="{escape_html(url)}">📱 Peržiūrėti įrašą</a>"""
+    else:
+        # No URL - show group name only (no link since we don't have group_url here)
+        msg = f"""📩 <b>Naujas įrašas</b>
+
+📍 <b>Grupė:</b> <i>{escape_html(clean_group_name)}</i>
+
+{content}"""
+    
+    return msg 

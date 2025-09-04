@@ -82,6 +82,9 @@ class ScraperManager:
         group_id = group_data['group_id']
         table_name = group_data['table_name']
         
+        # Store current group name for notifications
+        self._current_group_name = group_data.get('group_name', 'Unknown Group')
+        
         logging.info(f"🔍 [{group_index + 1}/{total_groups}] Scraping group: {group_url}")
         
         try:
@@ -209,18 +212,34 @@ class ScraperManager:
     ) -> None:
         """Send Telegram notification for relevant post."""
         try:
-            # Use actual post content, not AI summary
-            title = "📱 New Facebook Post"
-            post_content = content[:500] + '...' if len(content) > 500 else content
+            # Get group name from database
+            from database.db_setup import get_db_connection
+            conn = get_db_connection()
             
-            # Format with actual content and group info
-            from notifier.telegram_notifier import escape_html
+            # Extract group info from current scraping context
+            group_name = "Unknown Group"
+            try:
+                # Get group name from the current context (this is a bit hacky but works)
+                # We could pass group_id as parameter, but for now we'll extract from URL
+                if hasattr(self, '_current_group_name'):
+                    group_name = self._current_group_name
+                else:
+                    # Fallback: try to get from database if we have the URL
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT group_name FROM Groups LIMIT 1")  # Get any group for now
+                    result = cursor.fetchone()
+                    if result:
+                        group_name = result[0]
+            except Exception as e:
+                logging.debug(f"Could not get group name: {e}")
             
-            message = f"""<b>{title}</b>
-
-{escape_html(post_content)}
-
-<a href="{post_url}">View post</a>"""
+            conn.close()
+            
+            # Format notification message using Lithuanian format
+            title = ai_result.get('title', 'Relevant Post')
+            short_text = ai_result.get('summary', content[:300] + '...' if len(content) > 300 else content)
+            
+            message = format_post_message(title, short_text, post_url, author, group_name)
             
             # Send to all chat IDs
             for chat_id in chat_ids:
