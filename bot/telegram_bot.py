@@ -125,19 +125,16 @@ class ScrapiusTelegramBot:
                     # if chat_id not in self.chat_ids:
                     #     continue
                     
-                    # Check if user is in a login flow state (waiting for cookies, etc.)
-                    if chat_id in self.command_handlers.login_states:
-                        # Process as login flow message (cookies, credentials, etc.)
-                        await self.command_handlers._handle_login_flow(self.bot_token, chat_id, conn, '', text)
-                        continue
-                    
-                    # Handle regular commands (starting with /)
+                    # Handle regular commands (starting with /) - ALWAYS check commands first
                     cmd = extract_commands(upd)
                     logging.info(f"🔍 Extracted command: '{cmd}' from message text: '{text}'")
                     if cmd:
                         logging.info(f"🔍 Processing command: {cmd}")
                         await self.command_handlers.handle_text_command(cmd, self.bot_token, conn)
                         logging.info(f"🔍 Command processed: {cmd}")
+                    elif chat_id in self.command_handlers.login_states:
+                        # Process as login flow message (cookies, credentials, etc.) only if not a command
+                        await self.command_handlers._handle_login_flow(self.bot_token, chat_id, conn, '', text)
                     else:
                         logging.info(f"🔍 No command extracted from text: '{text}'")
             
