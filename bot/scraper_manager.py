@@ -53,9 +53,7 @@ class ScraperManager:
                 self.driver = manual_browser
                 self.reused_manual_browser = True
                 
-                # Apply stealth measures to reused browser
-                from config import remove_webdriver_traces
-                remove_webdriver_traces(self.driver)
+                # Note: Skip stealth measures for reused browser - already successfully logged in
             else:
                 # Create new WebDriver as fallback
                 logging.info("🆕 Creating new browser (no manual login browser available)")
