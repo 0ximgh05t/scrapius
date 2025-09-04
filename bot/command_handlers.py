@@ -447,7 +447,9 @@ Choose login method:
         """Handle login-related callback queries."""
         if callback_data == 'login_manual':
             answer_callback("🌐 Starting manual browser...", show_alert=True)
-            await self._start_manual_login(bot_token, chat_id)
+            # Run manual login in background thread to avoid blocking main bot loop
+            import threading
+            threading.Thread(target=self._start_manual_login_sync, args=(bot_token, chat_id), daemon=True).start()
         elif callback_data == 'login_existing':
             answer_callback("🍪 Checking existing cookies...", show_alert=True)
             await self._use_existing_cookies(bot_token, chat_id)
@@ -458,7 +460,7 @@ Choose login method:
             answer_callback("🧹 Clearing cookies...", show_alert=True)
             await self._handle_clearcookies(bot_token, chat_id, conn)
     
-    async def _start_manual_login(self, bot_token: str, chat_id: str) -> None:
+    def _start_manual_login_sync(self, bot_token: str, chat_id: str) -> None:
         """Start manual browser login with virtual display support."""
         import threading
         import time
