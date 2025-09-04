@@ -4,6 +4,7 @@ Scraper Manager for Scrapius Bot
 Handles all Facebook scraping operations with proper error handling and reliability.
 """
 
+import asyncio
 import logging
 import time
 from typing import Dict, List, Optional, Any
@@ -114,9 +115,9 @@ class ScraperManager:
                         bot_token, chat_ids, reliability
                     )
                     
-                    # Add delay between posts
+                    # Add delay between posts and yield control to allow Telegram updates
                     if post_index < len(posts) - 1:
-                        time.sleep(reliability['post_processing_delay'])
+                        await asyncio.sleep(reliability['post_processing_delay'])
                         
                 except Exception as e:
                     logging.error(f"❌ Error processing post {post_index + 1}: {e}")

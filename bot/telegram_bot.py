@@ -186,16 +186,19 @@ class ScrapiusTelegramBot:
             # Process each group
             for group_index, group_data in enumerate(groups_rows):
                 try:
+                    # Check for Telegram updates before each group
+                    await self.handle_telegram_updates(conn)
+                    
                     await self.scraper_manager.scrape_group(
                         group_data, group_index, len(groups_rows), 
                         reliability, conn, self.bot_token, self.chat_ids
                     )
                     
-                    # Add delay between groups
+                    # Add delay between groups with async sleep for responsiveness
                     if group_index < len(groups_rows) - 1:
                         group_delay = reliability['group_delay']
                         logging.info(f"⏳ Waiting {group_delay}s before next group (reliability)")
-                        time.sleep(group_delay)
+                        await asyncio.sleep(group_delay)
                         
                 except Exception as e:
                     logging.error(f"❌ Error scraping group {group_data.get('group_url', 'unknown')}: {e}")
@@ -225,15 +228,15 @@ class ScrapiusTelegramBot:
                     continue
                 
                 try:
-                    # Handle Telegram updates
+                    # Handle Telegram updates (check frequently)
                     await self.handle_telegram_updates(conn)
                     
                     # Check if should run scrape cycle
                     if await self.should_run_scrape_cycle(conn):
                         await self.run_scrape_cycle(conn)
                     
-                    # Small delay to prevent busy waiting
-                    await asyncio.sleep(2)
+                    # Shorter delay for more responsive command handling
+                    await asyncio.sleep(0.5)
                     
                 finally:
                     conn.close()
