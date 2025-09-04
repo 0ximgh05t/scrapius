@@ -95,7 +95,7 @@ class ScrapiusTelegramBot:
     async def handle_telegram_updates(self, conn) -> None:
         """Handle incoming Telegram messages and commands."""
         try:
-            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=5)
+            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=1)
             if not updates.get('ok') or not updates.get('result'):
                 return
             
@@ -189,10 +189,15 @@ class ScrapiusTelegramBot:
             
             logging.info(f"🎯 Found {len(groups_rows)} groups to scrape")
             
-            # Initialize scraper manager
+            # Initialize scraper manager (check for commands during initialization)
+            logging.info("🔧 Initializing scraper manager...")
+            await self.handle_telegram_updates(conn)  # Check for commands before init
+            
             if not await self.scraper_manager.initialize():
                 logging.error("❌ Failed to initialize scraper")
                 return
+                
+            await self.handle_telegram_updates(conn)  # Check for commands after init
             
             # Process each group
             for group_index, group_data in enumerate(groups_rows):
@@ -209,7 +214,14 @@ class ScrapiusTelegramBot:
                     if group_index < len(groups_rows) - 1:
                         group_delay = reliability['group_delay']
                         logging.info(f"⏳ Waiting {group_delay}s before next group (reliability)")
-                        await asyncio.sleep(group_delay)
+                        
+                        # Break up long delays to check for commands
+                        remaining_delay = group_delay
+                        while remaining_delay > 0:
+                            sleep_time = min(2, remaining_delay)  # Check commands every 2 seconds max
+                            await asyncio.sleep(sleep_time)
+                            await self.handle_telegram_updates(conn)  # Check for commands during delay
+                            remaining_delay -= sleep_time
                         
                 except Exception as e:
                     logging.error(f"❌ Error scraping group {group_data.get('group_url', 'unknown')}: {e}")
