@@ -95,7 +95,15 @@ class ScrapiusTelegramBot:
     async def handle_telegram_updates(self, conn) -> None:
         """Handle incoming Telegram messages and commands."""
         try:
-            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=0)
+            # Debug: Log Telegram API call
+            offset = self.last_update_id + 1 if self.last_update_id else None
+            logging.info(f"🔍 Calling Telegram API with offset: {offset}")
+            
+            updates = get_updates(self.bot_token, offset=offset, timeout=1)
+            
+            # Debug: Log API response
+            logging.info(f"🔍 Telegram API response: ok={updates.get('ok')}, result_count={len(updates.get('result', []))}")
+            
             if not updates.get('ok') or not updates.get('result'):
                 return
             
