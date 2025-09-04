@@ -757,22 +757,14 @@ def scrape_authenticated_group(
     else:
         logging.info("🔄 Skipping virtual display setup - reusing manual login browser environment")
     
-    # Navigate to group first without sorting to avoid triggering security
-    logging.info(f"Navigating to group: {group_url}")
+    # Ensure chronological sorting for newest posts first
+    if '?' in group_url:
+        chronological_url = f"{group_url}&sorting_setting=CHRONOLOGICAL"
+    else:
+        chronological_url = f"{group_url}?sorting_setting=CHRONOLOGICAL"
+    
+    logging.info(f"Navigating to group: {chronological_url} (chronological sorting)")
     try:
-        driver.get(group_url)
-        
-        # Wait a moment for page to load
-        import time
-        time.sleep(3)
-        
-        # Then try to add chronological sorting via URL change
-        if '?' in group_url:
-            chronological_url = f"{group_url}&sorting_setting=CHRONOLOGICAL"
-        else:
-            chronological_url = f"{group_url}?sorting_setting=CHRONOLOGICAL"
-        
-        logging.info(f"Adding chronological sorting: {chronological_url}")
         driver.get(chronological_url)
         logging.debug(f"Successfully navigated to {group_url}")
         
@@ -849,32 +841,26 @@ def scrape_authenticated_group(
             session_invalid = True
             error_type = "Account blocked/restricted"
         
-                if session_invalid:
-            logging.error(f"❌ SESSION INVALID! {error_type}")
-            logging.error(f"❌ Current URL: {driver.current_url}")
-            
-            # Take screenshot to see what Facebook is actually showing
-            try:
-                import os
-                screenshot_path = f"/tmp/facebook_error_{int(time.time())}.png"
-                driver.save_screenshot(screenshot_path)
-                logging.error(f"📸 Screenshot saved: {screenshot_path}")
-                
-                # Also get page title and some text content
-                try:
-                    page_title = driver.title
-                    logging.error(f"📄 Page Title: {page_title}")
-                    
-                    # Get first 300 characters of visible text
-                    body_text = driver.find_element(By.TAG_NAME, "body").text[:300]
-                    logging.error(f"📝 Page Text: {body_text}")
-                except Exception as text_e:
-                    logging.error(f"Could not get page text: {text_e}")
-                    
-            except Exception as screenshot_e:
-                logging.error(f"Could not take screenshot: {screenshot_e}")
-            
-            logging.error(f"❌ You need to refresh your cookies or complete verification!")
+        if session_invalid:
+             logging.error(f"❌ SESSION INVALID! {error_type}")
+             logging.error(f"❌ Current URL: {driver.current_url}")
+             
+             # Take screenshot to see what Facebook is actually showing
+             try:
+                 screenshot_path = f"/tmp/facebook_error_{int(time.time())}.png"
+                 driver.save_screenshot(screenshot_path)
+                 logging.error(f"📸 Screenshot saved: {screenshot_path}")
+                 
+                 # Get page title and some text content
+                 page_title = driver.title
+                 logging.error(f"📄 Page Title: {page_title}")
+                 
+                 body_text = driver.find_element(By.TAG_NAME, "body").text[:300]
+                 logging.error(f"📝 Page Text: {body_text}")
+             except Exception as e:
+                 logging.error(f"Could not capture debug info: {e}")
+             
+             logging.error(f"❌ You need to refresh your cookies or complete verification!")
              
              # Send Telegram notification about session failure
              try:
