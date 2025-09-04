@@ -133,10 +133,13 @@ class ScrapiusTelegramBot:
                     
                     # Handle regular commands (starting with /)
                     cmd = extract_commands(upd)
+                    logging.info(f"🔍 Extracted command: '{cmd}' from update: {upd}")
                     if cmd:
                         logging.info(f"🔍 Processing command: {cmd}")
                         await self.command_handlers.handle_text_command(cmd, self.bot_token, conn)
                         logging.info(f"🔍 Command processed: {cmd}")
+                    else:
+                        logging.info(f"🔍 No command extracted from update: {upd}")
             
             # Save last update ID
             botsettings_set(conn, 'last_update_id', str(self.last_update_id))
