@@ -37,11 +37,21 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
     url = post.get('post_url', '')
     author = post.get('post_author_name', '')
 
-    sys = (
-        (system_prompt or "You are a strict filter for Facebook posts.").strip()
-        + "\n\nRespond ONLY with valid JSON: {\"send\": <true|false>, \"summary\": <string>}\n"
-        + "If the post meets the criteria in the user's instructions, set send=true and write a short summary. Otherwise send=false and summary can be empty."
-    )
+    # Check if user wants all posts (no filtering)
+    wants_all_posts = "all posts" in user_prompt.lower() or "return all" in user_prompt.lower()
+    
+    if wants_all_posts:
+        sys = (
+            (system_prompt or "You are a helpful assistant.").strip()
+            + "\n\nRespond ONLY with valid JSON: {\"send\": true, \"summary\": <string>}\n"
+            + "Always set send=true and provide a brief summary of the post content."
+        )
+    else:
+        sys = (
+            (system_prompt or "You are a strict filter for Facebook posts.").strip()
+            + "\n\nRespond ONLY with valid JSON: {\"send\": <true|false>, \"summary\": <string>}\n"
+            + "If the post meets the criteria in the user's instructions, set send=true and write a short summary. Otherwise send=false and summary can be empty."
+        )
     usr = (
         (user_prompt or "Decide if this is relevant.").strip()
         + f"\n\nAuthor: {author}\nURL: {url}\nContent:\n{content}"
