@@ -769,12 +769,27 @@ def scrape_authenticated_group(
         )
         logging.debug("Feed element found.")
         
-        # NOW get or create group (after driver is on the correct page)
-        from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group
+        # Get or create group (driver is now on the correct page)
+        from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group, _scrape_group_name_from_page
         from database.crud import get_db_connection
         
         db_conn = get_db_connection()
-        group_id, table_suffix = get_or_create_group(db_conn, group_url, driver=driver)
+        group_id, table_suffix = get_or_create_group(db_conn, group_url)  # Create with fallback name first
+        
+        # Check if this group has a fallback name - if so, scrape the real name
+        cursor = db_conn.cursor()
+        cursor.execute("SELECT group_name FROM Groups WHERE group_id = ?", (group_id,))
+        current_name = cursor.fetchone()[0]
+        
+        if current_name.startswith("Group from "):
+            logging.info(f"📝 Scraping group name (first time)...")
+            scraped_name = _scrape_group_name_from_page(driver)
+            if scraped_name:
+                cursor.execute("UPDATE Groups SET group_name = ? WHERE group_id = ?", (scraped_name, group_id))
+                db_conn.commit()
+                logging.info(f"✅ Updated group name to: '{scraped_name}'")
+            else:
+                logging.warning(f"❌ Could not scrape group name, keeping fallback")
         
         processed_post_urls: set[str] = set()
         processed_post_ids: set[str] = set()
@@ -952,6 +967,7 @@ def scrape_authenticated_group(
                     # For incremental scraping, we'll check content hash after extraction
                     # No early stopping here - we need the content first
 
+                    # First, try to click "See more" to expand content
                     try:
                         see_more_button = WebDriverWait(post_element, 1).until(
                             EC.element_to_be_clickable(SEE_MORE_BUTTON_XPATH_S)
@@ -967,6 +983,7 @@ def scrape_authenticated_group(
                     except Exception as e_sm:
                         logging.warning(f"❌ Error clicking 'See more' for {temp_post_id or temp_post_url}: {e_sm}")
                     
+                    # NOW get the HTML content (after clicking "See more" if it existed)
                     post_html_content = post_element.get_attribute('outerHTML')
                     if not post_html_content:
                         logging.warning(f"Could not get outerHTML for post {temp_post_id or temp_post_url}. Skipping.")
