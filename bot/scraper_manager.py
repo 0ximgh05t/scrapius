@@ -52,6 +52,10 @@ class ScraperManager:
                 # Reuse the manual login browser
                 self.driver = manual_browser
                 self.reused_manual_browser = True
+                
+                # Apply stealth measures to reused browser
+                from config import remove_webdriver_traces
+                remove_webdriver_traces(self.driver)
             else:
                 # Create new WebDriver as fallback
                 logging.info("🆕 Creating new browser (no manual login browser available)")
@@ -122,11 +126,14 @@ class ScraperManager:
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
+            # Skip virtual display if reusing manual login browser to avoid environment changes
+            skip_virtual_display = getattr(self, 'reused_manual_browser', False)
             posts = list(scrape_authenticated_group(
                 self.driver,
                 group_url,
                 num_posts=reliability['max_posts_per_group'],
-                fields_to_scrape=["content_text", "post_image_url"]
+                fields_to_scrape=["content_text", "post_image_url"],
+                skip_virtual_display=skip_virtual_display
             ))
             
             if not posts:

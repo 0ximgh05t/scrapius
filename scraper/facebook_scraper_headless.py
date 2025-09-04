@@ -731,7 +731,8 @@ def scrape_authenticated_group(
     group_url: str,
     num_posts: int,
     fields_to_scrape: List[str] | None = None,
-    stop_at_url: str | None = None
+    stop_at_url: str | None = None,
+    skip_virtual_display: bool = False
 ) -> Iterator[Dict[str, Any]]:
     """
     Scrapes posts from a Facebook group, yielding data for each post.
@@ -746,11 +747,15 @@ def scrape_authenticated_group(
         A list of dictionaries, each representing a post with essential information.
     """
     # Setup virtual display for clipboard operations (headless mode)
-    virtual_display_setup = setup_virtual_display()
-    if virtual_display_setup:
-        logging.info("🖥️ Virtual display ready - clipboard operations enabled")
+    virtual_display_setup = False
+    if not skip_virtual_display:
+        virtual_display_setup = setup_virtual_display()
+        if virtual_display_setup:
+            logging.info("🖥️ Virtual display ready - clipboard operations enabled")
+        else:
+            logging.warning("⚠️ Virtual display not available - Share->Copy may not work")
     else:
-        logging.warning("⚠️ Virtual display not available - Share->Copy may not work")
+        logging.info("🔄 Skipping virtual display setup - reusing manual login browser environment")
     
     # Ensure chronological sorting for newest posts first
     if '?' in group_url:
