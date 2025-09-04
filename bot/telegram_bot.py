@@ -95,7 +95,7 @@ class ScrapiusTelegramBot:
     async def handle_telegram_updates(self, conn) -> None:
         """Handle incoming Telegram messages and commands."""
         try:
-            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=5)
+            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=1)
             if not updates.get('ok') or not updates.get('result'):
                 return
             
@@ -246,8 +246,8 @@ class ScrapiusTelegramBot:
                     if await self.should_run_scrape_cycle(conn):
                         await self.run_scrape_cycle(conn)
                     
-                    # Shorter delay for more responsive command handling
-                    await asyncio.sleep(0.5)
+                    # Very short delay for maximum responsiveness during manual login
+                    await asyncio.sleep(0.1)
                     
                 finally:
                     conn.close()
