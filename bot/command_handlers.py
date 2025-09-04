@@ -1129,8 +1129,23 @@ Please try again with the correct format."""
                 return
             
             # Save cookies from current browser state
-            save_cookies(driver, get_cookie_store_path())
-            logging.info("✅ Cookies saved from manual login completion")
+            cookie_path = get_cookie_store_path()
+            save_cookies(driver, cookie_path)
+            
+            # Check if cookies were actually saved
+            if os.path.exists(cookie_path):
+                try:
+                    import json
+                    with open(cookie_path, 'r') as f:
+                        cookies = json.load(f)
+                    cookie_count = len(cookies)
+                    logging.info(f"✅ Cookies saved from manual login completion: {cookie_count} cookies")
+                except:
+                    cookie_count = "unknown"
+                    logging.info("✅ Cookies saved from manual login completion")
+            else:
+                cookie_count = 0
+                logging.warning("⚠️ No cookies were saved - browser might not be logged in")
             
             # Clean up
             try:
@@ -1144,12 +1159,20 @@ Please try again with the correct format."""
             # Resume main scraper
             self._pause_main_scraper = False
             
-            send_telegram_message(bot_token, chat_id, 
-                "✅ <b>Manual login completed!</b>\n\n"
-                "🍪 Cookies saved successfully\n"
-                "🚀 Bot ready for scraping\n"
-                "▶️ Main scraper resumed", 
-                parse_mode="HTML")
+            if cookie_count > 0:
+                send_telegram_message(bot_token, chat_id, 
+                    f"✅ <b>Manual login completed!</b>\n\n"
+                    f"🍪 Saved {cookie_count} cookies successfully\n"
+                    f"🚀 Bot ready for scraping\n"
+                    f"▶️ Main scraper resumed", 
+                    parse_mode="HTML")
+            else:
+                send_telegram_message(bot_token, chat_id, 
+                    "⚠️ <b>Session saved, but no cookies found!</b>\n\n"
+                    "This might mean you weren't fully logged in.\n"
+                    "Try the login process again if scraping fails.\n\n"
+                    "▶️ Main scraper resumed", 
+                    parse_mode="HTML")
                 
         except Exception as e:
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error completing login:</b> {str(e)}", parse_mode="HTML")
