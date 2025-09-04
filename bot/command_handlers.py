@@ -422,28 +422,141 @@ Choose login method:
             await self._handle_clearcookies(bot_token, chat_id, conn)
     
     async def _start_manual_login(self, bot_token: str, chat_id: str) -> None:
-        """Start manual browser login."""
+        """Start manual browser login with virtual display support."""
         import threading
         import time
+        import subprocess
+        import os
         
         def manual_login_process():
+            xvfb_process = None
             try:
+                # Check if we're on a headless server
+                if not os.environ.get('DISPLAY'):
+                    # Try to start virtual display
+                    try:
+                        # Start Xvfb virtual display
+                        xvfb_process = subprocess.Popen([
+                            'Xvfb', ':99', '-screen', '0', '1920x1080x24', '-ac'
+                        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                        os.environ['DISPLAY'] = ':99'
+                        time.sleep(2)  # Give Xvfb time to start
+                        
+                        # Auto-start VNC server
+                        try:
+                            vnc_process = subprocess.Popen([
+                                'x11vnc', '-display', ':99', '-nopw', '-listen', 'localhost', 
+                                '-xkb', '-forever', '-shared'
+                            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                            time.sleep(2)
+                            
+                            # Get server IP
+                            try:
+                                import socket
+                                hostname = socket.gethostname()
+                                server_ip = socket.gethostbyname(hostname)
+                            except:
+                                server_ip = "YOUR_SERVER_IP"
+                            
+                            send_telegram_message(bot_token, chat_id, 
+                                "🖥️ <b>Virtual display & VNC started automatically!</b>\n\n"
+                                "📱 <b>EASY CONNECTION:</b>\n"
+                                "1. Download <b>VNC Viewer</b> app on your phone/computer\n"
+                                "2. Connect to: <code>" + server_ip + ":5901</code>\n"
+                                "3. No password needed\n\n"
+                                "🖥️ <b>OR via SSH tunnel (advanced):</b>\n"
+                                "1. <code>ssh -L 5901:localhost:5901 root@" + server_ip + "</code>\n"
+                                "2. VNC to <code>localhost:5901</code>\n\n"
+                                "Browser opening in 3 seconds...", 
+                                parse_mode="HTML")
+                        except Exception as vnc_error:
+                            send_telegram_message(bot_token, chat_id, 
+                                "🖥️ <b>Virtual display started</b>\n\n"
+                                "⚠️ Auto VNC failed, manual setup needed:\n"
+                                "Run on server: <code>x11vnc -display :99 -nopw -listen localhost -xkb</code>\n\n"
+                                "Browser opening in 3 seconds...", 
+                                parse_mode="HTML")
+                        # Try to start web-based VNC for ultimate ease
+                        try:
+                            # Check if novnc is available
+                            novnc_check = subprocess.run(['which', 'websockify'], 
+                                                       capture_output=True, text=True)
+                            if novnc_check.returncode == 0:
+                                # Start websockify for web VNC
+                                web_vnc_process = subprocess.Popen([
+                                    'websockify', '--web=/usr/share/novnc/', '6080', 'localhost:5901'
+                                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                time.sleep(2)
+                                
+                                send_telegram_message(bot_token, chat_id, 
+                                    "🌐 <b>WEB VNC AVAILABLE!</b>\n\n"
+                                    "🎉 <b>EASIEST METHOD:</b>\n"
+                                    "Open browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
+                                    "Click 'Connect' - no app needed!\n\n"
+                                    "📱 Or use VNC Viewer app: <code>" + server_ip + ":5901</code>", 
+                                    parse_mode="HTML")
+                        except:
+                            pass  # Web VNC not available, regular VNC instructions already sent
+                        
+                        time.sleep(3)
+                        
+                    except FileNotFoundError:
+                        send_telegram_message(bot_token, chat_id, 
+                            "❌ <b>Xvfb not installed</b>\n\n"
+                            "Install virtual display:\n"
+                            "<code>sudo apt update</code>\n"
+                            "<code>sudo apt install xvfb x11vnc</code>\n\n"
+                            "Then try manual login again.", 
+                            parse_mode="HTML")
+                        return
+                    except Exception as e:
+                        send_telegram_message(bot_token, chat_id, 
+                            f"❌ <b>Failed to start virtual display:</b> {str(e)}\n\n"
+                            "Try auto-login instead or install VNC manually.", 
+                            parse_mode="HTML")
+                        return
+                
+                # Create browser with display
                 manual_driver = create_reliable_webdriver(headless=False)
                 manual_driver.get("https://www.facebook.com/")
                 logging.info("✅ Manual login browser opened")
                 
+                send_telegram_message(bot_token, chat_id, 
+                    "✅ <b>Browser opened!</b>\n\n"
+                    "🔗 Navigate to Facebook and complete login\n"
+                    "🍪 Cookies will be saved automatically\n"
+                    "⏱️ Browser will close after successful login", 
+                    parse_mode="HTML")
+                
                 # Monitor for login completion
-                while True:
+                login_detected = False
+                timeout_counter = 0
+                max_timeout = 600  # 10 minutes timeout
+                
+                while timeout_counter < max_timeout:
                     try:
                         current_url = manual_driver.current_url
-                        if "facebook.com" in current_url and "/login" not in current_url:
+                        if "facebook.com" in current_url and "/login" not in current_url and "checkpoint" not in current_url:
                             save_cookies(manual_driver, get_cookie_store_path())
                             logging.info("✅ Cookies saved from manual login")
+                            send_telegram_message(bot_token, chat_id, 
+                                "✅ <b>Login successful!</b>\n\n"
+                                "🍪 Cookies saved and ready for scraping\n"
+                                "🚀 You can now start using the bot", 
+                                parse_mode="HTML")
+                            login_detected = True
                             break
                         time.sleep(3)
+                        timeout_counter += 3
                     except:
-                        logging.info("🔒 Manual login browser closed")
+                        logging.info("🔒 Manual login browser closed by user")
                         break
+                
+                if not login_detected and timeout_counter >= max_timeout:
+                    send_telegram_message(bot_token, chat_id, 
+                        "⏰ <b>Login timeout (10 minutes)</b>\n\n"
+                        "Please try again or use auto-login if you have credentials.", 
+                        parse_mode="HTML")
                 
                 try:
                     manual_driver.quit()
@@ -452,6 +565,27 @@ Choose login method:
                     
             except Exception as e:
                 logging.error(f"Manual login error: {e}")
+                send_telegram_message(bot_token, chat_id, 
+                    f"❌ <b>Manual login error:</b> {str(e)}\n\n"
+                    "Try auto-login instead if you have FB credentials.", 
+                    parse_mode="HTML")
+            finally:
+                # Clean up virtual display
+                if xvfb_process:
+                    try:
+                        xvfb_process.terminate()
+                        xvfb_process.wait(timeout=5)
+                    except:
+                        try:
+                            xvfb_process.kill()
+                        except:
+                            pass
+        
+        # Send initial message
+        send_telegram_message(bot_token, chat_id, 
+            "🚀 <b>Starting manual login...</b>\n\n"
+            "Setting up virtual display for headless server...", 
+            parse_mode="HTML")
         
         threading.Thread(target=manual_login_process, daemon=True).start()
     
