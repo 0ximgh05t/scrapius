@@ -46,6 +46,10 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
         + f"\n\nAuthor: {author}\nURL: {url}\nContent:\n{content}"
     )[:6000]
 
+    # Debug logging to see what prompts are actually being used
+    logging.info(f"🔍 AI System Prompt: {sys[:200]}...")
+    logging.info(f"🔍 AI User Prompt: {usr[:200]}...")
+
     resp = client.chat.completions.create(
         model=model,
         messages=[
@@ -55,10 +59,13 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
         temperature=0,
     )
     text = resp.choices[0].message.content if resp.choices else ""
+    logging.info(f"🔍 AI Raw Response: {text}")
+    
     try:
         data = json.loads(text)
         send = bool(data.get("send", False))
         summary = str(data.get("summary", ""))
+        logging.info(f"🔍 AI Parsed: send={send}, summary='{summary[:50]}...'")
         return send, summary
     except Exception:
         # Fallback: simple heuristic

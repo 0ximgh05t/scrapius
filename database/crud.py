@@ -530,8 +530,11 @@ def botsettings_get(db_conn: sqlite3.Connection, key: str, default: str = "") ->
         cursor = db_conn.cursor()
         cursor.execute("SELECT value FROM BotSettings WHERE key = ?", (key,))
         row = cursor.fetchone()
-        return row[0] if row and row[0] is not None else default
-    except sqlite3.Error:
+        result = row[0] if row and row[0] is not None else default
+        logging.info(f"🔍 botsettings_get('{key}'): found={'Yes' if row else 'No'}, returning='{result}'")
+        return result
+    except sqlite3.Error as e:
+        logging.error(f"🔍 botsettings_get('{key}') ERROR: {e}, returning default='{default}'")
         return default
 
 
