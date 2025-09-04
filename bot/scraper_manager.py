@@ -55,8 +55,16 @@ class ScraperManager:
             
             # Load cookies
             cookie_path = get_cookie_store_path()
-            if not load_cookies(self.driver, cookie_path):
-                logging.warning("⚠️ No valid cookies found - may need login")
+            logging.info(f"🍪 Attempting to load cookies from: {cookie_path}")
+            
+            if os.path.exists(cookie_path):
+                logging.info("🍪 Cookie file exists - loading...")
+                if load_cookies(self.driver, cookie_path):
+                    logging.info("✅ Cookies loaded successfully")
+                else:
+                    logging.warning("⚠️ Failed to load cookies - may be invalid")
+            else:
+                logging.warning("⚠️ No cookie file found - need fresh login")
             
             # Validate session
             if not is_facebook_session_valid(self.driver):
