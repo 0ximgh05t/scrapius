@@ -76,7 +76,10 @@ class CommandHandlers:
             await self._handle_clearcookies(bot_token, chat_id, conn)
         elif command == '/updategroup':
             await self._handle_updategroup(bot_token, chat_id, conn, arg)
-
+        elif command == '/done':
+            await self._handle_done(bot_token, chat_id, conn)
+        elif command == '/cancel':
+            await self._handle_cancel(bot_token, chat_id, conn)
         else:
             send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
     
@@ -585,56 +588,19 @@ Choose login method:
                 except Exception as debug_error:
                     logging.warning(f"⚠️ Debug info failed: {debug_error}")
                 
+                # Set login state so user can signal completion
+                self.login_states[chat_id] = 'manual_login_active'
+                self.login_drivers[chat_id] = manual_driver
+                
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
-                    "You should now see Facebook in your VNC connection.\n"
-                    "Complete the login and cookies will be saved automatically.", 
+                    "🖥️ Complete your login via VNC\n"
+                    "📱 When done, send: <b>/done</b>\n"
+                    "📱 To cancel, send: <b>/cancel</b>", 
                     parse_mode="HTML")
                 
-                # Monitor for login completion
-                login_detected = False
-                timeout_counter = 0
-                max_timeout = 600  # 10 minutes timeout
-                
-                while timeout_counter < max_timeout:
-                    try:
-                        current_url = manual_driver.current_url
-                        logging.debug(f"🔍 Checking URL: {current_url}")
-                        
-                        # Check for actual successful login indicators
-                        success_indicators = [
-                            "facebook.com/home",
-                            "facebook.com/?sk=h_chr", 
-                            "facebook.com/?ref=tn_tnmn",
-                            "/feed/",
-                            "facebook.com/?_rdr"
-                        ]
-                        
-                        # Check if we're actually logged in (not just on Facebook)
-                        is_logged_in = any(indicator in current_url for indicator in success_indicators)
-                        
-                        if is_logged_in:
-                            save_cookies(manual_driver, get_cookie_store_path())
-                            logging.info("✅ Cookies saved from manual login")
-                            send_telegram_message(bot_token, chat_id, 
-                                "✅ <b>Login successful!</b>\n\n"
-                                "🍪 Cookies saved and ready for scraping\n"
-                                "🚀 You can now start using the bot", 
-                                parse_mode="HTML")
-                            login_detected = True
-                            break
-                        
-                        time.sleep(3)
-                        timeout_counter += 3
-                    except:
-                        logging.info("🔒 Manual login browser closed by user")
-                        break
-                
-                if not login_detected and timeout_counter >= max_timeout:
-                    send_telegram_message(bot_token, chat_id, 
-                        "⏰ <b>Login timeout (10 minutes)</b>\n\n"
-                        "Please try again or use auto-login if you have credentials.", 
-                        parse_mode="HTML")
+                # Browser stays open, waiting for user signal
+                # User will send /done or /cancel to complete the process
                 
                 try:
                     manual_driver.quit()
@@ -1149,6 +1115,75 @@ Please try again with the correct format."""
         except Exception as e:
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error during browser wipe:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error during browser wipe: {e}")
+    
+    async def _handle_done(self, bot_token: str, chat_id: str, conn) -> None:
+        """Handle /done command - complete manual login."""
+        if chat_id not in self.login_states or self.login_states[chat_id] != 'manual_login_active':
+            send_telegram_message(bot_token, chat_id, "❌ <b>No active manual login session.</b>\n\nUse /login → Manual Browser first.", parse_mode="HTML")
+            return
+        
+        try:
+            driver = self.login_drivers.get(chat_id)
+            if not driver:
+                send_telegram_message(bot_token, chat_id, "❌ <b>Browser session not found.</b>", parse_mode="HTML")
+                return
+            
+            # Save cookies from current browser state
+            save_cookies(driver, get_cookie_store_path())
+            logging.info("✅ Cookies saved from manual login completion")
+            
+            # Clean up
+            try:
+                driver.quit()
+            except:
+                pass
+            
+            del self.login_states[chat_id]
+            del self.login_drivers[chat_id]
+            
+            # Resume main scraper
+            self._pause_main_scraper = False
+            
+            send_telegram_message(bot_token, chat_id, 
+                "✅ <b>Manual login completed!</b>\n\n"
+                "🍪 Cookies saved successfully\n"
+                "🚀 Bot ready for scraping\n"
+                "▶️ Main scraper resumed", 
+                parse_mode="HTML")
+                
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error completing login:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error completing manual login: {e}")
+    
+    async def _handle_cancel(self, bot_token: str, chat_id: str, conn) -> None:
+        """Handle /cancel command - cancel manual login."""
+        if chat_id not in self.login_states or self.login_states[chat_id] != 'manual_login_active':
+            send_telegram_message(bot_token, chat_id, "❌ <b>No active manual login session.</b>", parse_mode="HTML")
+            return
+        
+        try:
+            driver = self.login_drivers.get(chat_id)
+            if driver:
+                try:
+                    driver.quit()
+                except:
+                    pass
+            
+            del self.login_states[chat_id]
+            del self.login_drivers[chat_id]
+            
+            # Resume main scraper
+            self._pause_main_scraper = False
+            
+            send_telegram_message(bot_token, chat_id, 
+                "❌ <b>Manual login cancelled</b>\n\n"
+                "🔒 Browser closed\n"
+                "▶️ Main scraper resumed", 
+                parse_mode="HTML")
+                
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error cancelling login:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error cancelling manual login: {e}")
     
     async def _handle_updategroup(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
         """Handle /updategroup command - update group name from Facebook."""
