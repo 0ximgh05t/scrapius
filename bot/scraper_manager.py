@@ -33,32 +33,10 @@ class ScraperManager:
             if self.initialized:
                 return True
             
-            # Check if there's an existing manual login browser we can reuse
-            manual_browser = None
-            if self.command_handlers:
-                # Look for active manual login browsers
-                for chat_id, driver in self.command_handlers.login_drivers.items():
-                    if not chat_id.endswith('_xvfb') and driver:  # Skip VNC processes
-                        try:
-                            # Test if browser is still alive and valid
-                            driver.current_url  # This will throw if browser is dead
-                            manual_browser = driver
-                            logging.info(f"🔄 Reusing existing manual login browser from chat {chat_id}")
-                            break
-                        except:
-                            continue
-            
-            if manual_browser:
-                # Reuse the manual login browser
-                self.driver = manual_browser
-                self.reused_manual_browser = True
-                
-                # Note: Skip stealth measures for reused browser - already successfully logged in
-            else:
-                # Create new WebDriver as fallback
-                logging.info("🆕 Creating new browser (no manual login browser available)")
-                self.driver = create_reliable_webdriver(headless=True)
-                self.reused_manual_browser = False
+            # Create new headless WebDriver - simple and reliable
+            logging.info("🆕 Creating new headless browser for scraping")
+            self.driver = create_reliable_webdriver(headless=True)
+            self.reused_manual_browser = False
                 
             if not self.driver:
                 logging.error("❌ Failed to create WebDriver")
@@ -87,11 +65,7 @@ class ScraperManager:
         """Clean up resources."""
         try:
             if self.driver:
-                # Don't close manual login browsers - keep them alive for reuse
-                if hasattr(self, 'reused_manual_browser') and self.reused_manual_browser:
-                    logging.info("🔄 Keeping manual login browser alive for reuse")
-                else:
-                    self.driver.quit()
+                self.driver.quit()
                 self.driver = None
             self.initialized = False
             logging.info("🧹 Scraper manager cleaned up")
@@ -124,14 +98,11 @@ class ScraperManager:
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
             
             # Scrape posts with reliability settings - NO AUTHOR per user decision
-            # Skip virtual display if reusing manual login browser to avoid environment changes
-            skip_virtual_display = getattr(self, 'reused_manual_browser', False)
             posts = list(scrape_authenticated_group(
                 self.driver,
                 group_url,
                 num_posts=reliability['max_posts_per_group'],
-                fields_to_scrape=["content_text", "post_image_url"],
-                skip_virtual_display=skip_virtual_display
+                fields_to_scrape=["content_text", "post_image_url"]
             ))
             
             if not posts:

@@ -84,8 +84,6 @@ class CommandHandlers:
         elif command == '/cancel':
             logging.info(f"🔍 Routing to _handle_cancel for {chat_id}")
             await self._handle_cancel(bot_token, chat_id, conn)
-        elif command == '/resume':
-            await self._handle_resume(bot_token, chat_id, conn)
         else:
             logging.warning(f"🔍 Unknown command: '{command}' from {chat_id}")
             send_telegram_message(bot_token, chat_id, f"❓ Unknown command: {command}. Use /start for help.")
@@ -635,8 +633,7 @@ Choose login method:
                     "✅ <b>Facebook opened!</b>\n\n"
                     "🖥️ Complete your login via VNC\n"
                     "📱 When done, send: <b>/done</b>\n"
-                    "📱 To cancel, send: <b>/cancel</b>\n"
-                    "📱 To test scraping: <b>/resume</b>", 
+                    "📱 To cancel, send: <b>/cancel</b>", 
                     parse_mode="HTML")
                 
                 # CRITICAL: Return immediately after setup - don't block the thread!
@@ -1189,9 +1186,8 @@ Please try again with the correct format."""
                 cookie_count = 0
                 logging.warning("⚠️ No cookies were saved - browser might not be logged in")
             
-            # Keep browser alive for scraping - just close VNC display
-            # The browser will be reused by the scraper to avoid Facebook detection
-            logging.info("🔄 Keeping browser alive for scraping (closing VNC only)")
+            # Close browser after saving cookies - scraper will use cookies in new headless browser
+            logging.info("🔒 Closing browser after saving cookies")
             
             # Clean up virtual display
             xvfb_process = self.login_drivers.get(chat_id + '_xvfb')
@@ -1205,9 +1201,15 @@ Please try again with the correct format."""
                     except:
                         pass
             
+            # Close browser
+            try:
+                driver.quit()
+            except:
+                pass
+            
             # Clean up state
             del self.login_states[chat_id]
-            # del self.login_drivers[chat_id]  # Keep browser alive for scraper reuse
+            del self.login_drivers[chat_id]
             if chat_id + '_xvfb' in self.login_drivers:
                 del self.login_drivers[chat_id + '_xvfb']
             
@@ -1280,24 +1282,7 @@ Please try again with the correct format."""
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error cancelling login:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error cancelling manual login: {e}")
     
-    async def _handle_resume(self, bot_token: str, chat_id: str, conn) -> None:
-        """Handle /resume command - resume scraping while keeping manual login browser alive."""
-        if chat_id not in self.login_states or self.login_states[chat_id] != 'manual_login_active':
-            send_telegram_message(bot_token, chat_id, "❌ <b>No active manual login session.</b>", parse_mode="HTML")
-            return
-        
-        # Resume scraping while keeping browser alive
-        self._pause_main_scraper = False
-        
-        send_telegram_message(bot_token, chat_id, 
-            "▶️ <b>Scraping resumed!</b>\n\n"
-            "🔄 Browser will be reused for scraping\n"
-            "📱 Use <b>/done</b> when ready to close VNC\n"
-            "📱 Use <b>/cancel</b> to abort", 
-            parse_mode="HTML")
-        
-        logging.info(f"✅ Scraping resumed while manual login browser stays alive for {chat_id}")
-    
+
     async def _handle_updategroup(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
         """Handle /updategroup command - update group name from Facebook."""
         if not arg:
