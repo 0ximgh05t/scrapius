@@ -39,12 +39,7 @@ class CommandHandlers:
         logging.info(f"🔍 handle_text_command called: {command} from {chat_id}")
         logging.info(f"🔍 Command type: {type(command)}, repr: {repr(command)}")
         
-        # Handle login flow states
-        if chat_id in self.login_states:
-            await self._handle_login_flow(bot_token, chat_id, conn, command, arg)
-            return
-        
-        # Regular commands
+        # Regular commands (login flow is handled in telegram_bot.py now)
         logging.info(f"🔍 Starting command routing for: '{command}'")
         if command == '/start':
             await self._handle_start(bot_token, chat_id, conn)
