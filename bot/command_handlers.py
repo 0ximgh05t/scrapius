@@ -27,6 +27,7 @@ class CommandHandlers:
         self.login_states = {}
         self.login_drivers = {}
         self.login_credentials = {}
+        self._pause_main_scraper = False
     
     async def handle_text_command(self, cmd: Dict, bot_token: str, conn) -> None:
         """Handle text-based commands."""
@@ -552,6 +553,15 @@ Choose login method:
                 
                 # Create browser with display (ensure it uses the virtual display)
                 logging.info(f"🖥️ Creating browser on display: {os.environ.get('DISPLAY', 'NOT SET')}")
+                
+                # Clear any existing Chrome processes to avoid conflicts
+                try:
+                    subprocess.run(['pkill', '-f', 'chrome'], capture_output=True)
+                    time.sleep(2)
+                    logging.info("🧹 Cleared existing Chrome processes")
+                except:
+                    pass
+                
                 manual_driver = create_reliable_webdriver(headless=False)
                 logging.info("✅ Browser driver created successfully")
                 
@@ -633,10 +643,25 @@ Choose login method:
         # Send initial message
         send_telegram_message(bot_token, chat_id, 
             "🚀 <b>Starting manual login...</b>\n\n"
+            "⏸️ Pausing main scraper to free up resources...\n"
             "Setting up virtual display for headless server...", 
             parse_mode="HTML")
         
-        threading.Thread(target=manual_login_process, daemon=True).start()
+        # Pause the main scraper during manual login
+        self._pause_main_scraper = True
+        
+        def manual_login_wrapper():
+            try:
+                manual_login_process()
+            finally:
+                # Resume main scraper when done
+                self._pause_main_scraper = False
+                send_telegram_message(bot_token, chat_id, 
+                    "▶️ <b>Manual login session ended</b>\n\n"
+                    "Main scraper resumed.", 
+                    parse_mode="HTML")
+        
+        threading.Thread(target=manual_login_wrapper, daemon=True).start()
     
     async def _start_auto_login(self, bot_token: str, chat_id: str) -> None:
         """Start automatic login with saved credentials."""

@@ -559,9 +559,18 @@ def create_reliable_webdriver(headless: bool = True):
         from selenium import webdriver
         from selenium.webdriver.chrome.service import Service
         
-        # Get reliable ChromeDriver path
-        driver_path = get_reliable_chromedriver_path()
-        logging.info(f"🚀 Using ChromeDriver: {driver_path}")
+        # Get reliable ChromeDriver path - force compatible version for Chrome 140
+        from webdriver_manager.chrome import ChromeDriverManager
+        from webdriver_manager.core.utils import ChromeType
+        
+        try:
+            # Try to get a compatible ChromeDriver version
+            driver_path = ChromeDriverManager(version="140.0.7339.80").install()
+            logging.info(f"🚀 Using compatible ChromeDriver: {driver_path}")
+        except Exception as version_error:
+            logging.warning(f"⚠️ Could not get exact version match: {version_error}")
+            driver_path = get_reliable_chromedriver_path()
+            logging.info(f"🚀 Using fallback ChromeDriver: {driver_path}")
         
         # Get Chrome profile settings
         user_data_dir, profile_dir = get_chrome_profile_settings()

@@ -136,6 +136,10 @@ class ScrapiusTelegramBot:
     
     async def should_run_scrape_cycle(self, conn) -> bool:
         """Check if it's time to run a scrape cycle."""
+        # Check if manual login is in progress
+        if hasattr(self.command_handlers, '_pause_main_scraper') and self.command_handlers._pause_main_scraper:
+            return False
+            
         # Check working hours
         if not is_within_working_hours(conn):
             # Only log this message every 10 minutes to avoid spam
