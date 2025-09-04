@@ -437,7 +437,7 @@ Choose login method:
                     try:
                         # Start Xvfb virtual display
                         xvfb_process = subprocess.Popen([
-                            'Xvfb', ':99', '-screen', '0', '1920x1080x24', '-ac'
+                            '/usr/bin/Xvfb', ':99', '-screen', '0', '1920x1080x24', '-ac'
                         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                         os.environ['DISPLAY'] = ':99'
                         time.sleep(2)  # Give Xvfb time to start
@@ -445,7 +445,7 @@ Choose login method:
                         # Auto-start VNC server
                         try:
                             vnc_process = subprocess.Popen([
-                                'x11vnc', '-display', ':99', '-nopw', '-listen', 'localhost', 
+                                '/usr/bin/x11vnc', '-display', ':99', '-nopw', '-listen', 'localhost', 
                                 '-xkb', '-forever', '-shared'
                             ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                             time.sleep(2)
@@ -479,12 +479,12 @@ Choose login method:
                         # Try to start web-based VNC for ultimate ease
                         try:
                             # Check if novnc is available
-                            novnc_check = subprocess.run(['which', 'websockify'], 
-                                                       capture_output=True, text=True)
-                            if novnc_check.returncode == 0:
+                            # Check if websockify exists
+                            import os.path
+                            if os.path.exists('/usr/bin/websockify'):
                                 # Start websockify for web VNC
                                 web_vnc_process = subprocess.Popen([
-                                    'websockify', '--web=/usr/share/novnc/', '6080', 'localhost:5901'
+                                    '/usr/bin/websockify', '--web=/usr/share/novnc/', '6080', 'localhost:5901'
                                 ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                                 time.sleep(2)
                                 
@@ -500,9 +500,10 @@ Choose login method:
                         
                         time.sleep(3)
                         
-                    except FileNotFoundError:
+                    except FileNotFoundError as fnf_error:
                         send_telegram_message(bot_token, chat_id, 
-                            "❌ <b>Xvfb not installed</b>\n\n"
+                            f"❌ <b>Virtual display error</b>\n\n"
+                            f"Missing: {str(fnf_error)}\n\n"
                             "Install virtual display:\n"
                             "<code>sudo apt update</code>\n"
                             "<code>sudo apt install xvfb x11vnc</code>\n\n"
