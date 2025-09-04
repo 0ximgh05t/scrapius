@@ -22,10 +22,11 @@ def _scrape_group_name_from_page(driver) -> Optional[str]:
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.common.exceptions import TimeoutException, NoSuchElementException
     try:
-        # Common selectors for Facebook group names (based on actual FB structure)
+        # Enhanced selectors for Facebook group names (based on actual FB structure)
         selectors = [
             'h1[dir="auto"] span a',  # Most specific: h1 > span > a (contains actual name)
             'h1[dir="auto"] a',      # Fallback: direct h1 > a
+            'h1 a[href*="/groups/"]', # More specific: h1 > a with groups href
             'h1[dir="auto"]',        # Fallback: entire h1
             'h1 a',                  # Generic: any h1 > a
             'h1'                     # Last resort: any h1
@@ -33,19 +34,24 @@ def _scrape_group_name_from_page(driver) -> Optional[str]:
         
         for selector in selectors:
             try:
-                element = WebDriverWait(driver, 3).until(
+                element = WebDriverWait(driver, 5).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, selector))
                 )
                 text = element.text.strip()
                 
-                # Filter out common Facebook UI elements
+                # Filter out common Facebook UI elements and improve validation
                 if (text and 
-                    len(text) > 3 and 
-                    len(text) < 100 and
+                    len(text) > 2 and 
+                    len(text) < 150 and
                     'Facebook' not in text and
                     'See all' not in text and
                     'More' not in text and
-                    'home' not in text.lower()):
+                    'home' not in text.lower() and
+                    'Join' not in text and
+                    'Invite' not in text and
+                    'Search' not in text and
+                    not text.isdigit() and
+                    'members' not in text.lower()):
                     
                     logging.info(f"✅ Scraped group name: '{text}' using selector: {selector}")
                     return text

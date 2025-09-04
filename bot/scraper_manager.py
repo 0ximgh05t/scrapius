@@ -233,10 +233,13 @@ class ScraperManager:
                                      (f'https://www.facebook.com/groups/{group_identifier}', f'%{group_identifier}%'))
                         result = cursor.fetchone()
                         if result:
-                            group_name = result[0]
+                            raw_group_name = result[0]
                             # Clean up the group name for display
-                            if group_name.startswith("Group from "):
-                                group_name = group_name.replace("Group from https://www.facebook.com/groups/", "")
+                            if raw_group_name.startswith("Group from "):
+                                # Extract just the group identifier from the fallback name
+                                group_name = group_identifier
+                            else:
+                                group_name = raw_group_name
                             logging.debug(f"Found group name: {group_name}")
                         else:
                             logging.debug(f"No group found for identifier: {group_identifier}")

@@ -74,6 +74,8 @@ class CommandHandlers:
             await self._handle_clearcookies(bot_token, chat_id, conn)
         elif command == '/updategroup':
             await self._handle_updategroup(bot_token, chat_id, conn, arg)
+        elif command == '/refreshgroup':
+            await self._handle_refreshgroup(bot_token, chat_id, conn, arg)
         else:
             send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
     
@@ -876,3 +878,67 @@ Please try again with the correct format."""
         except Exception as e:
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error updating group:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error updating group: {e}")
+    
+    async def _handle_refreshgroup(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
+        """Handle /refreshgroup command - refresh group name from Facebook."""
+        if not arg:
+            send_telegram_message(bot_token, chat_id, "📝 <b>Usage:</b> /refreshgroup &lt;group_id&gt;\n\nExample: /refreshgroup 1", parse_mode="HTML")
+            return
+            
+        try:
+            group_id = int(arg.strip())
+            
+            cursor = conn.cursor()
+            cursor.execute("SELECT group_url FROM Groups WHERE group_id = ?", (group_id,))
+            result = cursor.fetchone()
+            
+            if not result:
+                send_telegram_message(bot_token, chat_id, f"❌ <b>Group {group_id} not found.</b>", parse_mode="HTML")
+                return
+                
+            group_url = result[0]
+            send_telegram_message(bot_token, chat_id, f"🔄 <b>Refreshing group name from Facebook...</b>\nGroup URL: {group_url}", parse_mode="HTML")
+            
+            # Create a temporary driver to scrape the group name
+            try:
+                from config import create_reliable_webdriver
+                from scraper.session_persistence import load_cookies
+                from database.simple_per_group import _scrape_group_name_from_page
+                
+                driver = create_reliable_webdriver()
+                if not driver:
+                    send_telegram_message(bot_token, chat_id, "❌ <b>Failed to create browser driver.</b>", parse_mode="HTML")
+                    return
+                
+                # Load cookies and navigate to group
+                load_cookies(driver)
+                driver.get(group_url)
+                
+                # Wait a bit for page to load
+                import time
+                time.sleep(3)
+                
+                # Scrape the group name
+                scraped_name = _scrape_group_name_from_page(driver)
+                
+                if scraped_name:
+                    # Update the database
+                    cursor.execute("UPDATE Groups SET group_name = ? WHERE group_id = ?", (scraped_name, group_id))
+                    conn.commit()
+                    
+                    send_telegram_message(bot_token, chat_id, f"✅ <b>Group {group_id} name refreshed:</b> {scraped_name}", parse_mode="HTML")
+                    logging.info(f"Refreshed group {group_id} name to: {scraped_name}")
+                else:
+                    send_telegram_message(bot_token, chat_id, f"❌ <b>Could not scrape group name from Facebook.</b>\nThe page might not be accessible or the selectors need updating.", parse_mode="HTML")
+                
+                driver.quit()
+                
+            except Exception as e:
+                send_telegram_message(bot_token, chat_id, f"❌ <b>Error scraping group name:</b> {str(e)}", parse_mode="HTML")
+                logging.error(f"Error scraping group name: {e}")
+                
+        except ValueError:
+            send_telegram_message(bot_token, chat_id, "❌ <b>Invalid group ID.</b> Must be a number.", parse_mode="HTML")
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error refreshing group:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error refreshing group: {e}")

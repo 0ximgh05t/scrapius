@@ -752,27 +752,6 @@ def scrape_authenticated_group(
     else:
         logging.warning("⚠️ Virtual display not available - Share->Copy may not work")
     
-    # Get the most recent post for incremental scraping
-    from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group
-    from database.crud import get_db_connection
-    
-    db_conn = get_db_connection()
-    group_id, table_suffix = get_or_create_group(db_conn, group_url, driver=driver)
-    
-    processed_post_urls: set[str] = set()
-    processed_post_ids: set[str] = set()
-    processed_content_hashes: set[str] = set()
-    
-    # Get most recent content hash for incremental scraping (FIXED normalization)
-    most_recent_hash = get_most_recent_post_content_hash(db_conn, table_suffix)
-    duplicate_found = False  # Global flag to stop all processing
-    
-    if most_recent_hash:
-        logging.info(f"🔄 Incremental scraping: will stop when finding duplicate content")
-    else:
-        logging.info(f"🆕 No existing posts found - this is a fresh scrape")
-    
-
     # Ensure chronological sorting for newest posts first
     if '?' in group_url:
         chronological_url = f"{group_url}&sorting_setting=CHRONOLOGICAL"
@@ -783,11 +762,32 @@ def scrape_authenticated_group(
     try:
         driver.get(chronological_url)
         logging.debug(f"Successfully navigated to {group_url}")
-
+        
+        # Wait for page to load before scraping group name
         WebDriverWait(driver, 30).until(
              EC.presence_of_element_located(FEED_OR_SCROLLER_S)
         )
         logging.debug("Feed element found.")
+        
+        # NOW get or create group (after driver is on the correct page)
+        from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group
+        from database.crud import get_db_connection
+        
+        db_conn = get_db_connection()
+        group_id, table_suffix = get_or_create_group(db_conn, group_url, driver=driver)
+        
+        processed_post_urls: set[str] = set()
+        processed_post_ids: set[str] = set()
+        processed_content_hashes: set[str] = set()
+        
+        # Get most recent content hash for incremental scraping (FIXED normalization)
+        most_recent_hash = get_most_recent_post_content_hash(db_conn, table_suffix)
+        duplicate_found = False  # Global flag to stop all processing
+        
+        if most_recent_hash:
+            logging.info(f"🔄 Incremental scraping: will stop when finding duplicate content")
+        else:
+            logging.info(f"🆕 No existing posts found - this is a fresh scrape")
 
         if "groups/" not in driver.current_url or "not_found" in driver.current_url or "login" in driver.current_url or "checkpoint" in driver.current_url:
              logging.error(f"❌ LOGGED OUT! Cannot access group. Current URL: {driver.current_url}")
