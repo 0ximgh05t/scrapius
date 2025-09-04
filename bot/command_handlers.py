@@ -608,11 +608,19 @@ Choose login method:
                     logging.warning(f"⚠️ Debug info failed: {debug_error}")
                 
                 # Store driver and xvfb process for cleanup (login_state already set outside)
-                # Note: We can't access self from inside this nested function, 
-                # so we'll store these in a way the outer function can access
+                # We need to store these immediately so /done and /cancel can access them
                 manual_login_process.driver = manual_driver
                 if 'xvfb_process' in locals():
                     manual_login_process.xvfb_process = xvfb_process
+                
+                # CRITICAL: Store in self.login_drivers immediately after browser opens
+                # This is a closure that can access the outer self
+                def store_driver():
+                    self.login_drivers[chat_id] = manual_driver
+                    if 'xvfb_process' in locals():
+                        self.login_drivers[chat_id + '_xvfb'] = xvfb_process
+                
+                store_driver()
                 
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
@@ -655,11 +663,7 @@ Choose login method:
             """Run browser creation without any blocking"""
             try:
                 manual_login_process()
-                # Store driver after completion
-                if hasattr(manual_login_process, 'driver'):
-                    self.login_drivers[chat_id] = manual_login_process.driver
-                if hasattr(manual_login_process, 'xvfb_process'):
-                    self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
+                # Driver storage now happens inside manual_login_process when browser opens
             except Exception as e:
                 logging.error(f"Browser creation failed: {e}")
                 send_telegram_message(bot_token, chat_id, 
