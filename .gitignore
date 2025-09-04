@@ -1,0 +1,109 @@
+# =============================================================================
+# SCRAPIUS .GITIGNORE - Comprehensive File Exclusions
+# =============================================================================
+
+# Environment and Configuration Files
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+insights.db
+
+# Log Files
+*.log
+logs/
+scrapius.log
+
+# Chrome User Data and Browser Files
+$HOME/
+chrome_user_data/
+fb_cookies.json
+*.cookies
+session_data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Node.js (if any frontend components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage Reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Selenium and Browser Automation
+selenium-debug.log
+geckodriver.log
+chromedriver.log
+screenshots/ 
