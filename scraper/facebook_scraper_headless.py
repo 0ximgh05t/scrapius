@@ -804,10 +804,42 @@ def scrape_authenticated_group(
         else:
             logging.info(f"🆕 No existing posts found - this is a fresh scrape")
 
-        if "groups/" not in driver.current_url or "not_found" in driver.current_url or "login" in driver.current_url or "checkpoint" in driver.current_url:
-             logging.error(f"❌ LOGGED OUT! Cannot access group. Current URL: {driver.current_url}")
-             logging.error(f"❌ Session is invalid - Facebook redirected to login/checkpoint")
-             logging.error(f"❌ You need to refresh your cookies!")
+        # Enhanced session validation - check for various Facebook security/verification scenarios
+        current_url = driver.current_url.lower()
+        page_source = driver.page_source.lower()
+        
+        session_invalid = False
+        error_type = ""
+        
+        if "groups/" not in current_url:
+            session_invalid = True
+            error_type = "Not on group page"
+        elif "not_found" in current_url:
+            session_invalid = True
+            error_type = "Group not found"
+        elif "login" in current_url:
+            session_invalid = True
+            error_type = "Redirected to login"
+        elif "checkpoint" in current_url:
+            session_invalid = True
+            error_type = "Security checkpoint"
+        elif "captcha" in page_source or "security check" in page_source:
+            session_invalid = True
+            error_type = "CAPTCHA/Security check required"
+        elif "verify" in current_url or "confirm" in current_url or "verification" in page_source:
+            session_invalid = True
+            error_type = "Account verification required"
+        elif "two_factor" in current_url or "2fa" in page_source:
+            session_invalid = True
+            error_type = "Two-factor authentication required"
+        elif "blocked" in page_source or "restricted" in page_source:
+            session_invalid = True
+            error_type = "Account blocked/restricted"
+        
+        if session_invalid:
+             logging.error(f"❌ SESSION INVALID! {error_type}")
+             logging.error(f"❌ Current URL: {driver.current_url}")
+             logging.error(f"❌ You need to refresh your cookies or complete verification!")
              
              # Send Telegram notification about session failure
              try:
@@ -815,18 +847,15 @@ def scrape_authenticated_group(
                  from notifier.telegram_notifier import broadcast_message
                  bot_token, chat_ids = get_telegram_settings()
                  if bot_token and chat_ids:
-                     error_msg = f"""🚨 <b>Facebook Session Expired!</b>
+                     error_msg = f"""🚨 <b>Facebook Session Issue!</b>
                        
-❌ Bot cannot access Facebook group
-🔒 Cookies have expired or session is invalid
+❌ <b>Problem:</b> {error_type}
+🔒 <b>Current URL:</b> <code>{driver.current_url}</code>
 
-💡 <b>To fix via Telegram:</b>
-1. Send: <code>/login</code>
-2. Choose 'manual' or 'auto'
-3. Complete login process
-4. Bot will continue automatically
-
-🌐 Current URL: <code>{driver.current_url}</code>"""
+💡 <b>Solutions:</b>
+• Complete any verification/CAPTCHA in your browser
+• Upload fresh cookies: <code>/login</code> → Import Cookies
+• Or try: <code>/clearcookies</code> → <code>/login</code>"""
                      
                      broadcast_message(bot_token, chat_ids, error_msg, parse_mode="HTML")
                      logging.info("📱 Sent session failure notification to Telegram")
