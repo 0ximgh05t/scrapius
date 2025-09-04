@@ -595,7 +595,31 @@ Choose login method:
                     "This may take 30-60 seconds on first run.", 
                     parse_mode="HTML")
                 
-                manual_driver = create_reliable_webdriver(headless=False)
+                # Create unique user data directory for manual login to avoid conflicts
+                import tempfile
+                manual_profile_dir = os.path.join(tempfile.gettempdir(), f"scrapius_manual_{os.getpid()}_{chat_id}")
+                os.makedirs(manual_profile_dir, exist_ok=True)
+                
+                # Set environment variables for unique profile
+                original_user_data = os.environ.get('CHROME_USER_DATA_DIR')
+                original_profile = os.environ.get('CHROME_PROFILE_DIR')
+                
+                os.environ['CHROME_USER_DATA_DIR'] = manual_profile_dir
+                os.environ['CHROME_PROFILE_DIR'] = 'ManualLogin'
+                
+                try:
+                    manual_driver = create_reliable_webdriver(headless=False)
+                finally:
+                    # Restore original environment variables
+                    if original_user_data:
+                        os.environ['CHROME_USER_DATA_DIR'] = original_user_data
+                    else:
+                        os.environ.pop('CHROME_USER_DATA_DIR', None)
+                    
+                    if original_profile:
+                        os.environ['CHROME_PROFILE_DIR'] = original_profile
+                    else:
+                        os.environ.pop('CHROME_PROFILE_DIR', None)
                 logging.info("✅ Browser driver created successfully")
                 
                 # Navigate to Facebook
