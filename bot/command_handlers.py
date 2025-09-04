@@ -652,22 +652,19 @@ Choose login method:
         import threading
         
         def run_browser_async():
-            """Run browser creation in thread pool to avoid blocking main thread"""
-            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(manual_login_process)
-                try:
-                    # This will run in background without blocking main thread
-                    future.result()  # Wait for completion
-                    # Store driver after completion
-                    if hasattr(manual_login_process, 'driver'):
-                        self.login_drivers[chat_id] = manual_login_process.driver
-                    if hasattr(manual_login_process, 'xvfb_process'):
-                        self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
-                except Exception as e:
-                    logging.error(f"Browser creation failed: {e}")
-                    send_telegram_message(bot_token, chat_id, 
-                        f"❌ <b>Browser creation failed:</b> {str(e)}", 
-                        parse_mode="HTML")
+            """Run browser creation without any blocking"""
+            try:
+                manual_login_process()
+                # Store driver after completion
+                if hasattr(manual_login_process, 'driver'):
+                    self.login_drivers[chat_id] = manual_login_process.driver
+                if hasattr(manual_login_process, 'xvfb_process'):
+                    self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
+            except Exception as e:
+                logging.error(f"Browser creation failed: {e}")
+                send_telegram_message(bot_token, chat_id, 
+                    f"❌ <b>Browser creation failed:</b> {str(e)}", 
+                    parse_mode="HTML")
         
         # Start in daemon thread - this won't block main thread
         threading.Thread(target=run_browser_async, daemon=True).start()
