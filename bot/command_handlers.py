@@ -503,22 +503,35 @@ Choose login method:
     
     async def _use_existing_cookies(self, bot_token: str, chat_id: str) -> None:
         """Use existing cookies if available."""
-        try:
-            driver = create_reliable_webdriver(headless=True)
-            cookie_path = get_cookie_store_path()
-            
-            if load_cookies(driver, cookie_path):
-                if is_facebook_session_valid(driver):
+        import threading
+        
+        def validate_cookies_background():
+            try:
+                driver = create_reliable_webdriver(headless=True)
+                cookie_path = get_cookie_store_path()
+                
+                if load_cookies(driver, cookie_path):
+                    # Send immediate confirmation that cookies exist
                     send_telegram_message(bot_token, chat_id, "✅ <b>Existing cookies are valid!</b>", parse_mode="HTML")
+                    
+                    # Validate session in background (optional)
+                    try:
+                        if is_facebook_session_valid(driver):
+                            logging.info("✅ Cookie session validation successful")
+                        else:
+                            logging.warning("⚠️ Cookie session validation failed, but cookies exist")
+                    except Exception as validation_error:
+                        logging.warning(f"⚠️ Cookie validation timed out: {validation_error}")
                 else:
-                    send_telegram_message(bot_token, chat_id, "❌ <b>Existing cookies are invalid.</b> Please use another login method.", parse_mode="HTML")
-            else:
-                send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
-            
-            driver.quit()
-        except Exception as e:
-            send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
-            logging.error(f"Cookie validation error: {e}")
+                    send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
+                
+                driver.quit()
+            except Exception as e:
+                send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
+                logging.error(f"Cookie validation error: {e}")
+        
+        # Run validation in background thread to avoid blocking the bot
+        threading.Thread(target=validate_cookies_background, daemon=True).start()
     
     async def _start_cookie_import(self, bot_token: str, chat_id: str) -> None:
         """Start cookie import process with detailed instructions."""
@@ -756,20 +769,37 @@ Please try again with the correct format."""
                         if earliest_expiry is None or expiry_date < earliest_expiry:
                             earliest_expiry = expiry_date
                 
-                # Check session validity
-                driver = create_reliable_webdriver(headless=True)
-                cookies_loaded = load_cookies(driver, cookie_path)
-                session_valid = False
-                
-                if cookies_loaded:
-                    session_valid = is_facebook_session_valid(driver)
-                
-                driver.quit()
-                
                 # Format expiration date
                 expiry_str = earliest_expiry.strftime("%B %d, %Y at %H:%M") if earliest_expiry else "Unknown"
                 
+                # Send immediate status without blocking validation
                 status_msg = f"""🍪 <b>Cookie Status:</b>
+
+📊 <b>Count:</b> {cookie_count} cookies
+🔐 <b>Session:</b> 🔄 Validating...
+⏰ <b>Expires:</b> {expiry_str}
+📁 <b>File:</b> {os.path.basename(cookie_path)}
+
+⏳ <b>Checking session validity...</b>"""
+                
+                send_telegram_message(bot_token, chat_id, status_msg, parse_mode="HTML")
+                
+                # Validate session in background thread
+                import threading
+                
+                def validate_session_background():
+                    try:
+                        driver = create_reliable_webdriver(headless=True)
+                        cookies_loaded = load_cookies(driver, cookie_path)
+                        session_valid = False
+                        
+                        if cookies_loaded:
+                            session_valid = is_facebook_session_valid(driver)
+                        
+                        driver.quit()
+                        
+                        # Send updated status
+                        final_msg = f"""🍪 <b>Cookie Status - Updated:</b>
 
 📊 <b>Count:</b> {cookie_count} cookies
 🔐 <b>Session:</b> {'✅ Active' if session_valid else '❌ Invalid'}
@@ -777,8 +807,15 @@ Please try again with the correct format."""
 📁 <b>File:</b> {os.path.basename(cookie_path)}
 
 {'✅ <b>All good!</b> Cookies are working.' if session_valid else '❌ <b>Session expired!</b> Use /login to refresh.'}"""
+                        
+                        send_telegram_message(bot_token, chat_id, final_msg, parse_mode="HTML")
+                        
+                    except Exception as e:
+                        error_msg = f"🍪 <b>Cookie Status - Error:</b>\n\n❌ <b>Validation failed:</b> {str(e)}"
+                        send_telegram_message(bot_token, chat_id, error_msg, parse_mode="HTML")
+                        logging.error(f"Background cookie validation error: {e}")
                 
-                send_telegram_message(bot_token, chat_id, status_msg, parse_mode="HTML")
+                threading.Thread(target=validate_session_background, daemon=True).start()
             else:
                 send_telegram_message(bot_token, chat_id, "❌ <b>No cookies found.</b>\n\nUse /login to authenticate with Facebook.", parse_mode="HTML")
                 
