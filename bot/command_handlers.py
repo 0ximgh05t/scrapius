@@ -631,9 +631,10 @@ Choose login method:
                     "📱 To cancel, send: <b>/cancel</b>", 
                     parse_mode="HTML")
                 
-                # Browser stays open, waiting for user signal
-                # User will send /done or /cancel to complete the process
-                # DO NOT quit the driver here - let /done or /cancel handle it
+                # CRITICAL: Return immediately after setup - don't block the thread!
+                # The browser will stay open and /done or /cancel will handle cleanup
+                logging.info("🔍 Manual login setup complete - returning from function")
+                return
                     
             except Exception as e:
                 logging.error(f"Manual login error: {e}")
