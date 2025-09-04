@@ -754,7 +754,7 @@ def scrape_authenticated_group(
     
     # Get the most recent post for incremental scraping
     from database.simple_per_group import get_most_recent_post_content_hash, get_or_create_group
-    from main import get_db_connection
+    from database.crud import get_db_connection
     
     db_conn = get_db_connection()
     group_id, table_suffix = get_or_create_group(db_conn, group_url)
