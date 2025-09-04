@@ -189,10 +189,10 @@ class ScraperManager:
                 'ai_result': ai_result
                 # NO AUTHOR - per user requirement
             }
-            add_post_to_group(conn, table_name, post_data_dict)
+            result = add_post_to_group(conn, table_name, post_data_dict)
             
-            # Send notification if relevant
-            if ai_result and ai_result.get('relevant', False):
+            # Send notification ONLY if post was actually saved (not duplicate) and relevant
+            if result and result[1] and ai_result and ai_result.get('relevant', False):
                 await self._send_post_notification(
                     content, author, post_url, ai_result,
                     bot_token, chat_ids
