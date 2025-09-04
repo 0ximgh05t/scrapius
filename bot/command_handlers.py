@@ -445,10 +445,10 @@ Choose login method:
                         # Auto-start VNC server
                         try:
                             vnc_process = subprocess.Popen([
-                                '/usr/bin/x11vnc', '-display', ':99', '-nopw', '-listen', 'localhost', 
-                                '-xkb', '-forever', '-shared'
+                                '/usr/bin/x11vnc', '-display', ':99', '-nopw', '-listen', '0.0.0.0', 
+                                '-xkb', '-forever', '-shared', '-rfbport', '5901'
                             ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                            time.sleep(2)
+                            time.sleep(3)  # Give VNC more time to start
                             
                             # Get server IP
                             try:
@@ -459,15 +459,13 @@ Choose login method:
                                 server_ip = "YOUR_SERVER_IP"
                             
                             send_telegram_message(bot_token, chat_id, 
-                                "🖥️ <b>Virtual display & VNC started automatically!</b>\n\n"
-                                "📱 <b>EASY CONNECTION:</b>\n"
-                                "1. Download <b>VNC Viewer</b> app on your phone/computer\n"
+                                "🖥️ <b>Virtual display & VNC started!</b>\n\n"
+                                "📱 <b>VNC APP METHOD (Recommended):</b>\n"
+                                "1. Download <b>VNC Viewer</b> app\n"
                                 "2. Connect to: <code>" + server_ip + ":5901</code>\n"
                                 "3. No password needed\n\n"
-                                "🖥️ <b>OR via SSH tunnel (advanced):</b>\n"
-                                "1. <code>ssh -L 5901:localhost:5901 root@" + server_ip + "</code>\n"
-                                "2. VNC to <code>localhost:5901</code>\n\n"
-                                "Browser opening in 3 seconds...", 
+                                "🌐 <b>Web VNC will be available shortly...</b>\n\n"
+                                "Browser opening in 5 seconds...", 
                                 parse_mode="HTML")
                         except Exception as vnc_error:
                             send_telegram_message(bot_token, chat_id, 
@@ -478,22 +476,37 @@ Choose login method:
                                 parse_mode="HTML")
                         # Try to start web-based VNC for ultimate ease
                         try:
-                            # Check if websockify exists
+                            # Check if websockify exists and VNC is running
                             if os.path.exists('/usr/bin/websockify'):
-                                # Start websockify for web VNC
-                                web_vnc_process = subprocess.Popen([
-                                    '/usr/bin/websockify', '--web=/usr/share/novnc/', '6080', 'localhost:5901'
-                                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                time.sleep(2)
+                                # Test if VNC port is accessible
+                                import socket
+                                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                                sock.settimeout(2)
+                                vnc_available = sock.connect_ex(('127.0.0.1', 5901)) == 0
+                                sock.close()
                                 
-                                send_telegram_message(bot_token, chat_id, 
-                                    "🌐 <b>WEB VNC AVAILABLE!</b>\n\n"
-                                    "🎉 <b>EASIEST METHOD:</b>\n"
-                                    "Open browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
-                                    "Click 'Connect' - no app needed!\n\n"
-                                    "📱 Or use VNC Viewer app: <code>" + server_ip + ":5901</code>", 
-                                    parse_mode="HTML")
-                        except:
+                                if vnc_available:
+                                    # Start websockify for web VNC
+                                    web_vnc_process = subprocess.Popen([
+                                        '/usr/bin/websockify', '--web=/usr/share/novnc/', '6080', '127.0.0.1:5901'
+                                    ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                    time.sleep(3)
+                                    
+                                    send_telegram_message(bot_token, chat_id, 
+                                        "🌐 <b>WEB VNC AVAILABLE!</b>\n\n"
+                                        "🎉 <b>EASIEST METHOD:</b>\n"
+                                        "Open browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
+                                        "Click 'Connect' - no app needed!\n\n"
+                                        "📱 Or use VNC Viewer app: <code>" + server_ip + ":5901</code>", 
+                                        parse_mode="HTML")
+                                else:
+                                    send_telegram_message(bot_token, chat_id, 
+                                        "⚠️ <b>VNC server not ready yet</b>\n\n"
+                                        "Use VNC Viewer app: <code>" + server_ip + ":5901</code>\n"
+                                        "Wait 10-15 seconds before connecting.", 
+                                        parse_mode="HTML")
+                        except Exception as web_vnc_error:
+                            logging.warning(f"Web VNC setup failed: {web_vnc_error}")
                             pass  # Web VNC not available, regular VNC instructions already sent
                         
                         time.sleep(3)
