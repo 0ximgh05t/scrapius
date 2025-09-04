@@ -602,6 +602,9 @@ Choose login method:
                 # Set login state so user can signal completion
                 self.login_states[chat_id] = 'manual_login_active'
                 self.login_drivers[chat_id] = manual_driver
+                # Store xvfb process for cleanup
+                if 'xvfb_process' in locals():
+                    self.login_drivers[chat_id + '_xvfb'] = xvfb_process
                 
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
@@ -612,11 +615,7 @@ Choose login method:
                 
                 # Browser stays open, waiting for user signal
                 # User will send /done or /cancel to complete the process
-                
-                try:
-                    manual_driver.quit()
-                except:
-                    pass
+                # DO NOT quit the driver here - let /done or /cancel handle it
                     
             except Exception as e:
                 logging.error(f"Manual login error: {e}")
@@ -624,17 +623,8 @@ Choose login method:
                     f"❌ <b>Manual login error:</b> {str(e)}\n\n"
                     "Try auto-login instead if you have FB credentials.", 
                     parse_mode="HTML")
-            finally:
-                # Clean up virtual display
-                if xvfb_process:
-                    try:
-                        xvfb_process.terminate()
-                        xvfb_process.wait(timeout=5)
-                    except:
-                        try:
-                            xvfb_process.kill()
-                        except:
-                            pass
+            # DO NOT clean up virtual display here - let /done or /cancel handle it
+            # The virtual display and VNC need to stay running for user interaction
         
         # Send initial message
         send_telegram_message(bot_token, chat_id, 
@@ -647,15 +637,7 @@ Choose login method:
         self._pause_main_scraper = True
         
         def manual_login_wrapper():
-            try:
-                manual_login_process()
-            finally:
-                # Resume main scraper when done
-                self._pause_main_scraper = False
-                send_telegram_message(bot_token, chat_id, 
-                    "▶️ <b>Manual login session ended</b>\n\n"
-                    "Main scraper resumed.", 
-                    parse_mode="HTML")
+            manual_login_process()
         
         threading.Thread(target=manual_login_wrapper, daemon=True).start()
     
@@ -1158,14 +1140,29 @@ Please try again with the correct format."""
                 cookie_count = 0
                 logging.warning("⚠️ No cookies were saved - browser might not be logged in")
             
-            # Clean up
+            # Clean up browser
             try:
                 driver.quit()
             except:
                 pass
             
+            # Clean up virtual display
+            xvfb_process = self.login_drivers.get(chat_id + '_xvfb')
+            if xvfb_process:
+                try:
+                    xvfb_process.terminate()
+                    xvfb_process.wait(timeout=5)
+                except:
+                    try:
+                        xvfb_process.kill()
+                    except:
+                        pass
+            
+            # Clean up state
             del self.login_states[chat_id]
             del self.login_drivers[chat_id]
+            if chat_id + '_xvfb' in self.login_drivers:
+                del self.login_drivers[chat_id + '_xvfb']
             
             # Resume main scraper
             self._pause_main_scraper = False
@@ -1196,6 +1193,7 @@ Please try again with the correct format."""
             return
         
         try:
+            # Clean up browser
             driver = self.login_drivers.get(chat_id)
             if driver:
                 try:
@@ -1203,8 +1201,23 @@ Please try again with the correct format."""
                 except:
                     pass
             
+            # Clean up virtual display
+            xvfb_process = self.login_drivers.get(chat_id + '_xvfb')
+            if xvfb_process:
+                try:
+                    xvfb_process.terminate()
+                    xvfb_process.wait(timeout=5)
+                except:
+                    try:
+                        xvfb_process.kill()
+                    except:
+                        pass
+            
+            # Clean up state
             del self.login_states[chat_id]
             del self.login_drivers[chat_id]
+            if chat_id + '_xvfb' in self.login_drivers:
+                del self.login_drivers[chat_id + '_xvfb']
             
             # Resume main scraper
             self._pause_main_scraper = False
