@@ -832,15 +832,17 @@ def scrape_authenticated_group(
         # elif "captcha" in page_source or "security check" in page_source:
         #     session_invalid = True
         #     error_type = "CAPTCHA/Security check required"
-        elif "verify" in current_url or "confirm" in current_url or "verification" in page_source:
-            session_invalid = True
-            error_type = "Account verification required"
-        elif "two_factor" in current_url or "2fa" in page_source:
+        # DISABLED: False positive - "verification" appears in normal Facebook pages
+        # elif "verify" in current_url or "confirm" in current_url or "verification" in page_source:
+        #     session_invalid = True
+        #     error_type = "Account verification required"
+        elif "two_factor" in current_url or "2fa" in current_url:  # Only check URL, not page source
             session_invalid = True
             error_type = "Two-factor authentication required"
-        elif "blocked" in page_source or "restricted" in page_source:
-            session_invalid = True
-            error_type = "Account blocked/restricted"
+        # DISABLED: Too broad - "blocked" and "restricted" appear in normal content
+        # elif "blocked" in page_source or "restricted" in page_source:
+        #     session_invalid = True
+        #     error_type = "Account blocked/restricted"
         
         if session_invalid:
              logging.error(f"❌ SESSION INVALID! {error_type}")
