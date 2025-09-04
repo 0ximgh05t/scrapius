@@ -478,9 +478,7 @@ Choose login method:
                                 parse_mode="HTML")
                         # Try to start web-based VNC for ultimate ease
                         try:
-                            # Check if novnc is available
                             # Check if websockify exists
-                            import os.path
                             if os.path.exists('/usr/bin/websockify'):
                                 # Start websockify for web VNC
                                 web_vnc_process = subprocess.Popen([
