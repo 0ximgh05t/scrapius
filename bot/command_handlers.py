@@ -756,7 +756,7 @@ Please try again with the correct format."""
         try:
             import os
             import json
-            from datetime import datetime
+            from datetime import datetime, timezone
             
             cookie_path = get_cookie_store_path()
             
@@ -772,7 +772,7 @@ Please try again with the correct format."""
                 for cookie in cookies:
                     if 'expirationDate' in cookie:
                         expiry_timestamp = cookie['expirationDate']
-                        expiry_date = datetime.fromtimestamp(expiry_timestamp)
+                        expiry_date = datetime.fromtimestamp(expiry_timestamp, tz=timezone.utc)
                         if earliest_expiry is None or expiry_date < earliest_expiry:
                             earliest_expiry = expiry_date
                 

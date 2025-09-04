@@ -39,7 +39,7 @@ class ScrapiusTelegramBot:
         self.command_handlers = CommandHandlers()
         
         # Throttle working hours logging - only log every 10 minutes
-        self.last_working_hours_log = datetime.min
+        self.last_working_hours_log = datetime.min.replace(tzinfo=timezone.utc)
         
         logging.info("🤖 Scrapius Telegram Bot initialized")
     
