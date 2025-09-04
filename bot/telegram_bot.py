@@ -122,16 +122,11 @@ class ScrapiusTelegramBot:
                     
                     # Handle regular commands (starting with /) - ALWAYS check commands first
                     cmd = extract_commands(upd)
-                    logging.info(f"🔍 Extracted command: '{cmd}' from message text: '{text}'")
                     if cmd:
-                        logging.info(f"🔍 Processing command: {cmd}")
                         await self.command_handlers.handle_text_command(cmd, self.bot_token, conn)
-                        logging.info(f"🔍 Command processed: {cmd}")
                     elif chat_id in self.command_handlers.login_states:
                         # Process as login flow message (cookies, credentials, etc.) only if not a command
                         await self.command_handlers._handle_login_flow(self.bot_token, chat_id, conn, '', text)
-                    else:
-                        logging.info(f"🔍 No command extracted from text: '{text}'")
             
             # Save last update ID
             botsettings_set(conn, 'last_update_id', str(self.last_update_id))

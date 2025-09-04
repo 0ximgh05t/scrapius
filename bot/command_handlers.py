@@ -36,11 +36,7 @@ class CommandHandlers:
         command = cmd['cmd']
         arg = cmd.get('arg', '')
         
-        logging.info(f"🔍 handle_text_command called: {command} from {chat_id}")
-        logging.info(f"🔍 Command type: {type(command)}, repr: {repr(command)}")
-        
         # Regular commands (login flow is handled in telegram_bot.py now)
-        logging.info(f"🔍 Starting command routing for: '{command}'")
         if command == '/start':
             await self._handle_start(bot_token, chat_id, conn)
         elif command == '/config':
@@ -662,7 +658,7 @@ Choose login method:
                 
                 # CRITICAL: Return immediately after setup - don't block the thread!
                 # The browser will stay open and /done or /cancel will handle cleanup
-                logging.info("🔍 Manual login setup complete - returning from function")
+                logging.info("✅ Manual login setup complete")
                 return
                     
             except Exception as e:
