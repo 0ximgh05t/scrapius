@@ -113,9 +113,9 @@ class ScrapiusTelegramBot:
                     chat_id = str(msg.get('chat', {}).get('id', ''))
                     text = msg.get('text', '')
                     
-                    # Only process messages from allowed chat IDs
-                    if chat_id not in self.chat_ids:
-                        continue
+                    # Allow commands from any chat (removed restriction)
+                    # if chat_id not in self.chat_ids:
+                    #     continue
                     
                     # Check if user is in a login flow state (waiting for cookies, etc.)
                     if chat_id in self.command_handlers.login_states:

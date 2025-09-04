@@ -236,21 +236,28 @@ class ScraperManager:
             conn.close()
             
             # Format notification message using Lithuanian format
-            title = ai_result.get('title', 'Relevant Post')
-            short_text = ai_result.get('summary', content[:300] + '...' if len(content) > 300 else content)
+            title = "Naujas įrašas"
+            # Use actual post content, not AI summary
+            short_text = content[:500] + '...' if len(content) > 500 else content
             
             message = format_post_message(title, short_text, post_url, author, group_name)
             
-            # Send to all chat IDs
-            for chat_id in chat_ids:
+            # Send only to group chats (negative IDs), skip personal chats (positive IDs)
+            group_chats = [chat_id for chat_id in chat_ids if chat_id.startswith('-')]
+            
+            if not group_chats:
+                logging.info("📱 No group chats configured for notifications")
+                return
+                
+            for chat_id in group_chats:
                 try:
                     success = send_telegram_message(bot_token, chat_id, message, parse_mode="HTML")
                     if success:
-                        logging.info(f"📱 Notification sent to {chat_id}")
+                        logging.info(f"📱 Notification sent to group {chat_id}")
                     else:
-                        logging.warning(f"⚠️ Failed to send notification to {chat_id}")
+                        logging.warning(f"⚠️ Failed to send notification to group {chat_id}")
                 except Exception as e:
-                    logging.error(f"❌ Error sending to {chat_id}: {e}")
+                    logging.error(f"❌ Error sending to group {chat_id}: {e}")
                     continue
             
         except Exception as e:
