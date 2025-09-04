@@ -601,12 +601,12 @@ Choose login method:
                 except Exception as debug_error:
                     logging.warning(f"⚠️ Debug info failed: {debug_error}")
                 
-                # Set login state so user can signal completion
-                self.login_states[chat_id] = 'manual_login_active'
-                self.login_drivers[chat_id] = manual_driver
-                # Store xvfb process for cleanup
+                # Store driver and xvfb process for cleanup (login_state already set outside)
+                # Note: We can't access self from inside this nested function, 
+                # so we'll store these in a way the outer function can access
+                manual_login_process.driver = manual_driver
                 if 'xvfb_process' in locals():
-                    self.login_drivers[chat_id + '_xvfb'] = xvfb_process
+                    manual_login_process.xvfb_process = xvfb_process
                 
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
@@ -638,8 +638,19 @@ Choose login method:
         # Pause the main scraper during manual login
         self._pause_main_scraper = True
         
+        # Set login state BEFORE starting thread so /done and /cancel can find it
+        self.login_states[chat_id] = 'manual_login_active'
+        
         # Run the manual login process directly in the thread
-        threading.Thread(target=manual_login_process, daemon=True).start()
+        def run_and_store():
+            manual_login_process()
+            # After the process completes, store the driver for /done and /cancel
+            if hasattr(manual_login_process, 'driver'):
+                self.login_drivers[chat_id] = manual_login_process.driver
+            if hasattr(manual_login_process, 'xvfb_process'):
+                self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
+        
+        threading.Thread(target=run_and_store, daemon=True).start()
     
     async def _start_auto_login(self, bot_token: str, chat_id: str) -> None:
         """Start automatic login with saved credentials."""
