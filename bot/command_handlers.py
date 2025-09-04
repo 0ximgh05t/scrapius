@@ -647,16 +647,30 @@ Choose login method:
         # Set login state BEFORE starting thread so /done and /cancel can find it
         self.login_states[chat_id] = 'manual_login_active'
         
-        # Run the manual login process directly in the thread
-        def run_and_store():
-            manual_login_process()
-            # After the process completes, store the driver for /done and /cancel
-            if hasattr(manual_login_process, 'driver'):
-                self.login_drivers[chat_id] = manual_login_process.driver
-            if hasattr(manual_login_process, 'xvfb_process'):
-                self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
+        # Use concurrent.futures to run browser creation without blocking
+        import concurrent.futures
+        import threading
         
-        threading.Thread(target=run_and_store, daemon=True).start()
+        def run_browser_async():
+            """Run browser creation in thread pool to avoid blocking main thread"""
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(manual_login_process)
+                try:
+                    # This will run in background without blocking main thread
+                    future.result()  # Wait for completion
+                    # Store driver after completion
+                    if hasattr(manual_login_process, 'driver'):
+                        self.login_drivers[chat_id] = manual_login_process.driver
+                    if hasattr(manual_login_process, 'xvfb_process'):
+                        self.login_drivers[chat_id + '_xvfb'] = manual_login_process.xvfb_process
+                except Exception as e:
+                    logging.error(f"Browser creation failed: {e}")
+                    send_telegram_message(bot_token, chat_id, 
+                        f"❌ <b>Browser creation failed:</b> {str(e)}", 
+                        parse_mode="HTML")
+        
+        # Start in daemon thread - this won't block main thread
+        threading.Thread(target=run_browser_async, daemon=True).start()
     
     async def _start_auto_login(self, bot_token: str, chat_id: str) -> None:
         """Start automatic login with saved credentials."""
