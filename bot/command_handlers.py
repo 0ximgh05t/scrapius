@@ -599,7 +599,21 @@ Choose login method:
                 while timeout_counter < max_timeout:
                     try:
                         current_url = manual_driver.current_url
-                        if "facebook.com" in current_url and "/login" not in current_url and "checkpoint" not in current_url:
+                        logging.debug(f"🔍 Checking URL: {current_url}")
+                        
+                        # Check for actual successful login indicators
+                        success_indicators = [
+                            "facebook.com/home",
+                            "facebook.com/?sk=h_chr", 
+                            "facebook.com/?ref=tn_tnmn",
+                            "/feed/",
+                            "facebook.com/?_rdr"
+                        ]
+                        
+                        # Check if we're actually logged in (not just on Facebook)
+                        is_logged_in = any(indicator in current_url for indicator in success_indicators)
+                        
+                        if is_logged_in:
                             save_cookies(manual_driver, get_cookie_store_path())
                             logging.info("✅ Cookies saved from manual login")
                             send_telegram_message(bot_token, chat_id, 
@@ -609,6 +623,7 @@ Choose login method:
                                 parse_mode="HTML")
                             login_detected = True
                             break
+                        
                         time.sleep(3)
                         timeout_counter += 3
                     except:
