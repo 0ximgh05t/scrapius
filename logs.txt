@@ -1,0 +1,152 @@
+🤖 Starting Scrapius - Clean Architecture Version
+2025-09-05 00:19:26,012 - INFO - Database 'insights.db' initialized with Groups and Posts tables created or verified.
+2025-09-05 00:19:26,012 - INFO - ✅ Database initialized
+2025-09-05 00:19:26,013 - INFO - 🤖 Scrapius Telegram Bot initialized
+2025-09-05 00:19:26,013 - INFO - 🔧 Allowed chat IDs: ['-1002910329593', '632575874']
+2025-09-05 00:19:26,013 - INFO - 🤖 Bot token length: 46
+2025-09-05 00:19:26,014 - INFO - 🚀 Scrapius bot started - entering main loop
+2025-09-05 00:19:27,242 - INFO - 📊 Hourly limit changed from 6 to 2 - regenerating schedule
+2025-09-05 00:19:33,555 - WARNING - ⚠️ No VNC_PASSWORD in .env, using random password
+2025-09-05 00:19:43,205 - INFO - 🖥️ Creating browser on display: :99
+2025-09-05 00:19:44,242 - INFO - 🧹 Cleared existing Chrome processes
+2025-09-05 00:19:46,565 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
+2025-09-05 00:19:46,566 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
+2025-09-05 00:20:16,694 - ERROR - Failed to create remote debugging WebDriver: Chrome remote debugging failed to start
+2025-09-05 00:20:16,695 - WARNING - Remote debugging failed: Could not initialize remote debugging WebDriver: Chrome remote debugging failed to start
+2025-09-05 00:20:16,744 - INFO - ====== WebDriver manager ======
+2025-09-05 00:20:17,035 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 00:20:17,224 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 00:20:17,425 - INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+2025-09-05 00:20:17,426 - INFO - 🔧 Set executable permissions on ChromeDriver
+2025-09-05 00:20:17,443 - INFO - ✅ ChromeDriver test successful
+2025-09-05 00:20:17,443 - INFO - 🚀 Using ChromeDriver: /root/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver
+2025-09-05 00:20:22,180 - INFO - 🥷 WebDriver traces removed successfully
+2025-09-05 00:20:22,181 - INFO - ✅ Traditional WebDriver created successfully
+2025-09-05 00:20:22,181 - INFO - ✅ Browser driver created successfully
+2025-09-05 00:20:22,181 - INFO - 🌐 Navigating to Facebook...
+2025-09-05 00:20:26,036 - INFO - ✅ Manual login browser opened on virtual display
+2025-09-05 00:20:26,102 - INFO - 🔍 Window size: {'width': 1919, 'height': 1079}, position: {'x': 10, 'y': 10}
+2025-09-05 00:20:26,126 - INFO - 🔍 Current URL: https://www.facebook.com/
+2025-09-05 00:20:26,129 - INFO - 🔍 Storing driver for chat_id: -1002910329593
+2025-09-05 00:20:26,129 - INFO - 🔍 Driver stored. login_drivers keys: ['-1002910329593', '-1002910329593_xvfb']
+2025-09-05 00:20:26,629 - INFO - 🔍 Manual login setup complete - returning from function
+2025-09-05 00:22:48,542 - INFO - 🔍 Extracted command: '{'chat_id': '-1002910329593', 'cmd': '/done', 'arg': ''}' from message text: '/done'
+2025-09-05 00:22:48,544 - INFO - 🔍 Processing command: {'chat_id': '-1002910329593', 'cmd': '/done', 'arg': ''}
+2025-09-05 00:22:48,544 - INFO - 🔍 handle_text_command called: /done from -1002910329593
+2025-09-05 00:22:48,544 - INFO - 🔍 Command type: <class 'str'>, repr: '/done'
+2025-09-05 00:22:48,544 - INFO - 🔍 Starting command routing for: '/done'
+2025-09-05 00:22:48,545 - INFO - 🔍 Routing to _handle_done for -1002910329593
+2025-09-05 00:22:48,545 - INFO - 🔍 /done called for chat_id: -1002910329593
+2025-09-05 00:22:48,546 - INFO - 🔍 login_states: {'-1002910329593': 'manual_login_active'}
+2025-09-05 00:22:48,546 - INFO - 🔍 login_drivers keys: ['-1002910329593', '-1002910329593_xvfb']
+2025-09-05 00:22:48,806 - INFO - ✅ Cookies saved from manual login completion: 11 cookies
+2025-09-05 00:22:48,806 - INFO - 🔒 Closing browser after saving cookies
+2025-09-05 00:22:49,422 - INFO - 🔍 Command processed: {'chat_id': '-1002910329593', 'cmd': '/done', 'arg': ''}
+2025-09-05 00:23:01,512 - INFO - 🔍 Extracted command: '{'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '30'}' from message text: '/setlimit 30'
+2025-09-05 00:23:01,513 - INFO - 🔍 Processing command: {'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '30'}
+2025-09-05 00:23:01,513 - INFO - 🔍 handle_text_command called: /setlimit from -1002910329593
+2025-09-05 00:23:01,513 - INFO - 🔍 Command type: <class 'str'>, repr: '/setlimit'
+2025-09-05 00:23:01,513 - INFO - 🔍 Starting command routing for: '/setlimit'
+2025-09-05 00:23:01,835 - INFO - 🔍 Command processed: {'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '30'}
+2025-09-05 00:23:01,846 - INFO - 📊 Hourly limit changed from 2 to 30 - regenerating schedule
+2025-09-05 00:25:08,048 - INFO - 🎯 Found 2 groups to scrape
+2025-09-05 00:25:08,049 - INFO - 🆕 Creating new headless browser for scraping with unique profile
+2025-09-05 00:25:10,075 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
+2025-09-05 00:25:10,076 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
+2025-09-05 00:25:12,296 - INFO - ✅ Chrome remote debugging ready
+2025-09-05 00:25:12,533 - INFO - ====== WebDriver manager ======
+2025-09-05 00:25:15,264 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 00:25:15,914 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-05 00:25:16,322 - INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+2025-09-05 00:25:16,322 - INFO - 🔧 Set executable permissions on ChromeDriver
+2025-09-05 00:25:16,336 - INFO - ✅ ChromeDriver test successful
+2025-09-05 00:25:16,673 - INFO - 🥷 WebDriver traces removed successfully
+2025-09-05 00:25:16,674 - INFO - ✅ Remote debugging WebDriver created successfully
+2025-09-05 00:25:16,676 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
+2025-09-05 00:25:16,693 - INFO - 🍪 Cookie file exists - loading...
+2025-09-05 00:25:46,550 - INFO - ✅ Cookies loaded successfully
+2025-09-05 00:25:46,551 - INFO - Checking Facebook session validity...
+2025-09-05 00:26:07,831 - INFO - ✅ Scraper manager initialized successfully
+2025-09-05 00:26:09,564 - INFO - 🔍 [1/2] Scraping group: https://www.facebook.com/groups/spauskcia
+2025-09-05 00:26:11,601 - INFO - ✅ Virtual display started using /usr/bin/Xvfb
+2025-09-05 00:26:11,603 - INFO - 🖥️ Virtual display ready - clipboard operations enabled
+2025-09-05 00:26:11,603 - INFO - Navigating to group: https://www.facebook.com/groups/spauskcia?sorting_setting=CHRONOLOGICAL (chronological sorting)
+2025-09-05 00:26:36,724 - INFO - 📋 Found existing group 5 -> Group_12479b7059
+2025-09-05 00:26:36,726 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+2025-09-05 00:27:02,596 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/spauskcia using 5 workers...
+2025-09-05 00:27:16,003 - INFO - Scroll 1: Found 11 potential posts. Scraped: 0/5. Active tasks: 0.
+2025-09-05 00:27:26,516 - INFO - ✅ Clicked 'See more' for post 3062447020600815
+2025-09-05 00:27:38,726 - INFO - ✅ Clicked 'See more' for post 3062172117294972
+2025-09-05 00:27:40,391 - INFO - Found content indicators (text=True, images=False, links=True, divs=True), marking as valid candidate
+2025-09-05 00:27:42,532 - INFO - ℹ️ No 'See more' button found for post generated_afe34103cefe
+2025-09-05 00:27:46,092 - INFO - ℹ️ No 'See more' button found for post 3062034800642037
+2025-09-05 00:27:46,483 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
+2025-09-05 00:27:47,707 - INFO - ℹ️ No 'See more' button found for post generated_6b4713b60679
+2025-09-05 00:27:47,725 - INFO - 🛑 Found duplicate content (hash: 6070cbd4...)
+2025-09-05 00:27:47,732 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+2025-09-05 00:27:47,732 - INFO - Target of 5 posts reached. Finalizing...
+2025-09-05 00:27:47,732 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
+2025-09-05 00:27:47,733 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+2025-09-05 00:27:47,733 - INFO - Finished scraping generator. Total posts yielded: 0.
+2025-09-05 00:27:47,733 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
+2025-09-05 00:27:47,754 - INFO - ✅ Virtual display cleaned up
+2025-09-05 00:27:47,771 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/spauskcia
+2025-09-05 00:27:47,772 - INFO - ⏳ Waiting 30s before next group (reliability)
+2025-09-05 00:28:18,996 - INFO - 🔍 [2/2] Scraping group: https://www.facebook.com/groups/501702489979518
+2025-09-05 00:28:21,034 - INFO - ✅ Virtual display started using /usr/bin/Xvfb
+2025-09-05 00:28:21,034 - INFO - 🖥️ Virtual display ready - clipboard operations enabled
+2025-09-05 00:28:21,034 - INFO - Navigating to group: https://www.facebook.com/groups/501702489979518?sorting_setting=CHRONOLOGICAL (chronological sorting)
+2025-09-05 00:28:39,763 - INFO - 📋 Found existing group 6 -> Group_501702489979518
+2025-09-05 00:28:39,763 - INFO - 🆕 No existing posts found - this is a fresh scrape
+2025-09-05 00:28:57,773 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/501702489979518 using 5 workers...
+2025-09-05 00:29:09,804 - INFO - Scroll 1: Found 10 potential posts. Scraped: 0/5. Active tasks: 0.
+2025-09-05 00:29:15,970 - INFO - Found content indicators (text=True, images=False, links=False, divs=True), marking as valid candidate
+2025-09-05 00:29:20,044 - INFO - ℹ️ No 'See more' button found for post generated_4922f5c9c757
+2025-09-05 00:29:21,792 - INFO - Found content indicators (text=True, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:29:25,089 - INFO - ✅ Clicked 'See more' for post generated_e10dc59a43eb
+2025-09-05 00:29:32,411 - INFO - Found content indicators (text=False, images=False, links=True, divs=True), marking as valid candidate
+2025-09-05 00:29:34,330 - INFO - ℹ️ No 'See more' button found for post generated_8ca037365870
+2025-09-05 00:29:37,366 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:29:39,412 - INFO - ℹ️ No 'See more' button found for post generated_a768b30e5f7d
+2025-09-05 00:29:42,205 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:29:44,244 - INFO - ℹ️ No 'See more' button found for post generated_732c7c7818e3
+2025-09-05 00:30:12,110 - INFO - Scroll 2: Found 13 potential posts. Scraped: 3/5. Active tasks: 1.
+2025-09-05 00:30:12,576 - INFO - Found content indicators (text=False, images=False, links=False, divs=True), marking as valid candidate
+2025-09-05 00:30:14,166 - INFO - ℹ️ No 'See more' button found for post generated_c0767ef0e876
+2025-09-05 00:30:15,845 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:30:19,014 - INFO - ℹ️ No 'See more' button found for post generated_e2a5cd0ef20f
+2025-09-05 00:30:20,359 - INFO - Found content indicators (text=False, images=False, links=True, divs=True), marking as valid candidate
+2025-09-05 00:30:22,182 - INFO - ℹ️ No 'See more' button found for post generated_c924eabc12bb
+2025-09-05 00:30:24,404 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:30:26,446 - INFO - ℹ️ No 'See more' button found for post generated_379e373de087
+2025-09-05 00:30:27,525 - INFO - Found content indicators (text=False, images=True, links=True, divs=True), marking as valid candidate
+2025-09-05 00:30:29,509 - INFO - ℹ️ No 'See more' button found for post generated_d7da7192adf4
+2025-09-05 00:30:29,690 - INFO - Target of 5 posts reached. Finalizing...
+2025-09-05 00:30:29,701 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+2025-09-05 00:30:30,106 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+2025-09-05 00:30:30,111 - INFO - Finished scraping generator. Total posts yielded: 5.
+2025-09-05 00:30:30,182 - INFO - ✅ Virtual display cleaned up
+2025-09-05 00:30:30,211 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/501702489979518
+2025-09-05 00:30:37,810 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 00:30:38,035 - INFO - 🤖 AI processed post: True
+2025-09-05 00:30:38,074 - INFO - ✅ Added new post to Posts_Group_501702489979518 with ID 1
+2025-09-05 00:30:38,974 - INFO - 📱 Notification sent to group -1002910329593
+2025-09-05 00:30:41,181 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 00:30:41,203 - INFO - 🤖 AI processed post: True
+2025-09-05 00:30:41,206 - INFO - 📝 Post already exists in Posts_Group_501702489979518 with ID 1
+2025-09-05 00:30:44,566 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 00:30:44,570 - INFO - 🤖 AI processed post: True
+2025-09-05 00:30:44,571 - INFO - 📝 Post already exists in Posts_Group_501702489979518 with ID 1
+2025-09-05 00:30:45,574 - INFO - 🔄 Skipping duplicate post (hash: 6d05f9383e15...)
+2025-09-05 00:30:48,136 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-05 00:30:48,146 - INFO - 🤖 AI processed post: True
+2025-09-05 00:30:48,148 - INFO - 📝 Post already exists in Posts_Group_501702489979518 with ID 1
+2025-09-05 00:30:48,270 - INFO - 🧹 Scraper manager cleaned up
+2025-09-05 00:30:48,568 - INFO - 🔍 Extracted command: '{'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '2'}' from message text: '/setlimit 2'
+2025-09-05 00:30:48,569 - INFO - 🔍 Processing command: {'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '2'}
+2025-09-05 00:30:48,570 - INFO - 🔍 handle_text_command called: /setlimit from -1002910329593
+2025-09-05 00:30:48,570 - INFO - 🔍 Command type: <class 'str'>, repr: '/setlimit'
+2025-09-05 00:30:48,570 - INFO - 🔍 Starting command routing for: '/setlimit'
+2025-09-05 00:30:48,865 - INFO - 🔍 Command processed: {'chat_id': '-1002910329593', 'cmd': '/setlimit', 'arg': '2'}
+2025-09-05 00:30:48,875 - INFO - 📊 Hourly limit changed from 30 to 2 - regenerating schedule
+

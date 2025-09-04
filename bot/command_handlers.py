@@ -623,14 +623,7 @@ Choose login method:
                 manual_driver.get("https://www.facebook.com/")
                 logging.info("✅ Manual login browser opened on virtual display")
                 
-                # Debug: Get window info
-                try:
-                    window_size = manual_driver.get_window_size()
-                    window_pos = manual_driver.get_window_position()
-                    logging.info(f"🔍 Window size: {window_size}, position: {window_pos}")
-                    logging.info(f"🔍 Current URL: {manual_driver.current_url}")
-                except Exception as debug_error:
-                    logging.warning(f"⚠️ Debug info failed: {debug_error}")
+                # Browser ready for manual login
                 
                 # Store driver and xvfb process for cleanup (login_state already set outside)
                 # We need to store these immediately so /done and /cancel can access them
@@ -639,15 +632,10 @@ Choose login method:
                     manual_login_process.xvfb_process = xvfb_process
                 
                 # CRITICAL: Store in self.login_drivers immediately after browser opens
-                # This is a closure that can access the outer self
-                def store_driver():
-                    logging.info(f"🔍 Storing driver for chat_id: {chat_id}")
-                    self.login_drivers[chat_id] = manual_driver
-                    if 'xvfb_process' in locals():
-                        self.login_drivers[chat_id + '_xvfb'] = xvfb_process
-                    logging.info(f"🔍 Driver stored. login_drivers keys: {list(self.login_drivers.keys())}")
-                
-                store_driver()
+                # Store driver and xvfb process for cleanup
+                self.login_drivers[chat_id] = manual_driver
+                if 'xvfb_process' in locals():
+                    self.login_drivers[chat_id + '_xvfb'] = xvfb_process
                 
                 send_telegram_message(bot_token, chat_id, 
                     "✅ <b>Facebook opened!</b>\n\n"
@@ -1171,10 +1159,7 @@ Please try again with the correct format."""
     
     async def _handle_done(self, bot_token: str, chat_id: str, conn) -> None:
         """Handle /done command - complete manual login."""
-        # Debug logging
-        logging.info(f"🔍 /done called for chat_id: {chat_id}")
-        logging.info(f"🔍 login_states: {self.login_states}")
-        logging.info(f"🔍 login_drivers keys: {list(self.login_drivers.keys())}")
+        # Complete manual login
         
         if chat_id not in self.login_states or self.login_states[chat_id] != 'manual_login_active':
             logging.warning(f"❌ No active session for {chat_id}. States: {self.login_states}")

@@ -683,7 +683,7 @@ def create_reliable_webdriver(headless: bool = True):
         
         # Get reliable ChromeDriver path
         driver_path = get_reliable_chromedriver_path()
-        logging.info(f"🚀 Using ChromeDriver: {driver_path}")
+        # ChromeDriver ready
         
         # Get Chrome profile settings - use persistent profile for session continuity
         env_user_data_dir, env_profile_dir = get_chrome_profile_settings()
@@ -706,7 +706,7 @@ def create_reliable_webdriver(headless: bool = True):
         # Remove WebDriver detection traces
         remove_webdriver_traces(driver)
         
-        logging.info("✅ Traditional WebDriver created successfully")
+        logging.info("✅ WebDriver created successfully")
         return driver
         
     except Exception as e:
