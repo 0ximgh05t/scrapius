@@ -482,6 +482,9 @@ def create_chrome_with_remote_debugging(headless: bool = True, debug_port: int =
             logging.warning("ChromeDriver not available, trying system default")
             driver = webdriver.Chrome(options=options)
         
+        # Remove WebDriver detection traces
+        remove_webdriver_traces(driver)
+        
         # Store Chrome process reference for cleanup
         driver._chrome_process = chrome_process
         driver._debug_port = debug_port
@@ -573,16 +576,77 @@ def setup_chrome_options(headless: bool = True, user_data_dir: str = None, profi
     # Timezone and locale spoofing (set to your local timezone)
     options.add_argument('--lang=en-US')
     
-    # Disable WebRTC to prevent IP leaks
+    # Advanced anti-detection measures
     options.add_experimental_option("prefs", {
         "webrtc.ip_handling_policy": "disable_non_proxied_udp",
         "webrtc.multiple_routes_enabled": False,
-        "webrtc.nonproxied_udp_enabled": False
+        "webrtc.nonproxied_udp_enabled": False,
+        "profile.default_content_setting_values.notifications": 2,
+        "profile.default_content_settings.popups": 0,
+        "profile.managed_default_content_settings.images": 1
     })
+    
+    # Advanced stealth options to avoid detection
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    
+    # Randomize viewport size slightly to avoid fingerprinting
+    import random
+    width = random.randint(1900, 1920)
+    height = random.randint(1060, 1080)
+    if headless:
+        options.add_argument(f'--window-size={width},{height}')
+    
+    # Memory and performance tweaks to reduce detection
+    options.add_argument('--max_old_space_size=4096')
+    options.add_argument('--disable-logging')
+    options.add_argument('--disable-gpu-logging')
+    options.add_argument('--silent')
+    options.add_argument('--log-level=3')
     
 
     
     return options
+
+
+def remove_webdriver_traces(driver):
+    """Remove WebDriver detection traces using JavaScript."""
+    try:
+        # Remove webdriver property
+        driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        
+        # Remove automation flags
+        driver.execute_script("""
+            delete window.cdc_adoQpoasnfa76pfcZLmcfl_Array;
+            delete window.cdc_adoQpoasnfa76pfcZLmcfl_Promise;
+            delete window.cdc_adoQpoasnfa76pfcZLmcfl_Symbol;
+        """)
+        
+        # Override plugins and languages to match real browser
+        driver.execute_script("""
+            Object.defineProperty(navigator, 'plugins', {
+                get: () => [1, 2, 3, 4, 5]
+            });
+            Object.defineProperty(navigator, 'languages', {
+                get: () => ['en-US', 'en']
+            });
+        """)
+        
+        # Override permissions
+        driver.execute_script("""
+            const originalQuery = window.navigator.permissions.query;
+            return window.navigator.permissions.query = (parameters) => (
+                parameters.name === 'notifications' ?
+                    Promise.resolve({ state: Notification.permission }) :
+                    originalQuery(parameters)
+            );
+        """)
+        
+        logging.info("🥷 WebDriver traces removed successfully")
+    except Exception as e:
+        logging.warning(f"⚠️ Could not remove WebDriver traces: {e}")
+
 
 def create_reliable_webdriver(headless: bool = True):
     """
@@ -597,6 +661,10 @@ def create_reliable_webdriver(headless: bool = True):
             options = webdriver.ChromeOptions()
             options.add_experimental_option("debuggerAddress", f"127.0.0.1:{existing_port}")
             driver = webdriver.Chrome(options=options)
+            
+            # Remove WebDriver detection traces
+            remove_webdriver_traces(driver)
+            
             logging.info(f"🔄 Connected to existing Chrome process on port {existing_port}")
             return driver
     except Exception as e:
@@ -635,6 +703,9 @@ def create_reliable_webdriver(headless: bool = True):
         # Create WebDriver
         driver = webdriver.Chrome(service=service, options=options)
         
+        # Remove WebDriver detection traces
+        remove_webdriver_traces(driver)
+        
         logging.info("✅ Traditional WebDriver created successfully")
         return driver
         
@@ -648,6 +719,10 @@ def create_reliable_webdriver(headless: bool = True):
         options = setup_chrome_options(headless, user_data_dir, profile_dir)
         
         driver = webdriver.Chrome(options=options)
+        
+        # Remove WebDriver detection traces
+        remove_webdriver_traces(driver)
+        
         logging.info("✅ System ChromeDriver created successfully")
         return driver
         
