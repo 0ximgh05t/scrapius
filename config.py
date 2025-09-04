@@ -79,6 +79,47 @@ def get_chrome_profile_settings() -> Tuple[str | None, str | None]:
     pd = os.getenv("CHROME_PROFILE_DIR")
     return udd, pd
 
+def get_persistent_browser_profile() -> Tuple[str, str]:
+    """
+    Returns a dedicated persistent browser profile for the bot.
+    This ensures session persistence even if browser windows close.
+    """
+    import tempfile
+    import os
+    
+    # Create a persistent profile directory in the project folder
+    project_root = os.path.dirname(os.path.abspath(__file__))
+    profile_dir = os.path.join(project_root, "browser_profile")
+    
+    # Ensure directory exists
+    os.makedirs(profile_dir, exist_ok=True)
+    
+    return profile_dir, "ScrapiusBot"
+
+def find_existing_chrome_process():
+    """
+    Find existing Chrome processes that might be running with our profile.
+    Returns the debugging port if found, None otherwise.
+    """
+    import psutil
+    import re
+    
+    try:
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            if proc.info['name'] and 'chrome' in proc.info['name'].lower():
+                cmdline = ' '.join(proc.info['cmdline'] or [])
+                if 'ScrapiusBot' in cmdline and '--remote-debugging-port=' in cmdline:
+                    # Extract debugging port
+                    match = re.search(r'--remote-debugging-port=(\d+)', cmdline)
+                    if match:
+                        port = int(match.group(1))
+                        logging.info(f"🔍 Found existing Chrome process on port {port}")
+                        return port
+    except Exception as e:
+        logging.debug(f"Error checking for existing Chrome processes: {e}")
+    
+    return None
+
 
 def get_openai_settings() -> Tuple[bool, str | None]:
     key = os.getenv("OPENAI_API_KEY")
@@ -496,7 +537,7 @@ def setup_chrome_options(headless: bool = True, user_data_dir: str = None, profi
         options.add_argument('--disable-popup-blocking')
         options.add_argument('--disable-extensions')
         options.add_argument('--disable-plugins')
-        options.add_argument('--disable-images')
+        # options.add_argument('--disable-images')  # Keep images enabled to match manual login
         options.add_argument('--disable-features=VizDisplayCompositor')
         options.add_argument('--disable-background-timer-throttling')
         options.add_argument('--disable-backgrounding-occluded-windows')
@@ -548,6 +589,19 @@ def create_reliable_webdriver(headless: bool = True):
     Create a WebDriver instance that's guaranteed to work reliably.
     Uses multiple fallback strategies for maximum reliability.
     """
+    # Strategy 0: Try connecting to existing Chrome process with our profile
+    try:
+        existing_port = find_existing_chrome_process()
+        if existing_port:
+            from selenium import webdriver
+            options = webdriver.ChromeOptions()
+            options.add_experimental_option("debuggerAddress", f"127.0.0.1:{existing_port}")
+            driver = webdriver.Chrome(options=options)
+            logging.info(f"🔄 Connected to existing Chrome process on port {existing_port}")
+            return driver
+    except Exception as e:
+        logging.debug(f"Could not connect to existing Chrome process: {e}")
+    
     # Strategy 1: Try remote debugging (most reliable on macOS)
     try:
         return create_chrome_with_remote_debugging(headless=headless)
@@ -563,8 +617,14 @@ def create_reliable_webdriver(headless: bool = True):
         driver_path = get_reliable_chromedriver_path()
         logging.info(f"🚀 Using ChromeDriver: {driver_path}")
         
-        # Get Chrome profile settings
-        user_data_dir, profile_dir = get_chrome_profile_settings()
+        # Get Chrome profile settings - use persistent profile for session continuity
+        env_user_data_dir, env_profile_dir = get_chrome_profile_settings()
+        if env_user_data_dir and env_profile_dir:
+            user_data_dir, profile_dir = env_user_data_dir, env_profile_dir
+        else:
+            # Use persistent bot profile to maintain session across browser restarts
+            user_data_dir, profile_dir = get_persistent_browser_profile()
+            logging.info(f"🔄 Using persistent browser profile: {user_data_dir}/{profile_dir}")
         
         # Setup robust options
         options = setup_chrome_options(headless, user_data_dir, profile_dir)

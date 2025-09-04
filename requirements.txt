@@ -14,6 +14,7 @@ tenacity>=8.2.0
 
 # System & Utilities
 pyperclip>=1.8.2
+psutil>=5.9.0
 
 # Optional: Telegram Bot Library (if using telegram_bot_controller.py)
 # python-telegram-bot>=20.0

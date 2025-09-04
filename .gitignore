@@ -23,6 +23,7 @@ scrapius.log
 # Chrome User Data and Browser Files
 $HOME/
 chrome_user_data/
+browser_profile/
 fb_cookies.json
 *.cookies
 session_data/
