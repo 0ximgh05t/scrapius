@@ -36,6 +36,8 @@ class CommandHandlers:
         command = cmd['cmd']
         arg = cmd.get('arg', '')
         
+        logging.info(f"🔍 handle_text_command called: {command} from {chat_id}")
+        
         # Handle login flow states
         if chat_id in self.login_states:
             await self._handle_login_flow(bot_token, chat_id, conn, command, arg)
