@@ -155,17 +155,9 @@ class ScraperManager:
                 # Get default prompts
                 default_system, default_user, _, _ = get_bot_runner_settings()
                 
-                # Debug: Show what defaults we got from .env
-                logging.info(f"🔍 Default system from .env: '{default_system}'")
-                logging.info(f"🔍 Default user from .env: '{default_user}'")
-                
                 # Get current prompts from database (if set)
                 system_prompt = botsettings_get(conn, 'bot_system', default_system)
                 user_prompt = botsettings_get(conn, 'bot_user', default_user)
-                
-                # Debug: Show what we actually got after database lookup
-                logging.info(f"🔍 Final system prompt: '{system_prompt}'")
-                logging.info(f"🔍 Final user prompt: '{user_prompt}'")
                 
                 # Create post dict for AI processing
                 post_dict = {'content': content, 'author': author, 'url': post_url}
