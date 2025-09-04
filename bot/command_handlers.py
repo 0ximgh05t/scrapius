@@ -390,16 +390,16 @@ Choose login method:
 • <b>Use Existing Cookies</b> - Check if saved cookies are still valid
 • <b>Import Cookies</b> - Import from browser extension (recommended)
 • <b>Clear Cookies</b> - Remove existing cookies and start fresh
-• <b>Auto Credentials</b> - Requires FB_USER/FB_PASS in .env file
+• <b>Manual Browser</b> - Open browser with VNC for manual login
 
-<i>💡 Import Cookies works best for headless servers</i>"""
+<i>💡 Manual Browser works best for headless servers with VNC</i>"""
         
         keyboard = {
             "inline_keyboard": [
                 [{"text": "🍪 Use Existing Cookies", "callback_data": "login_existing"}],
                 [{"text": "📥 Import Cookies", "callback_data": "login_import"}],
                 [{"text": "🧹 Clear Cookies", "callback_data": "login_clear"}],
-                [{"text": "📧 Auto Credentials", "callback_data": "login_auto"}]
+                [{"text": "🌐 Manual Browser", "callback_data": "login_manual"}]
             ]
         }
         
@@ -408,9 +408,9 @@ Choose login method:
     
     async def _handle_login_callback(self, callback_data: str, bot_token: str, chat_id: str, conn, answer_callback) -> None:
         """Handle login-related callback queries."""
-        if callback_data == 'login_auto':
-            answer_callback("🔑 Using saved credentials...", show_alert=True)
-            await self._start_auto_login(bot_token, chat_id)
+        if callback_data == 'login_manual':
+            answer_callback("🌐 Starting manual browser...", show_alert=True)
+            await self._start_manual_login(bot_token, chat_id)
         elif callback_data == 'login_existing':
             answer_callback("🍪 Checking existing cookies...", show_alert=True)
             await self._use_existing_cookies(bot_token, chat_id)
