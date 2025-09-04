@@ -95,7 +95,7 @@ class ScrapiusTelegramBot:
     async def handle_telegram_updates(self, conn) -> None:
         """Handle incoming Telegram messages and commands."""
         try:
-            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=1)
+            updates = get_updates(self.bot_token, offset=self.last_update_id + 1 if self.last_update_id else None, timeout=0)
             if not updates.get('ok') or not updates.get('result'):
                 return
             
@@ -137,6 +137,8 @@ class ScrapiusTelegramBot:
             logging.error(f"❌ ERROR in handle_telegram_updates: {e}")
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
+            # Don't let Telegram API errors block the main loop
+            await asyncio.sleep(0.1)
     
     async def should_run_scrape_cycle(self, conn) -> bool:
         """Check if it's time to run a scrape cycle."""
@@ -255,8 +257,12 @@ class ScrapiusTelegramBot:
                     if await self.should_run_scrape_cycle(conn):
                         await self.run_scrape_cycle(conn)
                     
-                    # Very short delay for maximum responsiveness during manual login
-                    await asyncio.sleep(0.1)
+                                    # Very short delay for maximum responsiveness during manual login
+                await asyncio.sleep(0.1)
+                
+                # Debug: Log every 10 loops to see if main loop is running
+                if loop_count % 10 == 0:
+                    logging.info(f"🔍 Main loop running - iteration {loop_count}")
                     
                 finally:
                     conn.close()
