@@ -30,11 +30,17 @@ class ScraperManager:
     async def initialize(self) -> bool:
         """Initialize the scraper with WebDriver and session."""
         try:
-            if self.initialized:
-                return True
+            if self.initialized and self.driver:
+                # Check if existing browser is still alive
+                try:
+                    self.driver.current_url  # Quick test
+                    logging.info("🔄 Reusing existing browser session")
+                    return True
+                except:
+                    logging.info("🔄 Browser died, creating new one")
+                    self.initialized = False
             
-            # Create new headless WebDriver with unique profile to avoid conflicts
-            logging.info("🆕 Creating new headless browser for scraping with unique profile")
+            logging.info("🆕 Creating browser for scraping")
             
             # Create a unique user data directory for scraper to avoid conflicts with manual login
             import tempfile
@@ -53,26 +59,20 @@ class ScraperManager:
                 logging.error("❌ Failed to create WebDriver")
                 return False
             
-            # Load cookies
+            # Load cookies only for new browser
             cookie_path = get_cookie_store_path()
-            logging.info(f"🍪 Attempting to load cookies from: {cookie_path}")
-            
             if os.path.exists(cookie_path):
-                logging.info("🍪 Cookie file exists - loading...")
                 if load_cookies(self.driver, cookie_path):
-                    logging.info("✅ Cookies loaded successfully")
+                    logging.info("✅ Cookies loaded")
                 else:
-                    logging.warning("⚠️ Failed to load cookies - may be invalid")
+                    logging.warning("⚠️ Cookie loading failed")
             else:
-                logging.warning("⚠️ No cookie file found - need fresh login")
+                logging.warning("⚠️ No cookies found")
             
-            # Validate session
-            if not is_facebook_session_valid(self.driver):
-                logging.error("❌ Facebook session invalid - need to login")
-                return False
+            # Skip session validation for reused browser - we'll find out when we navigate
             
             self.initialized = True
-            logging.info("✅ Scraper manager initialized successfully")
+            logging.info("✅ Scraper ready")
             return True
             
         except Exception as e:

@@ -457,25 +457,8 @@ def _get_post_identifiers_from_element(driver: WebDriver, post_element: Any, gro
                         if id_match:
                             post_id = id_match.group(1)
         
-        if not is_valid_post_candidate:
-            # Check if this looks like a post container with content
-            try:
-                # Look for any text content or images - basic post indicators
-                has_text = len(post_element.text.strip()) > 5  # Lower threshold
-                has_images = len(post_element.find_elements(By.TAG_NAME, "img")) > 0
-                has_links = len(post_element.find_elements(By.TAG_NAME, "a")) > 0
-                has_divs = len(post_element.find_elements(By.TAG_NAME, "div")) > 3  # Structural indicator
-                
-                if has_text or has_images or has_links or has_divs:
-                    logging.info(f"Found content indicators (text={has_text}, images={has_images}, links={has_links}, divs={has_divs}), marking as valid candidate")
-                    is_valid_post_candidate = True
-                else:
-                    logging.debug(f"No content indicators found, not a valid candidate")
-                    is_valid_post_candidate = False
-            except Exception:
-                # If we can't check content, assume it's valid and let Share->Copy try
-                logging.info(f"Could not check content, assuming valid candidate for Share->Copy")
-                is_valid_post_candidate = True
+        # Process all post elements - no need for content validation
+        is_valid_post_candidate = True
 
         # Share->Copy method removed - only use direct permalink detection
         # This is much more reliable and eliminates the noise in logs
@@ -750,7 +733,7 @@ def scrape_authenticated_group(
     """
     # Skip virtual display - we don't use clipboard operations anymore
     virtual_display_setup = False
-    logging.info("🚀 Skipping virtual display - not needed for direct scraping")
+            # No virtual display needed
     
     # Ensure chronological sorting for newest posts first
     if '?' in group_url:
@@ -758,7 +741,7 @@ def scrape_authenticated_group(
     else:
         chronological_url = f"{group_url}?sorting_setting=CHRONOLOGICAL"
     
-    logging.info(f"Navigating to group: {chronological_url} (chronological sorting)")
+            # Navigate to group
     try:
         driver.get(chronological_url)
         logging.debug(f"Successfully navigated to {group_url}")
@@ -1083,9 +1066,11 @@ def scrape_authenticated_group(
                         see_more_button = WebDriverWait(post_element, 1).until(EC.element_to_be_clickable(see_more_button))
                         see_more_button.click()
                         time.sleep(0.5)
-                        logging.info(f"✅ Clicked 'See more' for post {temp_post_id or temp_post_url}")
+                        # Expanded post content
+                        pass
                     except (TimeoutException, NoSuchElementException):
-                        logging.info(f"ℹ️ No 'See more' button found for post {temp_post_id or temp_post_url}")
+                        # No expansion needed
+                        pass
                     except Exception as e_sm:
                         logging.warning(f"❌ Error clicking 'See more' for {temp_post_id or temp_post_url}: {e_sm}")
                     
