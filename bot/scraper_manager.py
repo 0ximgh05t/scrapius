@@ -209,11 +209,18 @@ class ScraperManager:
     ) -> None:
         """Send Telegram notification for relevant post."""
         try:
-            # Format notification message
-            title = ai_result.get('title', 'Relevant Post')
-            short_text = ai_result.get('summary', content[:200] + '...' if len(content) > 200 else content)
+            # Use actual post content, not AI summary
+            title = "📱 New Facebook Post"
+            post_content = content[:500] + '...' if len(content) > 500 else content
             
-            message = format_post_message(title, short_text, post_url, author)
+            # Format with actual content and group info
+            from notifier.telegram_notifier import escape_html
+            
+            message = f"""<b>{title}</b>
+
+{escape_html(post_content)}
+
+<a href="{post_url}">View post</a>"""
             
             # Send to all chat IDs
             for chat_id in chat_ids:
