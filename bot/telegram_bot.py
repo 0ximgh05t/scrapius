@@ -132,7 +132,9 @@ class ScrapiusTelegramBot:
             botsettings_set(conn, 'last_update_id', str(self.last_update_id))
             
         except Exception as e:
-            logging.debug(f"Telegram polling error: {e}")
+            logging.error(f"❌ ERROR in handle_telegram_updates: {e}")
+            import traceback
+            logging.error(f"Full traceback: {traceback.format_exc()}")
     
     async def should_run_scrape_cycle(self, conn) -> bool:
         """Check if it's time to run a scrape cycle."""
@@ -230,8 +232,13 @@ class ScrapiusTelegramBot:
         
         logging.info("🚀 Scrapius bot started - entering main loop")
         
+        loop_count = 0
         try:
             while True:
+                loop_count += 1
+                # Heartbeat every 100 loops (roughly every 10 seconds)
+                if loop_count % 100 == 0:
+                    logging.info(f"💓 Bot heartbeat - loop {loop_count} - responsive and running")
                 conn = get_db_connection()
                 if not conn:
                     logging.error("❌ Could not connect to database in main loop")

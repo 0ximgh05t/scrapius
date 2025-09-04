@@ -584,6 +584,12 @@ Choose login method:
                 except:
                     pass
                 
+                # Send immediate message that browser is starting
+                send_telegram_message(bot_token, chat_id, 
+                    "🌐 <b>Creating browser...</b>\n\n"
+                    "This may take 30-60 seconds on first run.", 
+                    parse_mode="HTML")
+                
                 manual_driver = create_reliable_webdriver(headless=False)
                 logging.info("✅ Browser driver created successfully")
                 
