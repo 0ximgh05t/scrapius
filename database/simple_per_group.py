@@ -457,15 +457,24 @@ def content_hash_exists(db_conn: sqlite3.Connection, table_suffix: str, content_
         cursor = db_conn.cursor()
         posts_table = f"Posts_{table_suffix}"
         
+        # Debug: Check what hashes exist in the table
+        cursor.execute(f"SELECT content_hash FROM {posts_table} WHERE content_hash IS NOT NULL LIMIT 5")
+        existing_hashes = cursor.fetchall()
+        logging.info(f"🔍 DEBUG: Existing hashes in {posts_table}: {[h[0][:12] + '...' if h[0] else 'None' for h in existing_hashes]}")
+        logging.info(f"🔍 DEBUG: Looking for hash: {content_hash[:12]}...")
+        
         cursor.execute(f"""
             SELECT 1 FROM {posts_table} 
             WHERE content_hash = ? 
             LIMIT 1
         """, (content_hash,))
         
-        return cursor.fetchone() is not None
+        result = cursor.fetchone() is not None
+        logging.info(f"🔍 DEBUG: Hash exists check result: {result}")
+        return result
         
-    except sqlite3.Error:
+    except sqlite3.Error as e:
+        logging.error(f"🔍 DEBUG: Error checking hash: {e}")
         return False
 
 # Helper function for Telegram bot

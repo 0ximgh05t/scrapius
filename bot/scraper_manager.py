@@ -179,9 +179,15 @@ class ScraperManager:
             
             # CHECK FOR DUPLICATES BEFORE AI PROCESSING (save API costs)
             from database.simple_per_group import content_hash_exists
+            
+            # Debug: Log the hash we're checking
+            logging.info(f"🔍 Checking for duplicate hash: {content_hash[:12]}... in table {table_name}")
+            
             if content_hash_exists(conn, table_name, content_hash):
                 logging.info(f"🔄 Skipping duplicate post (hash: {content_hash[:12]}...)")
                 return
+            else:
+                logging.info(f"✅ Hash not found in database - proceeding with AI processing")
             
             # AI Processing
             ai_result = None
