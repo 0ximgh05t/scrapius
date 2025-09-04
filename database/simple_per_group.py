@@ -253,8 +253,23 @@ def add_post_to_group(db_conn: sqlite3.Connection, table_suffix: str, post_data:
         
         existing = cursor.fetchone()
         if existing:
-            logging.info(f"📝 Post already exists in {posts_table} with ID {existing[0]}")
-            return existing[0], False
+            # Check if this is the same content (by hash) or updated content
+            cursor.execute(f"SELECT content_hash FROM {posts_table} WHERE internal_post_id = ?", (existing[0],))
+            existing_hash = cursor.fetchone()[0]
+            
+            if existing_hash == content_hash:
+                logging.info(f"📝 Post already exists with same content in {posts_table} with ID {existing[0]}")
+                return existing[0], False
+            else:
+                # Same post URL/ID but different content - update it
+                logging.info(f"🔄 Updating existing post {existing[0]} with new content (hash changed: {existing_hash[:12]}... → {content_hash[:12]}...)")
+                cursor.execute(f"""
+                    UPDATE {posts_table} 
+                    SET post_content_raw = ?, content_hash = ?, scraped_at = CURRENT_TIMESTAMP
+                    WHERE internal_post_id = ?
+                """, (post_data.get('content_text'), content_hash, existing[0]))
+                db_conn.commit()
+                return existing[0], True  # Return True to indicate it was updated (treat as new)
         
         # Insert new post
         cursor.execute(f"""
@@ -457,24 +472,15 @@ def content_hash_exists(db_conn: sqlite3.Connection, table_suffix: str, content_
         cursor = db_conn.cursor()
         posts_table = f"Posts_{table_suffix}"
         
-        # Debug: Check what hashes exist in the table
-        cursor.execute(f"SELECT content_hash FROM {posts_table} WHERE content_hash IS NOT NULL LIMIT 5")
-        existing_hashes = cursor.fetchall()
-        logging.info(f"🔍 DEBUG: Existing hashes in {posts_table}: {[h[0][:12] + '...' if h[0] else 'None' for h in existing_hashes]}")
-        logging.info(f"🔍 DEBUG: Looking for hash: {content_hash[:12]}...")
-        
         cursor.execute(f"""
             SELECT 1 FROM {posts_table} 
             WHERE content_hash = ? 
             LIMIT 1
         """, (content_hash,))
         
-        result = cursor.fetchone() is not None
-        logging.info(f"🔍 DEBUG: Hash exists check result: {result}")
-        return result
+        return cursor.fetchone() is not None
         
-    except sqlite3.Error as e:
-        logging.error(f"🔍 DEBUG: Error checking hash: {e}")
+    except sqlite3.Error:
         return False
 
 # Helper function for Telegram bot

@@ -577,13 +577,7 @@ def _extract_data_from_post_html(
     content_for_hash = post_data["content_text"] or ""
     # Remove extra whitespace, normalize line endings, strip
     normalized_content = ' '.join(content_for_hash.split())
-    
-    # Debug: Log content being hashed
-    content_preview = normalized_content[:100] + "..." if len(normalized_content) > 100 else normalized_content
-    hash_result = hashlib.md5(normalized_content.encode('utf-8')).hexdigest()
-    logging.info(f"🔍 HASH DEBUG: Content='{content_preview}' → Hash={hash_result[:12]}...")
-    
-    post_data["content_hash"] = hash_result
+    post_data["content_hash"] = hashlib.md5(normalized_content.encode('utf-8')).hexdigest()
 
     if scrape_all_fields or "post_image_url" in fields_to_scrape:
         try:
