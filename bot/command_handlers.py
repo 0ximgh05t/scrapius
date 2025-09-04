@@ -79,8 +79,10 @@ class CommandHandlers:
         elif command == '/updategroup':
             await self._handle_updategroup(bot_token, chat_id, conn, arg)
         elif command == '/done':
+            logging.info(f"🔍 Routing to _handle_done for {chat_id}")
             await self._handle_done(bot_token, chat_id, conn)
         elif command == '/cancel':
+            logging.info(f"🔍 Routing to _handle_cancel for {chat_id}")
             await self._handle_cancel(bot_token, chat_id, conn)
         else:
             send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
