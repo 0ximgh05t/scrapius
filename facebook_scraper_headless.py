@@ -757,7 +757,7 @@ def scrape_authenticated_group(
     from database.crud import get_db_connection
     
     db_conn = get_db_connection()
-    group_id, table_suffix = get_or_create_group(db_conn, group_url)
+    group_id, table_suffix = get_or_create_group(db_conn, group_url, driver=driver)
     
     processed_post_urls: set[str] = set()
     processed_post_ids: set[str] = set()

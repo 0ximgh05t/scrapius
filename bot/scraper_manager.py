@@ -216,20 +216,29 @@ class ScraperManager:
             from database.crud import get_db_connection
             conn = get_db_connection()
             
-            # Extract group info from current scraping context
+            # Get actual group name from database using post URL
             group_name = "Unknown Group"
             try:
-                # Get group name from the current context (this is a bit hacky but works)
-                # We could pass group_id as parameter, but for now we'll extract from URL
-                if hasattr(self, '_current_group_name'):
+                # Extract group URL from post URL to find the correct group
+                if 'facebook.com/groups/' in post_url:
+                    # Extract group identifier from post URL
+                    import re
+                    group_match = re.search(r'facebook\.com/groups/([^/]+)', post_url)
+                    if group_match:
+                        group_identifier = group_match.group(1)
+                        cursor = conn.cursor()
+                        cursor.execute("SELECT group_name FROM Groups WHERE group_url LIKE ?", (f'%{group_identifier}%',))
+                        result = cursor.fetchone()
+                        if result:
+                            group_name = result[0]
+                            logging.debug(f"Found group name: {group_name}")
+                        else:
+                            logging.debug(f"No group found for identifier: {group_identifier}")
+                
+                # Fallback: use current group name if available
+                if group_name == "Unknown Group" and hasattr(self, '_current_group_name'):
                     group_name = self._current_group_name
-                else:
-                    # Fallback: try to get from database if we have the URL
-                    cursor = conn.cursor()
-                    cursor.execute("SELECT group_name FROM Groups LIMIT 1")  # Get any group for now
-                    result = cursor.fetchone()
-                    if result:
-                        group_name = result[0]
+                    
             except Exception as e:
                 logging.debug(f"Could not get group name: {e}")
             
