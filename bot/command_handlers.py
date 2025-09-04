@@ -562,8 +562,8 @@ Choose login method:
                 
                 # Clear any existing Chrome processes to avoid conflicts
                 try:
-                    subprocess.run(['pkill', '-f', 'chrome'], capture_output=True)
-                    time.sleep(2)
+                    subprocess.run(['pkill', '-f', 'chrome'], capture_output=True, timeout=5)
+                    time.sleep(1)
                     logging.info("🧹 Cleared existing Chrome processes")
                 except:
                     pass
@@ -571,11 +571,9 @@ Choose login method:
                 manual_driver = create_reliable_webdriver(headless=False)
                 logging.info("✅ Browser driver created successfully")
                 
-                # Navigate to Facebook and maximize window
+                # Navigate to Facebook
                 logging.info("🌐 Navigating to Facebook...")
                 manual_driver.get("https://www.facebook.com/")
-                logging.info("📏 Maximizing window...")
-                manual_driver.maximize_window()  # Make sure window is visible
                 logging.info("✅ Manual login browser opened on virtual display")
                 
                 # Debug: Get window info
