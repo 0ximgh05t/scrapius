@@ -616,9 +616,11 @@ Choose login method:
                 # CRITICAL: Store in self.login_drivers immediately after browser opens
                 # This is a closure that can access the outer self
                 def store_driver():
+                    logging.info(f"🔍 Storing driver for chat_id: {chat_id}")
                     self.login_drivers[chat_id] = manual_driver
                     if 'xvfb_process' in locals():
                         self.login_drivers[chat_id + '_xvfb'] = xvfb_process
+                    logging.info(f"🔍 Driver stored. login_drivers keys: {list(self.login_drivers.keys())}")
                 
                 store_driver()
                 
@@ -1143,7 +1145,13 @@ Please try again with the correct format."""
     
     async def _handle_done(self, bot_token: str, chat_id: str, conn) -> None:
         """Handle /done command - complete manual login."""
+        # Debug logging
+        logging.info(f"🔍 /done called for chat_id: {chat_id}")
+        logging.info(f"🔍 login_states: {self.login_states}")
+        logging.info(f"🔍 login_drivers keys: {list(self.login_drivers.keys())}")
+        
         if chat_id not in self.login_states or self.login_states[chat_id] != 'manual_login_active':
+            logging.warning(f"❌ No active session for {chat_id}. States: {self.login_states}")
             send_telegram_message(bot_token, chat_id, "❌ <b>No active manual login session.</b>\n\nUse /login → Manual Browser first.", parse_mode="HTML")
             return
         
