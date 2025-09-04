@@ -1042,22 +1042,98 @@ Please try again with the correct format."""
             logging.error(f"Error checking cookie status: {e}")
 
     async def _handle_clearcookies(self, bot_token: str, chat_id: str, conn) -> None:
-        """Handle /clearcookies command - clear all cookies."""
+        """Handle /clearcookies command - completely wipe all browser data for security."""
+        import shutil
+        import subprocess
+        import time
+        import glob
+        
+        send_telegram_message(bot_token, chat_id, "🧹 <b>Starting complete browser wipe...</b>\n\nThis will remove ALL browser data for security.", parse_mode="HTML")
+        
         try:
-            import os
             cookie_path = get_cookie_store_path()
+            items_removed = []
             
+            # 1. Remove cookie file
             if os.path.exists(cookie_path):
-                send_telegram_message(bot_token, chat_id, "🧹 <b>Clearing cookies...</b>", parse_mode="HTML")
                 os.remove(cookie_path)
-                logging.info(f"Cleared cookies from {cookie_path}")
-                send_telegram_message(bot_token, chat_id, "✅ <b>Cookies cleared successfully!</b>\n\nUse /login to authenticate again.", parse_mode="HTML")
+                items_removed.append("Cookie files")
+                logging.info("🧹 Removed cookie file")
+            
+            # 2. Kill all Chrome processes
+            try:
+                result = subprocess.run(['pkill', '-f', 'chrome'], capture_output=True, timeout=10)
+                if result.returncode == 0:
+                    items_removed.append("Chrome processes")
+                time.sleep(2)
+                logging.info("🧹 Killed all Chrome processes")
+            except:
+                pass
+            
+            # 3. Remove Chrome user data directories (contains profiles, sessions, etc.)
+            chrome_data_paths = [
+                "/root/.config/google-chrome",
+                "/root/.cache/google-chrome"
+            ]
+            
+            for path in chrome_data_paths:
+                try:
+                    if os.path.exists(path):
+                        shutil.rmtree(path)
+                        items_removed.append(f"Chrome data ({os.path.basename(path)})")
+                        logging.info(f"🧹 Removed Chrome data: {path}")
+                except Exception as e:
+                    logging.warning(f"⚠️ Could not remove {path}: {e}")
+            
+            # 4. Remove temporary Chrome files
+            temp_patterns = [
+                "/tmp/.com.google.Chrome*",
+                "/tmp/scoped_dir*"
+            ]
+            
+            for pattern in temp_patterns:
+                try:
+                    for match in glob.glob(pattern):
+                        if os.path.exists(match):
+                            if os.path.isdir(match):
+                                shutil.rmtree(match)
+                            else:
+                                os.remove(match)
+                            items_removed.append(f"Temp files ({os.path.basename(match)})")
+                            logging.info(f"🧹 Removed temp: {match}")
+                except Exception as e:
+                    logging.warning(f"⚠️ Could not remove temp files {pattern}: {e}")
+            
+            # 5. Clear WebDriver cache
+            try:
+                webdriver_cache = "/root/.wdm"
+                if os.path.exists(webdriver_cache):
+                    shutil.rmtree(webdriver_cache)
+                    items_removed.append("WebDriver cache")
+                    logging.info(f"🧹 Removed WebDriver cache")
+            except Exception as e:
+                logging.warning(f"⚠️ Could not remove WebDriver cache: {e}")
+            
+            # Send success message
+            if items_removed:
+                items_text = "\n".join([f"• {item}" for item in items_removed])
+                send_telegram_message(bot_token, chat_id, 
+                    f"✅ <b>Complete browser wipe successful!</b>\n\n"
+                    f"🧹 <b>Removed:</b>\n{items_text}\n\n"
+                    f"🔒 <b>Clean slate ready!</b>\n"
+                    f"Next login will be completely fresh with no previous session data.", 
+                    parse_mode="HTML")
             else:
-                send_telegram_message(bot_token, chat_id, "❌ <b>No cookies to clear.</b>", parse_mode="HTML")
-                
+                send_telegram_message(bot_token, chat_id, 
+                    "✅ <b>Browser wipe completed!</b>\n\n"
+                    "No browser data was found to remove.", 
+                    parse_mode="HTML")
+                    
+            logging.info("🧹 Complete browser wipe completed successfully")
+            
         except Exception as e:
-            send_telegram_message(bot_token, chat_id, f"❌ <b>Error clearing cookies:</b> {str(e)}", parse_mode="HTML")
-            logging.error(f"Error clearing cookies: {e}")
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Error during browser wipe:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Error during browser wipe: {e}")
     
     async def _handle_updategroup(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
         """Handle /updategroup command - update group name from Facebook."""
