@@ -514,7 +514,7 @@ def _extract_data_from_post_html(
     soup = BeautifulSoup(post_html_content, 'html.parser')
     post_data = {
         "facebook_post_id": post_id_from_main,
-        "post_url": post_url_from_main,
+        "post_url": post_url_from_main or group_url_context,  # Fallback to group URL if no specific post URL
         "content_text": "N/A",
         "posted_at": None,
         "scraped_at": datetime.now().isoformat(),
