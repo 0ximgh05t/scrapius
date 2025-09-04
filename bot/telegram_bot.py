@@ -178,6 +178,13 @@ class ScrapiusTelegramBot:
             groups_rows = list_all_groups(conn)
             reliability = get_reliability_settings(conn)
             
+            # Check if there are any groups to scrape
+            if not groups_rows:
+                logging.info("📭 No groups configured for scraping")
+                return
+            
+            logging.info(f"🎯 Found {len(groups_rows)} groups to scrape")
+            
             # Initialize scraper manager
             if not await self.scraper_manager.initialize():
                 logging.error("❌ Failed to initialize scraper")
