@@ -32,8 +32,33 @@ class ScraperManager:
             if self.initialized:
                 return True
             
-            # Create WebDriver
-            self.driver = create_reliable_webdriver(headless=True)
+            # Check if there's an existing manual login browser we can reuse
+            from bot.command_handlers import CommandHandlers
+            command_handlers = CommandHandlers()
+            
+            # Look for active manual login browsers
+            manual_browser = None
+            for chat_id, driver in command_handlers.login_drivers.items():
+                if not chat_id.endswith('_xvfb') and driver:  # Skip VNC processes
+                    try:
+                        # Test if browser is still alive and valid
+                        driver.current_url  # This will throw if browser is dead
+                        manual_browser = driver
+                        logging.info(f"🔄 Reusing existing manual login browser from chat {chat_id}")
+                        break
+                    except:
+                        continue
+            
+            if manual_browser:
+                # Reuse the manual login browser
+                self.driver = manual_browser
+                self.reused_manual_browser = True
+            else:
+                # Create new WebDriver as fallback
+                logging.info("🆕 Creating new browser (no manual login browser available)")
+                self.driver = create_reliable_webdriver(headless=True)
+                self.reused_manual_browser = False
+                
             if not self.driver:
                 logging.error("❌ Failed to create WebDriver")
                 return False
@@ -61,7 +86,11 @@ class ScraperManager:
         """Clean up resources."""
         try:
             if self.driver:
-                self.driver.quit()
+                # Don't close manual login browsers - keep them alive for reuse
+                if hasattr(self, 'reused_manual_browser') and self.reused_manual_browser:
+                    logging.info("🔄 Keeping manual login browser alive for reuse")
+                else:
+                    self.driver.quit()
                 self.driver = None
             self.initialized = False
             logging.info("🧹 Scraper manager cleaned up")

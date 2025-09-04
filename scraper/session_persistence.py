@@ -62,6 +62,10 @@ def load_cookies(driver: WebDriver, file_path: str, target_url: str = None) -> b
             driver.get(target_url)
         else:
             driver.refresh()
+        
+        # Add delay to let session stabilize and avoid bot detection
+        import time
+        time.sleep(3)
             
         return True
     except Exception:
