@@ -5,6 +5,7 @@ Handles all user commands and interactions cleanly separated from main bot logic
 """
 
 import logging
+import os
 import requests
 from typing import Dict, List, Optional
 
@@ -144,33 +145,38 @@ class CommandHandlers:
 """
         
         # Add cookie status if cookies exist
-        cookie_path = get_cookie_store_path()
-        if os.path.exists(cookie_path):
-            try:
-                import json
-                from datetime import datetime, timezone
-                
-                with open(cookie_path, 'r') as f:
-                    cookies = json.load(f)
-                
-                # Find the earliest expiry date
-                earliest_expiry = None
-                for cookie in cookies:
-                    if 'expiry' in cookie:
-                        expiry_date = datetime.fromtimestamp(cookie['expiry'], tz=timezone.utc)
-                        if earliest_expiry is None or expiry_date < earliest_expiry:
-                            earliest_expiry = expiry_date
-                
-                if earliest_expiry:
-                    expiry_str = earliest_expiry.strftime("%B %d, %Y")
-                    help_text += f"\n⚠️ <b>Cookie Expiration:</b> Your cookies expire on <b>{expiry_str}</b>"
-                else:
-                    help_text += f"\n🍪 <b>Cookies:</b> Available (no expiration data)"
+        try:
+            cookie_path = get_cookie_store_path()
+            if os.path.exists(cookie_path):
+                try:
+                    import json
+                    from datetime import datetime, timezone
                     
-            except Exception as e:
-                help_text += f"\n🍪 <b>Cookies:</b> Available (could not read expiration)"
-        else:
-            help_text += f"\n❌ <b>No cookies found</b> - Use /login to authenticate"
+                    with open(cookie_path, 'r') as f:
+                        cookies = json.load(f)
+                    
+                    # Find the earliest expiry date
+                    earliest_expiry = None
+                    for cookie in cookies:
+                        if 'expiry' in cookie:
+                            expiry_date = datetime.fromtimestamp(cookie['expiry'], tz=timezone.utc)
+                            if earliest_expiry is None or expiry_date < earliest_expiry:
+                                earliest_expiry = expiry_date
+                    
+                    if earliest_expiry:
+                        expiry_str = earliest_expiry.strftime("%B %d, %Y")
+                        help_text += f"\n⚠️ <b>Cookie Expiration:</b> Your cookies expire on <b>{expiry_str}</b>"
+                    else:
+                        help_text += f"\n🍪 <b>Cookies:</b> Available (no expiration data)"
+                        
+                except Exception as e:
+                    help_text += f"\n🍪 <b>Cookies:</b> Available (could not read expiration)"
+            else:
+                help_text += f"\n❌ <b>No cookies found</b> - Use /login to authenticate"
+        except Exception as e:
+            # If cookie check fails completely, just skip it
+            pass
+            
         send_telegram_message(bot_token, chat_id, help_text, parse_mode="HTML")
     
     async def _handle_config(self, bot_token: str, chat_id: str, conn, arg: str) -> None:
