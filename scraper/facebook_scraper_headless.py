@@ -828,9 +828,10 @@ def scrape_authenticated_group(
         elif "checkpoint" in current_url:
             session_invalid = True
             error_type = "Security checkpoint"
-        elif "captcha" in page_source or "security check" in page_source:
-            session_invalid = True
-            error_type = "CAPTCHA/Security check required"
+        # DISABLED: False positive - these words appear in normal Facebook pages
+        # elif "captcha" in page_source or "security check" in page_source:
+        #     session_invalid = True
+        #     error_type = "CAPTCHA/Security check required"
         elif "verify" in current_url or "confirm" in current_url or "verification" in page_source:
             session_invalid = True
             error_type = "Account verification required"
