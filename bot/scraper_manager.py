@@ -172,6 +172,12 @@ class ScraperManager:
                 logging.warning("⚠️ Skipping post with missing content or hash")
                 return
             
+            # CHECK FOR DUPLICATES BEFORE AI PROCESSING (save API costs)
+            from database.simple_per_group import content_hash_exists
+            if content_hash_exists(conn, table_name, content_hash):
+                logging.info(f"🔄 Skipping duplicate post (hash: {content_hash[:12]}...)")
+                return
+            
             # AI Processing
             ai_result = None
             try:

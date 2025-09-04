@@ -1014,6 +1014,21 @@ def scrape_authenticated_group(
                        (temp_post_id and temp_post_id in processed_post_ids):
                         continue
                     
+                    # EARLY CONTENT-BASED DUPLICATE DETECTION for videos/repeated elements
+                    # Get a quick content preview to check for duplicates before full processing
+                    try:
+                        quick_text = post_element.text.strip()[:200]  # First 200 chars
+                        if quick_text:
+                            # Create a simple hash for quick comparison
+                            import hashlib
+                            quick_hash = hashlib.md5(quick_text.encode('utf-8')).hexdigest()[:12]
+                            if quick_hash in processed_post_urls:  # Reuse the set for content hashes
+                                logging.info(f"🔄 Skipping duplicate content (quick hash: {quick_hash})")
+                                continue
+                            processed_post_urls.add(quick_hash)  # Track this content hash
+                    except Exception:
+                        pass  # If quick check fails, continue with normal processing
+                    
                     # Process all posts regardless of URL availability
                     # URLs are nice to have but not required for content processing
                     
