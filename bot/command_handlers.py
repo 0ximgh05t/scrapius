@@ -85,7 +85,8 @@ class CommandHandlers:
             logging.info(f"🔍 Routing to _handle_cancel for {chat_id}")
             await self._handle_cancel(bot_token, chat_id, conn)
         else:
-            send_telegram_message(bot_token, chat_id, "❓ Unknown command. Use /start for help.")
+            logging.warning(f"🔍 Unknown command: '{command}' from {chat_id}")
+            send_telegram_message(bot_token, chat_id, f"❓ Unknown command: {command}. Use /start for help.")
     
     async def handle_callback_query(self, update: Dict, bot_token: str, chat_ids: List[str], conn) -> None:
         """Handle button callback queries."""
