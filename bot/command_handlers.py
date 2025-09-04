@@ -481,8 +481,16 @@ Choose login method:
                         
                         # Auto-start VNC server
                         try:
+                            # Get VNC password from .env or generate random one
+                            vnc_password = os.getenv('VNC_PASSWORD')
+                            if not vnc_password:
+                                import secrets
+                                import string
+                                vnc_password = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(12))
+                                logging.warning("⚠️ No VNC_PASSWORD in .env, using random password")
+                            
                             vnc_process = subprocess.Popen([
-                                '/usr/bin/x11vnc', '-display', ':99', '-nopw', '-listen', '0.0.0.0', 
+                                '/usr/bin/x11vnc', '-display', ':99', '-passwd', vnc_password, '-listen', '0.0.0.0', 
                                 '-xkb', '-forever', '-shared', '-rfbport', '5901'
                             ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                             time.sleep(3)  # Give VNC more time to start
@@ -498,7 +506,8 @@ Choose login method:
                             send_telegram_message(bot_token, chat_id, 
                                 "🖥️ <b>VNC Ready!</b>\n\n"
                                 "Connect: <code>" + server_ip + ":5901</code>\n"
-                                "Or: <code>ufrg.l.dedikuoti.lt:5901</code>\n\n"
+                                "Or: <code>ufrg.l.dedikuoti.lt:5901</code>\n"
+                                "🔒 Password: <code>" + vnc_password + "</code>\n\n"
                                 "Opening Facebook browser...", 
                                 parse_mode="HTML")
                         except Exception as vnc_error:
@@ -529,12 +538,14 @@ Choose login method:
                                     send_telegram_message(bot_token, chat_id, 
                                         "🌐 <b>Web VNC Ready!</b>\n\n"
                                         "Browser: <code>http://" + server_ip + ":6080/vnc.html</code>\n"
-                                        "Or: <code>http://ufrg.l.dedikuoti.lt:6080/vnc.html</code>", 
+                                        "Or: <code>http://ufrg.l.dedikuoti.lt:6080/vnc.html</code>\n"
+                                        "🔒 Password: <code>" + vnc_password + "</code>", 
                                         parse_mode="HTML")
                                 else:
                                     send_telegram_message(bot_token, chat_id, 
                                         "⚠️ <b>VNC starting...</b>\n\n"
                                         "Connect: <code>" + server_ip + ":5901</code>\n"
+                                        "🔒 Password: <code>" + vnc_password + "</code>\n"
                                         "Wait 10 seconds before connecting.", 
                                         parse_mode="HTML")
                         except Exception as web_vnc_error:
