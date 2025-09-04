@@ -257,12 +257,12 @@ class ScrapiusTelegramBot:
                     if await self.should_run_scrape_cycle(conn):
                         await self.run_scrape_cycle(conn)
                     
-                                    # Very short delay for maximum responsiveness during manual login
-                await asyncio.sleep(0.1)
-                
-                # Debug: Log every 10 loops to see if main loop is running
-                if loop_count % 10 == 0:
-                    logging.info(f"🔍 Main loop running - iteration {loop_count}")
+                    # Very short delay for maximum responsiveness during manual login
+                    await asyncio.sleep(0.1)
+                    
+                    # Debug: Log every 10 loops to see if main loop is running
+                    if loop_count % 10 == 0:
+                        logging.info(f"🔍 Main loop running - iteration {loop_count}")
                     
                 finally:
                     conn.close()
