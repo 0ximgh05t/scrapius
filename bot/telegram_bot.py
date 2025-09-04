@@ -35,8 +35,8 @@ class ScrapiusTelegramBot:
         self.schedule_times: List[datetime] = []
         
         # Initialize components
-        self.scraper_manager = ScraperManager()
         self.command_handlers = CommandHandlers()
+        self.scraper_manager = ScraperManager(self.command_handlers)
         
         # Throttle working hours logging - only log every 10 minutes
         self.last_working_hours_log = datetime.min.replace(tzinfo=timezone.utc)

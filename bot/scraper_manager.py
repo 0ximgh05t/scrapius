@@ -22,9 +22,10 @@ class ScraperManager:
     Manages Facebook scraping operations with proper resource management.
     """
     
-    def __init__(self):
+    def __init__(self, command_handlers=None):
         self.driver = None
         self.initialized = False
+        self.command_handlers = command_handlers
     
     async def initialize(self) -> bool:
         """Initialize the scraper with WebDriver and session."""
@@ -33,21 +34,19 @@ class ScraperManager:
                 return True
             
             # Check if there's an existing manual login browser we can reuse
-            from bot.command_handlers import CommandHandlers
-            command_handlers = CommandHandlers()
-            
-            # Look for active manual login browsers
             manual_browser = None
-            for chat_id, driver in command_handlers.login_drivers.items():
-                if not chat_id.endswith('_xvfb') and driver:  # Skip VNC processes
-                    try:
-                        # Test if browser is still alive and valid
-                        driver.current_url  # This will throw if browser is dead
-                        manual_browser = driver
-                        logging.info(f"🔄 Reusing existing manual login browser from chat {chat_id}")
-                        break
-                    except:
-                        continue
+            if self.command_handlers:
+                # Look for active manual login browsers
+                for chat_id, driver in self.command_handlers.login_drivers.items():
+                    if not chat_id.endswith('_xvfb') and driver:  # Skip VNC processes
+                        try:
+                            # Test if browser is still alive and valid
+                            driver.current_url  # This will throw if browser is dead
+                            manual_browser = driver
+                            logging.info(f"🔄 Reusing existing manual login browser from chat {chat_id}")
+                            break
+                        except:
+                            continue
             
             if manual_browser:
                 # Reuse the manual login browser
