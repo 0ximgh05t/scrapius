@@ -638,10 +638,8 @@ Choose login method:
         # Pause the main scraper during manual login
         self._pause_main_scraper = True
         
-        def manual_login_wrapper():
-            manual_login_process()
-        
-        threading.Thread(target=manual_login_wrapper, daemon=True).start()
+        # Run the manual login process directly in the thread
+        threading.Thread(target=manual_login_process, daemon=True).start()
     
     async def _start_auto_login(self, bot_token: str, chat_id: str) -> None:
         """Start automatic login with saved credentials."""
