@@ -33,9 +33,20 @@ class ScraperManager:
             if self.initialized:
                 return True
             
-            # Create new non-headless WebDriver to match manual login environment
-            logging.info("🆕 Creating new non-headless browser for scraping (to match manual login)")
-            self.driver = create_reliable_webdriver(headless=False)
+            # Create new headless WebDriver with unique profile to avoid conflicts
+            logging.info("🆕 Creating new headless browser for scraping with unique profile")
+            
+            # Create a unique user data directory for scraper to avoid conflicts with manual login
+            import tempfile
+            import os
+            scraper_profile_dir = os.path.join(tempfile.gettempdir(), f"scrapius_scraper_{os.getpid()}")
+            os.makedirs(scraper_profile_dir, exist_ok=True)
+            
+            # Set environment variable to force unique profile
+            os.environ['CHROME_USER_DATA_DIR'] = scraper_profile_dir
+            os.environ['CHROME_PROFILE_DIR'] = 'ScrapiusScraper'
+            
+            self.driver = create_reliable_webdriver(headless=True)
             self.reused_manual_browser = False
                 
             if not self.driver:
