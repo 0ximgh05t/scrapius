@@ -147,25 +147,147 @@ class ScraperManager:
             
             logging.info(f"📊 Found {len(posts)} new posts in group {group_url}")
             
-            # Process each post
-            for post_index, post in enumerate(posts):
-                try:
-                    await self._process_single_post(
-                        post, group_id, table_name, conn, 
-                        bot_token, chat_ids, reliability
-                    )
-                    
-                    # Add delay between posts and yield control to allow Telegram updates
-                    if post_index < len(posts) - 1:
-                        await asyncio.sleep(reliability['post_processing_delay'])
-                        
-                except Exception as e:
-                    logging.error(f"❌ Error processing post {post_index + 1}: {e}")
-                    continue
+            # NEW ARCHITECTURE: Process all posts first, then send notifications
+            await self._process_posts_batch(
+                posts, group_id, table_name, conn, 
+                bot_token, chat_ids, reliability
+            )
             
         except Exception as e:
             logging.error(f"❌ Error scraping group {group_url}: {e}")
             raise
+    
+    async def _process_posts_batch(
+        self,
+        posts: List[Dict],
+        group_id: int,
+        table_name: str,
+        conn,
+        bot_token: str,
+        chat_ids: List[str],
+        reliability: Dict
+    ) -> None:
+        """Process all posts in batch: save to DB first, then send notifications in order."""
+        if not posts:
+            return
+            
+        logging.info(f"🔄 Processing {len(posts)} posts in batch mode")
+        
+        # STEP 1: Process all posts and collect results (no notifications yet)
+        processed_results = []
+        
+        for post_index, post in enumerate(posts):
+            try:
+                # Extract post data
+                content = post.get('content_text', '')
+                post_url = post.get('post_url', '')
+                content_hash = post.get('content_hash', '')
+                
+                if not content or not content_hash:
+                    logging.warning(f"⚠️ Skipping post {post_index + 1} with missing content or hash")
+                    continue
+                
+                # Check for duplicates BEFORE AI processing
+                from database.simple_per_group import content_hash_exists
+                if content_hash_exists(conn, table_name, content_hash):
+                    logging.info(f"🔄 Skipping duplicate post {post_index + 1} (hash: {content_hash[:12]}...)")
+                    continue
+                
+                # AI Processing
+                ai_result = None
+                try:
+                    ai_result = decide_and_summarize_for_post(content)
+                    if ai_result:
+                        logging.info(f"🤖 AI processed post {post_index + 1}: {ai_result.get('relevant', False)}")
+                    else:
+                        logging.warning(f"⚠️ AI processing failed for post {post_index + 1}")
+                        continue
+                except Exception as e:
+                    logging.error(f"❌ AI processing error for post {post_index + 1}: {e}")
+                    continue
+                
+                # Only process relevant posts
+                if not ai_result.get('relevant', False):
+                    logging.info(f"🚫 Post {post_index + 1} not relevant - skipping")
+                    continue
+                
+                # Prepare post data for database
+                post_data_dict = {
+                    'facebook_post_id': post.get('facebook_post_id'),
+                    'post_url': post_url,
+                    'content_text': content,
+                    'content_hash': content_hash
+                }
+                
+                # Store for batch processing
+                processed_results.append({
+                    'post_data': post_data_dict,
+                    'content': content,
+                    'post_url': post_url,
+                    'ai_result': ai_result,
+                    'post_index': post_index + 1
+                })
+                
+                logging.info(f"✅ Post {post_index + 1} prepared for database insertion")
+                
+            except Exception as e:
+                logging.error(f"❌ Error preparing post {post_index + 1}: {e}")
+                continue
+        
+        if not processed_results:
+            logging.info("📭 No relevant posts to save after processing")
+            return
+        
+        # STEP 2: Save all posts to database in batch
+        logging.info(f"💾 Saving {len(processed_results)} posts to database...")
+        saved_posts = []
+        
+        for result in processed_results:
+            try:
+                from database.simple_per_group import add_post_to_group
+                db_result = add_post_to_group(conn, table_name, result['post_data'])
+                
+                if db_result and db_result[1]:  # Successfully saved (new post, not update)
+                    saved_posts.append({
+                        'internal_post_id': db_result[0],
+                        'content': result['content'],
+                        'post_url': result['post_url'],
+                        'ai_result': result['ai_result'],
+                        'post_index': result['post_index']
+                    })
+                    logging.info(f"✅ Saved post {result['post_index']} to database with ID {db_result[0]}")
+                else:
+                    logging.info(f"📝 Post {result['post_index']} already exists in database - skipping notification")
+                    
+            except Exception as e:
+                logging.error(f"❌ Error saving post {result['post_index']} to database: {e}")
+                continue
+        
+        # STEP 3: Send notifications for saved posts in correct order
+        if saved_posts:
+            logging.info(f"📱 Sending {len(saved_posts)} notifications in chronological order...")
+            
+            for saved_post in saved_posts:
+                try:
+                    await self._send_post_notification(
+                        saved_post['content'],
+                        'Anonymous',  # No author stored in database
+                        saved_post['post_url'],
+                        saved_post['ai_result'],
+                        bot_token,
+                        chat_ids
+                    )
+                    
+                    logging.info(f"📱 Notification sent for post ID {saved_post['internal_post_id']}")
+                    
+                    # Add delay between notifications
+                    await asyncio.sleep(reliability['post_processing_delay'])
+                    
+                except Exception as e:
+                    logging.error(f"❌ Error sending notification for post ID {saved_post['internal_post_id']}: {e}")
+                    continue
+        
+        logging.info(f"🎉 Batch processing complete: {len(saved_posts)} posts saved and notified")
     
     async def _process_single_post(
         self,

@@ -1140,10 +1140,13 @@ def scrape_authenticated_group(
                     break
             
             logging.info(f"Scroll attempts finished or target reached. Waiting for {len(active_futures)} remaining tasks...")
-            for future in concurrent.futures.as_completed(active_futures, timeout=30):
+            
+            # Collect results in submission order to preserve Facebook chronological order
+            final_results = []
+            for future in active_futures:
                 if extracted_count >= num_posts or duplicate_found: break
                 try:
-                    result = future.result()
+                    result = future.result(timeout=30)
                     if result:
                         # DUPLICATE check in final collection too
                         if most_recent_hash and result.get('content_hash') == most_recent_hash:
@@ -1152,11 +1155,14 @@ def scrape_authenticated_group(
                             duplicate_found = True
                             break
                             
-                        collected_posts.append(result)
+                        final_results.append(result)
                         extracted_count += 1
-                        logging.debug(f"Collected post {extracted_count}/{num_posts} (ID: {result.get('facebook_post_id')}) during final collection.")
+                        logging.debug(f"Collected post {extracted_count}/{num_posts} (ID: {result.get('facebook_post_id')}) in submission order.")
                 except Exception as e_final_future:
                     logging.error(f"Error in final collection from worker: {e_final_future}", exc_info=True)
+            
+            # Add results in discovery order (preserves Facebook chronological order)
+            collected_posts.extend(final_results)
         
         # Yield posts in reverse order so newest gets highest DB ID
         logging.info(f"Yielding {len(collected_posts)} posts in reverse order (newest gets highest ID)")
