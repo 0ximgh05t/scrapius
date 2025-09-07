@@ -69,6 +69,8 @@ class CommandHandlers:
             await self._handle_cookies(bot_token, chat_id, conn)
         elif command == '/clearcookies':
             await self._handle_clearcookies(bot_token, chat_id, conn)
+        elif command == '/peek':
+            await self._handle_peek(bot_token, chat_id, conn)
         elif command == '/done':
             logging.info(f"🔍 Routing to _handle_done for {chat_id}")
             await self._handle_done(bot_token, chat_id, conn)
@@ -145,6 +147,7 @@ class CommandHandlers:
 /login - Login to Facebook
 /cookies - Check cookie status & expiration
 /clearcookies - Clear saved cookies
+/peek - View scraper browser via VNC (testing)
 """
         
         # Add cookie status if cookies exist
@@ -592,8 +595,23 @@ Choose login method:
                 
                 # Create unique user data directory for manual login to avoid conflicts
                 import tempfile
-                manual_profile_dir = os.path.join(tempfile.gettempdir(), f"scrapius_manual_{os.getpid()}_{chat_id}")
+                import time
+                timestamp = int(time.time())
+                manual_profile_dir = os.path.join(tempfile.gettempdir(), f"scrapius_manual_{timestamp}_{chat_id}")
+                
+                # Clean up any existing manual profile directories
+                import glob
+                old_profiles = glob.glob(os.path.join(tempfile.gettempdir(), f"scrapius_manual_*_{chat_id}"))
+                for old_profile in old_profiles:
+                    try:
+                        import shutil
+                        shutil.rmtree(old_profile)
+                        logging.info(f"🧹 Cleaned up old manual profile: {old_profile}")
+                    except:
+                        pass
+                
                 os.makedirs(manual_profile_dir, exist_ok=True)
+                logging.info(f"📁 Created manual login profile: {manual_profile_dir}")
                 
                 # Set environment variables for unique profile
                 original_user_data = os.environ.get('CHROME_USER_DATA_DIR')
@@ -650,10 +668,24 @@ Choose login method:
                     
             except Exception as e:
                 logging.error(f"Manual login error: {e}")
+                # Clean error message for Telegram (remove HTML-like content)
+                error_msg = str(e).replace('<', '&lt;').replace('>', '&gt;')
+                if len(error_msg) > 200:
+                    error_msg = error_msg[:200] + "..."
+                
                 send_telegram_message(bot_token, chat_id, 
-                    f"❌ <b>Manual login error:</b> {str(e)}\n\n"
-                    "Try auto-login instead if you have FB credentials.", 
+                    f"❌ <b>Manual login failed!</b>\n\n"
+                    f"<b>Error:</b> {error_msg}\n\n"
+                    "💡 <b>Try:</b>\n"
+                    "• Use /clearcookies first\n"
+                    "• Try auto-login if you have FB credentials\n"
+                    "• Contact admin if issue persists", 
                     parse_mode="HTML")
+                
+                # Clean up login state on failure
+                if chat_id in self.login_states:
+                    del self.login_states[chat_id]
+                self._pause_main_scraper = False
             # DO NOT clean up virtual display here - let /done or /cancel handle it
             # The virtual display and VNC need to stay running for user interaction
         
@@ -681,9 +713,24 @@ Choose login method:
                 # Driver storage now happens inside manual_login_process when browser opens
             except Exception as e:
                 logging.error(f"Browser creation failed: {e}")
+                # Clean error message for Telegram
+                error_msg = str(e).replace('<', '&lt;').replace('>', '&gt;')
+                if len(error_msg) > 200:
+                    error_msg = error_msg[:200] + "..."
+                
                 send_telegram_message(bot_token, chat_id, 
-                    f"❌ <b>Browser creation failed:</b> {str(e)}", 
+                    f"❌ <b>Browser creation failed!</b>\n\n"
+                    f"<b>Error:</b> {error_msg}\n\n"
+                    "💡 <b>Solutions:</b>\n"
+                    "• Run /clearcookies to clear Chrome conflicts\n"
+                    "• Wait a moment and try again\n"
+                    "• Use auto-login instead", 
                     parse_mode="HTML")
+                
+                # Clean up on failure
+                if chat_id in self.login_states:
+                    del self.login_states[chat_id]
+                self._pause_main_scraper = False
         
         # Start in daemon thread - this won't block main thread
         threading.Thread(target=run_browser_async, daemon=True).start()
@@ -1112,18 +1159,23 @@ Please try again with the correct format."""
                 "/tmp/scoped_dir*"
             ]
             
+            temp_files_count = 0
             for pattern in temp_patterns:
                 try:
-                    for match in glob.glob(pattern):
+                    matches = glob.glob(pattern)
+                    for match in matches:
                         if os.path.exists(match):
                             if os.path.isdir(match):
                                 shutil.rmtree(match)
                             else:
                                 os.remove(match)
-                            items_removed.append(f"Temp files ({os.path.basename(match)})")
+                            temp_files_count += 1
                             logging.info(f"🧹 Removed temp: {match}")
                 except Exception as e:
                     logging.warning(f"⚠️ Could not remove temp files {pattern}: {e}")
+            
+            if temp_files_count > 0:
+                items_removed.append(f"Chrome temp files ({temp_files_count} items)")
             
             # 5. Clear WebDriver cache
             try:
@@ -1155,6 +1207,83 @@ Please try again with the correct format."""
         except Exception as e:
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error during browser wipe:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error during browser wipe: {e}")
+    
+    async def _handle_peek(self, bot_token: str, chat_id: str, conn) -> None:
+        """Handle /peek command - provide VNC access to existing scraper browser."""
+        try:
+            # Check if main scraper has an active browser
+            from bot.scraper_manager import ScraperManager
+            
+            # Simple VNC setup for existing display
+            import subprocess
+            import os
+            import socket
+            
+            # Check if display :99 exists (where scraper browser runs)
+            if not os.path.exists('/tmp/.X99-lock'):
+                send_telegram_message(bot_token, chat_id, 
+                    "❌ <b>No scraper browser found!</b>\n\n"
+                    "The main scraper browser is not currently running.\n"
+                    "Wait for a scrape cycle to start, or use /login for manual browser.", 
+                    parse_mode="HTML")
+                return
+            
+            # Get or generate VNC password
+            vnc_password = os.getenv('VNC_PASSWORD')
+            if not vnc_password:
+                import secrets
+                import string
+                vnc_password = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(8))
+                logging.info(f"Generated temporary VNC password: {vnc_password}")
+            
+            # Start VNC server on display :99 (where scraper runs)
+            try:
+                # Kill any existing VNC on port 5901
+                subprocess.run(['pkill', '-f', 'x11vnc.*5901'], capture_output=True)
+                
+                # Start VNC server
+                vnc_process = subprocess.Popen([
+                    '/usr/bin/x11vnc', '-display', ':99', '-passwd', vnc_password, 
+                    '-listen', '0.0.0.0', '-xkb', '-forever', '-shared', '-rfbport', '5901'
+                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                
+                # Get server IP
+                try:
+                    hostname = socket.gethostname()
+                    server_ip = socket.gethostbyname(hostname)
+                except:
+                    server_ip = "YOUR_SERVER_IP"
+                
+                send_telegram_message(bot_token, chat_id, 
+                    "👀 <b>Peek Mode Active!</b>\n\n"
+                    "🖥️ <b>VNC Connection:</b>\n"
+                    f"• IP: <code>{server_ip}:5901</code>\n"
+                    f"• Alt: <code>ufrg.l.dedikuoti.lt:5901</code>\n"
+                    f"🔒 <b>Password:</b> <code>{vnc_password}</code>\n\n"
+                    "📋 <b>You can now:</b>\n"
+                    "• View the scraper's browser\n"
+                    "• Navigate to Facebook groups\n"
+                    "• Compare with database results\n\n"
+                    "⚠️ <b>Note:</b> Don't close the browser - it's used by the main scraper!", 
+                    parse_mode="HTML")
+                
+                logging.info(f"🔍 Peek mode activated for {chat_id} - VNC on :5901")
+                
+            except Exception as vnc_error:
+                send_telegram_message(bot_token, chat_id, 
+                    f"❌ <b>VNC setup failed:</b>\n\n"
+                    f"Error: {str(vnc_error)}\n\n"
+                    "Try again in a moment.", 
+                    parse_mode="HTML")
+                logging.error(f"VNC setup error: {vnc_error}")
+                
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, 
+                f"❌ <b>Peek mode error:</b>\n\n"
+                f"Error: {str(e)}\n\n"
+                "Contact admin if issue persists.", 
+                parse_mode="HTML")
+            logging.error(f"Peek mode error: {e}")
     
     async def _handle_done(self, bot_token: str, chat_id: str, conn) -> None:
         """Handle /done command - complete manual login."""
