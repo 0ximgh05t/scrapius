@@ -196,12 +196,30 @@ class ScraperManager:
                 # AI Processing
                 ai_result = None
                 try:
-                    ai_result = decide_and_summarize_for_post(content)
-                    if ai_result:
-                        logging.info(f"🤖 AI processed post {post_index + 1}: {ai_result.get('relevant', False)}")
-                    else:
-                        logging.warning(f"⚠️ AI processing failed for post {post_index + 1}")
-                        continue
+                    # Get AI prompts from database or config
+                    from config import get_bot_runner_settings
+                    from database.crud import botsettings_get
+                    
+                    # Get default prompts
+                    default_system, default_user, _, _ = get_bot_runner_settings()
+                    
+                    # Get current prompts from database (if set)
+                    system_prompt = botsettings_get(conn, 'bot_system', default_system)
+                    user_prompt = botsettings_get(conn, 'bot_user', default_user)
+                    
+                    # Create post dict for AI processing (NO AUTHOR per user requirement)
+                    post_dict = {'content': content, 'url': post_url}
+                    is_relevant, summary = decide_and_summarize_for_post(
+                        post_dict, 
+                        system_prompt,
+                        user_prompt
+                    )
+                    ai_result = {
+                        'relevant': is_relevant,
+                        'summary': summary,
+                        'title': "Relevant Post"  # No author in title
+                    }
+                    logging.info(f"🤖 AI processed post {post_index + 1}: {is_relevant}")
                 except Exception as e:
                     logging.error(f"❌ AI processing error for post {post_index + 1}: {e}")
                     continue
