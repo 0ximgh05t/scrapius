@@ -44,9 +44,16 @@ def get_updates(bot_token: str, offset: Optional[int] = None, timeout: int = 30)
     params = {"timeout": timeout}
     if offset is not None:
         params["offset"] = offset
-    resp = requests.get(url, params=params, timeout=timeout + 5)
-    resp.raise_for_status()
-    return resp.json()
+    
+    try:
+        resp = requests.get(url, params=params, timeout=timeout + 5)
+        resp.raise_for_status()
+        return resp.json()
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout, 
+            requests.exceptions.RequestException, OSError) as e:
+        # Return empty result on network errors to prevent bot crashes
+        print(f"⚠️ Telegram API connection error: {e}")
+        return {"ok": False, "result": []}
 
 
 def extract_commands(update: Dict) -> Optional[Dict]:
