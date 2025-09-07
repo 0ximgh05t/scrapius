@@ -595,7 +595,6 @@ Choose login method:
                 
                 # Create unique user data directory for manual login to avoid conflicts
                 import tempfile
-                import time
                 timestamp = int(time.time())
                 manual_profile_dir = os.path.join(tempfile.gettempdir(), f"scrapius_manual_{timestamp}_{chat_id}")
                 
