@@ -68,9 +68,6 @@ class ScrapiusTelegramBot:
             
             conn.close()
             
-            logging.info(f"🔧 Allowed chat IDs: {self.chat_ids}")
-            logging.info(f"🤖 Bot token length: {len(self.bot_token)}")
-            
             return True
             
         except Exception as e:
