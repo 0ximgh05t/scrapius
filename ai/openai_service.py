@@ -67,7 +67,8 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
     )
     text = resp.choices[0].message.content if resp.choices else ""
     
-    # DEBUG: Log the raw AI response
+    # DEBUG: Log the raw AI response AND the content being analyzed
+    print(f"🔍 POST CONTENT: {content[:200]}...")
     print(f"🔍 RAW AI RESPONSE: {text}")
     
     try:
