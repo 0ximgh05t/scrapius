@@ -396,7 +396,7 @@ Current Settings:
             
             # Check group limit
             existing_groups = list_all_groups(conn)
-            if len(existing_groups) >= 5:
+            if len(existing_groups) >= 20:
                 send_telegram_message(bot_token, chat_id, "⚠️ <b>Group limit reached!</b> Max 5 groups. Remove one first.", parse_mode="HTML")
                 return
             
@@ -1414,5 +1414,4 @@ Please try again with the correct format."""
             send_telegram_message(bot_token, chat_id, f"❌ <b>Error cancelling login:</b> {str(e)}", parse_mode="HTML")
             logging.error(f"Error cancelling manual login: {e}")
     
-
 

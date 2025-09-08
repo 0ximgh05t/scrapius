@@ -66,6 +66,11 @@ def extract_commands(update: Dict) -> Optional[Dict]:
         return None
     parts = text.strip().split(" ", 1)
     cmd = parts[0].lower()
+    
+    # Remove bot username from command if present (e.g., /groups@agneaibot -> /groups)
+    if "@" in cmd:
+        cmd = cmd.split("@")[0]
+
     arg = parts[1].strip() if len(parts) > 1 else ""
     return {"chat_id": str(chat_id), "cmd": cmd, "arg": arg}
 
