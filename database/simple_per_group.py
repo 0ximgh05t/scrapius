@@ -238,18 +238,11 @@ def add_post_to_group(db_conn: sqlite3.Connection, table_suffix: str, post_data:
         facebook_post_id = post_data.get('facebook_post_id')
         content_hash = post_data.get('content_hash')
         
-        if post_url:
-            # Check by URL, facebook_post_id, or content_hash
-            cursor.execute(f"""
-                SELECT internal_post_id FROM {posts_table} 
-                WHERE post_url = ? OR facebook_post_id = ? OR content_hash = ?
-            """, (post_url, facebook_post_id, content_hash))
-        else:
-            # Check by facebook_post_id or content_hash when no URL
-            cursor.execute(f"""
-                SELECT internal_post_id FROM {posts_table} 
-                WHERE facebook_post_id = ? OR content_hash = ?
-            """, (facebook_post_id, content_hash))
+        # Check ONLY by content_hash - content is what matters, not URL or ID
+        cursor.execute(f"""
+            SELECT internal_post_id FROM {posts_table} 
+            WHERE content_hash = ?
+        """, (content_hash,))
         
         existing = cursor.fetchone()
         if existing:

@@ -538,7 +538,7 @@ Choose login method:
                                     web_vnc_process = subprocess.Popen([
                                         '/usr/bin/websockify', '--web=/usr/share/novnc/', '6080', '127.0.0.1:5901'
                                     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                                    time.sleep(3)
+                        time.sleep(3)
                                     
                                     send_telegram_message(bot_token, chat_id, 
                                         "🌐 <b>Web VNC Ready!</b>\n\n"
@@ -584,7 +584,7 @@ Choose login method:
                     subprocess.run(['pkill', '-f', 'chrome'], capture_output=True, timeout=5)
                     time.sleep(1)
                     logging.info("🧹 Cleared existing Chrome processes")
-                except:
+                    except:
                     pass
                 
                 # Send immediate message that browser is starting
@@ -606,8 +606,8 @@ Choose login method:
                         import shutil
                         shutil.rmtree(old_profile)
                         logging.info(f"🧹 Cleaned up old manual profile: {old_profile}")
-                    except:
-                        pass
+                except:
+                    pass
                 
                 os.makedirs(manual_profile_dir, exist_ok=True)
                 logging.info(f"📁 Created manual login profile: {manual_profile_dir}")
@@ -791,11 +791,11 @@ Choose login method:
         import threading
         
         def validate_cookies_background():
-            try:
-                driver = create_reliable_webdriver(headless=True)
-                cookie_path = get_cookie_store_path()
-                
-                if load_cookies(driver, cookie_path):
+        try:
+            driver = create_reliable_webdriver(headless=True)
+            cookie_path = get_cookie_store_path()
+            
+            if load_cookies(driver, cookie_path):
                     # Send immediate confirmation that cookies exist
                     send_telegram_message(bot_token, chat_id, "✅ <b>Existing cookies are valid!</b>", parse_mode="HTML")
                     
@@ -803,17 +803,17 @@ Choose login method:
                     try:
                         if is_facebook_session_valid(driver):
                             logging.info("✅ Cookie session validation successful")
-                        else:
+                else:
                             logging.warning("⚠️ Cookie session validation failed, but cookies exist")
                     except Exception as validation_error:
                         logging.warning(f"⚠️ Cookie validation timed out: {validation_error}")
-                else:
-                    send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
-                
-                driver.quit()
-            except Exception as e:
-                send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
-                logging.error(f"Cookie validation error: {e}")
+            else:
+                send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
+            
+            driver.quit()
+        except Exception as e:
+            send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
+            logging.error(f"Cookie validation error: {e}")
         
         # Run validation in background thread to avoid blocking the bot
         threading.Thread(target=validate_cookies_background, daemon=True).start()
@@ -1074,15 +1074,15 @@ Please try again with the correct format."""
                 
                 def validate_session_background():
                     try:
-                        driver = create_reliable_webdriver(headless=True)
-                        cookies_loaded = load_cookies(driver, cookie_path)
-                        session_valid = False
-                        
-                        if cookies_loaded:
-                            session_valid = is_facebook_session_valid(driver)
-                        
-                        driver.quit()
-                        
+                driver = create_reliable_webdriver(headless=True)
+                cookies_loaded = load_cookies(driver, cookie_path)
+                session_valid = False
+                
+                if cookies_loaded:
+                    session_valid = is_facebook_session_valid(driver)
+                
+                driver.quit()
+                
                         # Send updated status
                         final_msg = f"""🍪 <b>Cookie Status - Updated:</b>
 
@@ -1092,7 +1092,7 @@ Please try again with the correct format."""
 📁 <b>File:</b> {os.path.basename(cookie_path)}
 
 {'✅ <b>All good!</b> Cookies are working.' if session_valid else '❌ <b>Session expired!</b> Use /login to refresh.'}"""
-                        
+                
                         send_telegram_message(bot_token, chat_id, final_msg, parse_mode="HTML")
                         
                     except Exception as e:
@@ -1166,7 +1166,7 @@ Please try again with the correct format."""
                         if os.path.exists(match):
                             if os.path.isdir(match):
                                 shutil.rmtree(match)
-                            else:
+            else:
                                 os.remove(match)
                             temp_files_count += 1
                             logging.info(f"🧹 Removed temp: {match}")
@@ -1183,7 +1183,7 @@ Please try again with the correct format."""
                     shutil.rmtree(webdriver_cache)
                     items_removed.append("WebDriver cache")
                     logging.info(f"🧹 Removed WebDriver cache")
-            except Exception as e:
+        except Exception as e:
                 logging.warning(f"⚠️ Could not remove WebDriver cache: {e}")
             
             # Send success message
