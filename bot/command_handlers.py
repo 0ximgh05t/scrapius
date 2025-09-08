@@ -1074,15 +1074,15 @@ Please try again with the correct format."""
                 
                 def validate_session_background():
                     try:
-                driver = create_reliable_webdriver(headless=True)
-                cookies_loaded = load_cookies(driver, cookie_path)
-                session_valid = False
-                
-                if cookies_loaded:
-                    session_valid = is_facebook_session_valid(driver)
-                
-                driver.quit()
-                
+                        driver = create_reliable_webdriver(headless=True)
+                        cookies_loaded = load_cookies(driver, cookie_path)
+                        session_valid = False
+                        
+                        if cookies_loaded:
+                            session_valid = is_facebook_session_valid(driver)
+                        
+                        driver.quit()
+                        
                         # Send updated status
                         final_msg = f"""🍪 <b>Cookie Status - Updated:</b>
 
@@ -1092,7 +1092,7 @@ Please try again with the correct format."""
 📁 <b>File:</b> {os.path.basename(cookie_path)}
 
 {'✅ <b>All good!</b> Cookies are working.' if session_valid else '❌ <b>Session expired!</b> Use /login to refresh.'}"""
-                
+                        
                         send_telegram_message(bot_token, chat_id, final_msg, parse_mode="HTML")
                         
                     except Exception as e:
@@ -1166,7 +1166,7 @@ Please try again with the correct format."""
                         if os.path.exists(match):
                             if os.path.isdir(match):
                                 shutil.rmtree(match)
-            else:
+                            else:
                                 os.remove(match)
                             temp_files_count += 1
                             logging.info(f"🧹 Removed temp: {match}")
@@ -1183,7 +1183,7 @@ Please try again with the correct format."""
                     shutil.rmtree(webdriver_cache)
                     items_removed.append("WebDriver cache")
                     logging.info(f"🧹 Removed WebDriver cache")
-        except Exception as e:
+            except Exception as e:
                 logging.warning(f"⚠️ Could not remove WebDriver cache: {e}")
             
             # Send success message
