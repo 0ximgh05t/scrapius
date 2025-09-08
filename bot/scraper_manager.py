@@ -214,7 +214,7 @@ class ScraperManager:
                         logging.info(f"🔍 DEBUG - Post content sample: {content[:100]}...")
                     
                     # Create post dict for AI processing (NO AUTHOR per user requirement)
-                    post_dict = {'content': content, 'url': post_url}
+                    post_dict = {'content_text': content, 'post_url': post_url}
                     is_relevant, summary = decide_and_summarize_for_post(
                         post_dict, 
                         system_prompt,

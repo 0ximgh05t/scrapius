@@ -66,14 +66,21 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
         temperature=0,
     )
     text = resp.choices[0].message.content if resp.choices else ""
+    
+    # DEBUG: Log the raw AI response
+    print(f"🔍 RAW AI RESPONSE: {text}")
+    
     try:
         data = json.loads(text)
         send = bool(data.get("send", False))
         summary = str(data.get("summary", ""))
+        print(f"🔍 PARSED: send={send}, summary={summary}")
         return send, summary
-    except Exception:
+    except Exception as e:
+        print(f"🔍 JSON PARSE ERROR: {e}")
         # Fallback: simple heuristic
         lowered = (text or "").lower()
         send = "\"send\": true" in lowered or "\"send\":true" in lowered or lowered.strip().startswith("send")
         summary = text if send else ""
+        print(f"🔍 FALLBACK: send={send}")
         return send, summary 
