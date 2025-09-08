@@ -606,8 +606,8 @@ Choose login method:
                         import shutil
                         shutil.rmtree(old_profile)
                         logging.info(f"🧹 Cleaned up old manual profile: {old_profile}")
-                except:
-                    pass
+                    except:
+                        pass
                 
                 os.makedirs(manual_profile_dir, exist_ok=True)
                 logging.info(f"📁 Created manual login profile: {manual_profile_dir}")
@@ -791,11 +791,11 @@ Choose login method:
         import threading
         
         def validate_cookies_background():
-        try:
-            driver = create_reliable_webdriver(headless=True)
-            cookie_path = get_cookie_store_path()
+            try:
+                driver = create_reliable_webdriver(headless=True)
+                cookie_path = get_cookie_store_path()
             
-            if load_cookies(driver, cookie_path):
+                if load_cookies(driver, cookie_path):
                     # Send immediate confirmation that cookies exist
                     send_telegram_message(bot_token, chat_id, "✅ <b>Existing cookies are valid!</b>", parse_mode="HTML")
                     
@@ -803,17 +803,17 @@ Choose login method:
                     try:
                         if is_facebook_session_valid(driver):
                             logging.info("✅ Cookie session validation successful")
-                else:
+                        else:
                             logging.warning("⚠️ Cookie session validation failed, but cookies exist")
                     except Exception as validation_error:
                         logging.warning(f"⚠️ Cookie validation timed out: {validation_error}")
-            else:
-                send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
+                else:
+                    send_telegram_message(bot_token, chat_id, "❌ <b>No existing cookies found.</b> Please use another login method.", parse_mode="HTML")
             
-            driver.quit()
-        except Exception as e:
-            send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
-            logging.error(f"Cookie validation error: {e}")
+                driver.quit()
+            except Exception as e:
+                send_telegram_message(bot_token, chat_id, f"❌ <b>Cookie validation error:</b> {str(e)}", parse_mode="HTML")
+                logging.error(f"Cookie validation error: {e}")
         
         # Run validation in background thread to avoid blocking the bot
         threading.Thread(target=validate_cookies_background, daemon=True).start()
