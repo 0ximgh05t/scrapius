@@ -86,14 +86,22 @@ def format_post_message(title: str, short_text: str, url: str, author: Optional[
     content = escape_html(short_text or "")
     
     if url and url != "#":
-        # Has URL - show group name + post link
+        # Check if URL is a specific post or just group URL
+        if "/posts/" in url:
+            # Specific post URL
+            button_text = "📱 Peržiūrėti įrašą"
+        else:
+            # Group URL (fallback when no specific post URL available)
+            button_text = "📱 Peržiūrėti grupę"
+        
+        # Has URL - show group name + appropriate link
         msg = f"""📩 <b>Naujas įrašas</b>
 
 📍 <b>Grupė:</b> <i>{escape_html(clean_group_name)}</i>
 
 {content}
 
-<a href="{escape_html(url)}">📱 Peržiūrėti įrašą</a>"""
+<a href="{escape_html(url)}">{button_text}</a>"""
     else:
         # No URL - show group name only (no link since we don't have group_url here)
         msg = f"""📩 <b>Naujas įrašas</b>
