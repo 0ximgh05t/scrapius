@@ -108,11 +108,11 @@ def create_group_posts_table(db_conn: sqlite3.Connection, table_suffix: str) -> 
         cursor.execute(f'''
             CREATE TABLE IF NOT EXISTS {posts_table} (
                 internal_post_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                facebook_post_id TEXT UNIQUE,
-                post_url TEXT UNIQUE,
+                facebook_post_id TEXT,
+                post_url TEXT,
                 post_content_raw TEXT,
                 scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                content_hash TEXT
+                content_hash TEXT UNIQUE
             )
         ''')
         
