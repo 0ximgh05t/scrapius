@@ -207,6 +207,12 @@ class ScraperManager:
                     system_prompt = botsettings_get(conn, 'bot_system', default_system)
                     user_prompt = botsettings_get(conn, 'bot_user', default_user)
                     
+                    # DEBUG: Log what prompts are being used (first post only)
+                    if post_index == 0:
+                        logging.info(f"🔍 DEBUG - System prompt: {system_prompt[:100]}...")
+                        logging.info(f"🔍 DEBUG - User prompt: {user_prompt[:100]}...")
+                        logging.info(f"🔍 DEBUG - Post content sample: {content[:100]}...")
+                    
                     # Create post dict for AI processing (NO AUTHOR per user requirement)
                     post_dict = {'content': content, 'url': post_url}
                     is_relevant, summary = decide_and_summarize_for_post(
