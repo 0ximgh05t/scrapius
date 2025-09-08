@@ -538,7 +538,7 @@ Choose login method:
                                     web_vnc_process = subprocess.Popen([
                                         '/usr/bin/websockify', '--web=/usr/share/novnc/', '6080', '127.0.0.1:5901'
                                     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                        time.sleep(3)
+                                    time.sleep(3)
                                     
                                     send_telegram_message(bot_token, chat_id, 
                                         "🌐 <b>Web VNC Ready!</b>\n\n"
@@ -584,7 +584,7 @@ Choose login method:
                     subprocess.run(['pkill', '-f', 'chrome'], capture_output=True, timeout=5)
                     time.sleep(1)
                     logging.info("🧹 Cleared existing Chrome processes")
-                    except:
+                except:
                     pass
                 
                 # Send immediate message that browser is starting
