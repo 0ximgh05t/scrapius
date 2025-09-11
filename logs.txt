@@ -1,526 +1,693 @@
-Sep 11 11:49:36 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:49:36,518 - WARNING - Unsupported architecture:
-Sep 11 11:49:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:49:39,362 - INFO - 🥷 WebDriver traces removed successfully
-Sep 11 11:49:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:49:39,365 - INFO - ✅ System ChromeDriver created successfully
-Sep 11 11:49:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:49:39,365 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
-Sep 11 11:49:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:49:39,365 - INFO - 🍪 Cookie file exists - loading...
-Sep 11 11:50:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:00,715 - INFO - ✅ Cookies loaded successfully
-Sep 11 11:50:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:00,715 - INFO - Checking Facebook session validity...
-Sep 11 11:50:18 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:18,608 - INFO - ✅ Scraper manager initialized successfully
-Sep 11 11:50:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:22,116 - INFO - 🔍 [1/13] Scraping group: https://www.facebook.com/groups/165457490610070
-Sep 11 11:50:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:22,117 - INFO - 🔍 Most recent post in database: 2163749150780884
-Sep 11 11:50:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:22,117 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:50:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:22,118 - INFO - Navigating to group: https://www.facebook.com/groups/165457490610070?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:50:46 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:46,757 - INFO - 📋 Found existing group 7 -> Group_165457490610070
-Sep 11 11:50:46 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:46,757 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:50:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:50:51,126 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/165457490610070 using 5 workers...
-Sep 11 11:51:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:00,053 - INFO - Scroll 1: Found 21 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:51:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:16,714 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 11:51:18 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:18,534 - INFO - Scroll 2: Found 29 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 11:51:18 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:18,854 - INFO - 🔄 Skipping duplicate content (quick hash: c3495f02e73e)
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,934 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,943 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,974 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,974 - INFO - Finished scraping generator. Total posts yielded: 5.
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,975 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/165457490610070
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,975 - INFO - 🔄 Processing 5 posts in batch mode
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,975 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,975 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 11:51:37 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:37,975 - INFO - 🔍 DEBUG - Post content sample: Sveiki, esu Simonas, internetinių svetainių kūrimo srityje dirbu jau daugiau nei trejus metus. Kuriu...
-Sep 11 11:51:38 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:38,748 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:51:38 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:38,754 - INFO - 🤖 AI processed post 1: False
-Sep 11 11:51:38 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:38,754 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 11:51:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:39,384 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:51:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:39,387 - INFO - 🤖 AI processed post 2: False
-Sep 11 11:51:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:39,388 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 11:51:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,247 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:51:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,266 - INFO - 🤖 AI processed post 3: False
-Sep 11 11:51:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,267 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 11:51:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,977 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:51:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,997 - INFO - 🤖 AI processed post 4: False
-Sep 11 11:51:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:40,998 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 11:51:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:42,226 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:51:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:42,245 - INFO - 🤖 AI processed post 5: False
-Sep 11 11:51:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:42,245 - INFO - 🚫 Post 5 not relevant - skipping
-Sep 11 11:51:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:42,246 - INFO - 📭 No relevant posts to save after processing
-Sep 11 11:51:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:51:42,246 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:52:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:14,515 - INFO - 🔍 [2/13] Scraping group: https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas
-Sep 11 11:52:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:14,516 - INFO - 🔍 Most recent post in database: 1292627902509210
-Sep 11 11:52:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:14,516 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:52:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:14,516 - INFO - Navigating to group: https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:52:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:25,847 - INFO - 📋 Found existing group 8 -> Group_c560f0066a
-Sep 11 11:52:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:25,856 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:52:38 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:38,056 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas using 5 workers...
-Sep 11 11:52:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:40,236 - INFO - Scroll 1: Found 18 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:52:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:55,998 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 11:52:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:57,907 - INFO - Scroll 2: Found 25 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 11:52:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:52:58,157 - INFO - 🔄 Skipping duplicate content (quick hash: 0a8a4539eb0b)
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,155 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,156 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,163 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,163 - INFO - Finished scraping generator. Total posts yielded: 5.
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,164 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,164 - INFO - 🔄 Processing 5 posts in batch mode
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,164 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,164 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 11:53:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:13,164 - INFO - 🔍 DEBUG - Post content sample: IEŠKOMAS ASMENINIS ASISTENTAS – PADĖJĖJAS!… Žr. daugiau...
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,026 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,039 - INFO - 🤖 AI processed post 1: False
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,039 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,773 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,777 - INFO - 🤖 AI processed post 2: False
-Sep 11 11:53:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:14,777 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 11:53:15 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:15,527 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:53:15 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:15,535 - INFO - 🤖 AI processed post 3: False
-Sep 11 11:53:15 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:15,535 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,237 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,244 - INFO - 🤖 AI processed post 4: False
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,244 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,984 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,988 - INFO - 🤖 AI processed post 5: False
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,993 - INFO - 🚫 Post 5 not relevant - skipping
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,993 - INFO - 📭 No relevant posts to save after processing
-Sep 11 11:53:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:16,993 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:53:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:49,206 - INFO - 🔍 [3/13] Scraping group: https://www.facebook.com/groups/ivykiai.aktualijos
-Sep 11 11:53:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:49,214 - INFO - 🔍 Most recent post in database: 1464633148107912
-Sep 11 11:53:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:49,214 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:53:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:53:49,215 - INFO - Navigating to group: https://www.facebook.com/groups/ivykiai.aktualijos?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:54:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:05,323 - INFO - 📋 Found existing group 9 -> Group_10aa321b60
-Sep 11 11:54:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:05,324 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:54:11 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:11,244 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/ivykiai.aktualijos using 5 workers...
-Sep 11 11:54:19 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:19,101 - INFO - Scroll 1: Found 13 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:54:33 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:33,065 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 11:54:34 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:34,854 - INFO - Scroll 2: Found 19 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 11:54:35 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:35,095 - INFO - 🔄 Skipping duplicate content (quick hash: c3495f02e73e)
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,164 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,186 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,227 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,227 - INFO - Finished scraping generator. Total posts yielded: 5.
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,242 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/ivykiai.aktualijos
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,242 - INFO - 🔄 Processing 5 posts in batch mode
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,250 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,250 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 11:54:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:48,264 - INFO - 🔍 DEBUG - Post content sample: Sveiki kuriu įvairias animacijas,animuotus banerius,sveikinimus,montuoju video,jei kas susidomėjo,su...
-Sep 11 11:54:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:49,724 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:54:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:49,729 - INFO - 🤖 AI processed post 1: False
-Sep 11 11:54:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:49,729 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 11:54:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:50,593 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:54:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:50,604 - INFO - 🤖 AI processed post 2: False
-Sep 11 11:54:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:50,604 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 11:54:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:51,365 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:54:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:51,371 - INFO - 🤖 AI processed post 3: False
-Sep 11 11:54:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:51,371 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,067 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,092 - INFO - 🤖 AI processed post 4: False
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,093 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,801 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,805 - INFO - 🤖 AI processed post 5: False
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,806 - INFO - 🚫 Post 5 not relevant - skipping
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,806 - INFO - 📭 No relevant posts to save after processing
-Sep 11 11:54:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:54:52,806 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:55:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:25,085 - INFO - 🔍 [4/13] Scraping group: https://www.facebook.com/groups/skaitmeninismarketingaslt
-Sep 11 11:55:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:25,086 - INFO - 🔍 Most recent post in database: 1286138642977637
-Sep 11 11:55:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:25,086 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:55:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:25,092 - INFO - Navigating to group: https://www.facebook.com/groups/skaitmeninismarketingaslt?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:55:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:41,825 - INFO - 📋 Found existing group 10 -> Group_61ae7a75ca
-Sep 11 11:55:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:41,841 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:55:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:48,682 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/skaitmeninismarketingaslt using 5 workers...
-Sep 11 11:55:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:55:50,461 - INFO - Scroll 1: Found 19 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:56:04 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:04,600 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 11:56:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:07,882 - INFO - Scroll 2: Found 27 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 11:56:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:08,073 - INFO - 🔄 Skipping duplicate content (quick hash: 552ff93b18ef)
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,935 - INFO - 🛑 Found duplicate content (hash: 65e77db3...)
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,945 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,945 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,945 - INFO - Scroll attempts finished or target reached. Waiting for 5 remaining tasks...
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,993 - INFO - Yielding 3 posts in reverse order (newest gets highest ID)
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - INFO - Finished scraping generator. Total posts yielded: 3.
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - WARNING - Generator finished, but only yielded 3 posts, less than requested 5.
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - INFO - 📊 Found 3 new posts in group https://www.facebook.com/groups/skaitmeninismarketingaslt
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - INFO - 🔄 Processing 3 posts in batch mode
-Sep 11 11:56:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 11:56:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,994 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 11:56:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:22,995 - INFO - 🔍 DEBUG - Post content sample: Sveiki, Esu antro kurso marketingo ir reklamos kūrimo studijų studentė. Šiuo metu ieškau įmonės ar o...
-Sep 11 11:56:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:23,733 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:56:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:23,742 - INFO - 🤖 AI processed post 1: False
-Sep 11 11:56:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:23,743 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:24,575 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Can you save 5 section as a group in elementor as combined section as template Can you save 5 section as a group in elementor as combined section as template...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Anchor text hack that nobody talks about: Use Google Search Console to find natural anchor text ideas. The process takes only 5 minutes: → GSC Performance tab → Filter by your page URL Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: GMB or website which is more productive GMB or website which is more productive...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Has anyone mastered ChatGPT SEO yet? Id like to know how to get local businesses found when people are asking questions like, “whos the best [service type] in [city]. I’m noticing a lot of sources lik...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Ieškau kas galit padėti sutvarkyti Google search console po viruso vis sunkiai sekasi duoti užklausas pašalinti išvis neegzistuojancius puslapius....
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":true,"summary":"User is looking for help with Google Search Console after a virus issue."}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=True, summary=User is looking for help with Google Search Console after a virus issue.
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Esu Junior Marketing Specialistė Sparkle way studio įkūrėja Padedu prekiniams ženklams augti socialinėje erdvėje, bei gerinti website matomumą ir kokybę Ką galiu pasiūlyti: Socialinių tinklų administr...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki Aš – Junior Marketing Specialistė, Sparkle way studio įkūrėja, ir mama, kuri tiki, kad augimas (tiek verslo, tiek asmeninis) vyksta kasdien po mažą žingsnelį … Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Nesusipratimai dėl CTR ką svarbu žinoti. Iš 3 pokalbių šią savaitę Nesusipratimai dėl CTR ką svarbu žinoti. Iš 3 pokalbių šią savaitę...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false, "summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Prisijunk prie mūsų!...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki, Ieškau žmogaus su marketingo ir web/e-commerce žiniomis – žmogaus, kuris gerai supranta, kaip veikia pardavimų sistema ir kaip turi atrodyti brandas. Produktas yra maisto papildų srityje. Svet...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":true,"summary":"User is looking for a marketing specialist with knowledge in web/e-commerce to improve sales for a dietary supplement product."}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=True, summary=User is looking for a marketing specialist with knowledge in web/e-commerce to improve sales for a dietary supplement product.
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: 840 € vertės dovana nemokamai? ChatGPT Plus (GPT-5 + o3) Gemini Pro Claude Pro Grok 4 Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Ieškau kas išreklamuotų mano mokymus:...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Susidomėjusios rašykite asmeniškai...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki, esu Simonas, internetinių svetainių kūrimo srityje dirbu jau daugiau nei trejus metus. Kuriu profesionalias ir stilingas svetaines įvairiomis temomis ir žanrais… Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Skaitmeninio marketingo agentūra ieško reklamos specialisto! Ieškome patyrusio Google Ads ir Meta reklamos specialisto, kuris prisijungtų prie mūsų komandos! Ko tikimės iš tavęs: – Bent 3 metų patirti...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Susisiekite asmeniškai, jeigu norite greičiau gauti atsakymą....
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Jei dirbi su excel ir darai tuos pačius skaičiavimus, pabandykim tai automatizuoti su access database. Pavyzdys: skirtingos klientų grupės gauna tam tikrą % bonuso iki nustatytos max sumos, priklausom...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki Ieškau žmogaus kuris supranta ir moka dirbti su shopify platforma.  O jei turi ir SEO įgūdžių, tai būtų dar didesnis privalumas....
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: IEŠKOMAS ASMENINIS ASISTENTAS – PADĖJĖJAS!… Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki, Ieškau naujo puslapio facebook ir svetainei administruojančio asmens. Tikslas į sukurtą svetainę per fb pasiekti kuo daugiau smulkių ir mažų vietinių ūkininkų. Sveiki, Ieškau naujo puslapio fa...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Mamos!!! Šitas post’as – kaip mažas žiburėlis Tavo kasdienybės kelyje! Jei esi vaiko priežiūros atostogose ir vis dažniau pagalvoji: „O gal galėčiau kažką nuveikti ir SAU?“ „… Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Labas!Pradedu savo kelią kaip UGC kūrėja ir ieškau pirmųjų barterinių klientų–mainais į jūsų produktą. Sukursiu autentišką turinį(video, reels, nuotraukas), kurį galėsite naudoti reklamai. Jei turite ...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Restoranų marketingas - Klaipėda Sveiki, Mūsų šeimos restoranai ieško kūrybiško ir iniciatyvaus marketingo specialisto, kuris padėtų auginti prekės ženklus, pritraukti naujų klientų ir stiprinti ryšį ...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki kuriu įvairias animacijas,animuotus banerius,sveikinimus,montuoju video,jei kas susidomėjo,susirašom!...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false, "summary": ""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Copytrading su dirbtiniu intelektu suteikia galimybę dalyvauti finansų rinkoje net ir su mažu pradiniu kapitalu – visiškai be specialių žinių ar ilgų rinkos analizės valandų. Pradėti gali jau nuo **50...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: 5 patarimai, kuriuos žinojęs anksčiau būčiau greičiau uždirbęs iš savo verslo:… Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false, "summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Video montavimo paslaugos Galiu sumontuoti: -Produktų, paslaugų reklamas -Youtube video… Žr. daugiau...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki! Esu pradedantis, bet jau įgūdžių turintis grafinio dizaino kūrėjas. Galiu padėti su jūsų prekės ženklo atnaujinimu arba sukurti naują – nuo logotipo, maketų, plakatų iki viso vizualinio identi...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Sveiki, Esu antro kurso marketingo ir reklamos kūrimo studijų studentė. Šiuo metu ieškau įmonės ar organizacijos, kurioje galėčiau atlikti praktiką. Mano tikslas – įgyti praktinės patirties marketingo...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 PARSED: send=False, summary=
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 🔍 POST CONTENT: Esu Junior Marketing Specialistė Sparkle way studio įkūrėja Padedu prekiniams ženklams augti socialinėje erdvėje, bei gerinti website matomumą ir kokybę Ką galiu pasiūlyti: Socialinių tinklų administr...
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:24,586 - INFO - 🤖 AI processed post 2: False
-Sep 11 11:56:24 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:24,586 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 11:56:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:25,322 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:56:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:25,335 - INFO - 🤖 AI processed post 3: False
-Sep 11 11:56:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:25,336 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 11:56:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:25,336 - INFO - 📭 No relevant posts to save after processing
-Sep 11 11:56:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:25,336 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:56:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:57,643 - INFO - 🔍 [5/13] Scraping group: https://www.facebook.com/groups/7572597017
-Sep 11 11:56:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:57,644 - INFO - 🔍 Most recent post in database: 10164188050797018
-Sep 11 11:56:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:57,644 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:56:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:56:57,644 - INFO - Navigating to group: https://www.facebook.com/groups/7572597017?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:57:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:16,905 - INFO - 📋 Found existing group 11 -> Group_7572597017
-Sep 11 11:57:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:16,905 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:57:21 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:21,283 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/7572597017 using 5 workers...
-Sep 11 11:57:25 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:25,234 - INFO - Scroll 1: Found 11 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:57:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:42,123 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 11:57:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:43,845 - INFO - Scroll 2: Found 24 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 11:57:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:44,050 - INFO - 🔄 Skipping duplicate content (quick hash: 4e2a3269b766)
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,764 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,770 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,771 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,771 - INFO - Finished scraping generator. Total posts yielded: 5.
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,771 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/7572597017
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,772 - INFO - 🔄 Processing 5 posts in batch mode
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,772 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,772 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 11:57:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:58,772 - INFO - 🔍 DEBUG - Post content sample: Sveiki, Ieškau developerio, kuris galėtų integruoti Rivilę į Shopify....
-Sep 11 11:57:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:59,605 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:57:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:59,611 - INFO - 🤖 AI processed post 1: False
-Sep 11 11:57:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:57:59,611 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 11:58:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:00,353 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:58:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:00,364 - INFO - 🤖 AI processed post 2: False
-Sep 11 11:58:00 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:00,364 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,084 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,091 - INFO - 🤖 AI processed post 3: False
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,091 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,722 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,725 - INFO - 🤖 AI processed post 4: False
-Sep 11 11:58:01 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:01,725 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 11:58:02 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:02,658 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 11:58:02 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:02,662 - INFO - 🤖 AI processed post 5: False
-Sep 11 11:58:02 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:02,663 - INFO - 🚫 Post 5 not relevant - skipping
-Sep 11 11:58:02 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:02,663 - INFO - 📭 No relevant posts to save after processing
-Sep 11 11:58:02 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:02,664 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:58:34 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:34,891 - INFO - 🔍 [6/13] Scraping group: https://www.facebook.com/groups/svetaines
-Sep 11 11:58:34 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:34,893 - INFO - 🔍 Most recent post in database: 25230018003305888
-Sep 11 11:58:34 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:34,893 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:58:34 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:34,893 - INFO - Navigating to group: https://www.facebook.com/groups/svetaines?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 11:58:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:48,271 - INFO - 📋 Found existing group 12 -> Group_3d82f7b1dd
-Sep 11 11:58:48 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:48,286 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 11:58:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:55,910 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/svetaines using 5 workers...
-Sep 11 11:58:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:58:58,720 - INFO - Scroll 1: Found 12 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,521 - INFO - 🛑 Found duplicate content (hash: 4aee9309...)
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,526 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,526 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,526 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,527 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,527 - INFO - Finished scraping generator. Total posts yielded: 0.
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,532 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,532 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/svetaines
-Sep 11 11:59:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:17,532 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 11:59:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:49,792 - INFO - 🔍 [7/13] Scraping group: https://www.facebook.com/groups/juodairbalta
-Sep 11 11:59:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:49,794 - INFO - 🔍 Most recent post in database: 24237659299267859
-Sep 11 11:59:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:49,794 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 11:59:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 11:59:49,794 - INFO - Navigating to group: https://www.facebook.com/groups/juodairbalta?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:00:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:08,276 - INFO - 📋 Found existing group 13 -> Group_b7423ca4ec
-Sep 11 12:00:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:08,311 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 12:00:14 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:14,662 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/juodairbalta using 5 workers...
-Sep 11 12:00:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:22,155 - INFO - Scroll 1: Found 18 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:00:39 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:39,652 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 12:00:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:41,964 - INFO - Scroll 2: Found 25 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 12:00:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:42,193 - INFO - 🔄 Skipping duplicate content (quick hash: e4bbc2101501)
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,157 - INFO - 🛑 Found duplicate content (hash: dafe7578...)
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,167 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,167 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,168 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,209 - INFO - Yielding 4 posts in reverse order (newest gets highest ID)
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,209 - INFO - Finished scraping generator. Total posts yielded: 4.
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,209 - WARNING - Generator finished, but only yielded 4 posts, less than requested 5.
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,209 - INFO - 📊 Found 4 new posts in group https://www.facebook.com/groups/juodairbalta
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,209 - INFO - 🔄 Processing 4 posts in batch mode
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,215 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,216 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,216 - INFO - 🔍 DEBUG - Post content sample: Sveiki kuriu įvairias animacijas,animuotus banerius,sveikinimus,montuoju video,jei kas susidomėjo,su...
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,906 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,908 - INFO - 🤖 AI processed post 1: False
-Sep 11 12:00:56 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:56,909 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 12:00:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:57,774 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:00:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:57,779 - INFO - 🤖 AI processed post 2: False
-Sep 11 12:00:57 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:57,784 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 12:00:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:58,575 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:00:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:58,578 - INFO - 🤖 AI processed post 3: False
-Sep 11 12:00:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:58,578 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 12:00:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:59,405 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:00:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:59,409 - INFO - 🤖 AI processed post 4: False
-Sep 11 12:00:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:59,409 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 12:00:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:59,409 - INFO - 📭 No relevant posts to save after processing
-Sep 11 12:00:59 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:00:59,409 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 12:01:31 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:31,649 - INFO - 🔍 [8/13] Scraping group: https://www.facebook.com/groups/spauskcia
-Sep 11 12:01:31 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:31,650 - INFO - 🔍 Most recent post in database: 3067987906713393
-Sep 11 12:01:31 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:31,655 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:01:31 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:31,656 - INFO - Navigating to group: https://www.facebook.com/groups/spauskcia?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:01:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:40,364 - INFO - 📋 Found existing group 14 -> Group_12479b7059
-Sep 11 12:01:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:40,377 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 12:01:58 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:01:58,499 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/spauskcia using 5 workers...
-Sep 11 12:02:04 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:04,519 - INFO - Scroll 1: Found 31 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,060 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,067 - INFO - 🛑 Found duplicate content (hash: dccf0674...)
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,067 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,067 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,067 - INFO - Scroll attempts finished or target reached. Waiting for 3 remaining tasks...
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,115 - INFO - Yielding 1 posts in reverse order (newest gets highest ID)
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,116 - INFO - Finished scraping generator. Total posts yielded: 1.
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,116 - WARNING - Generator finished, but only yielded 1 posts, less than requested 5.
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,116 - INFO - 📊 Found 1 new posts in group https://www.facebook.com/groups/spauskcia
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,116 - INFO - 🔄 Processing 1 posts in batch mode
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,118 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,118 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 12:02:20 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:20,118 - INFO - 🔍 DEBUG - Post content sample: Sveiki, turime paruoštą front’o šabloną, reikia kas galėtų pateikti pasiūlymus patobulinimui iš UX/U...
-Sep 11 12:02:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:22,059 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:02:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:22,067 - INFO - 🤖 AI processed post 1: False
-Sep 11 12:02:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:22,067 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 12:02:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:22,067 - INFO - 📭 No relevant posts to save after processing
-Sep 11 12:02:22 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:22,067 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 12:02:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:54,320 - INFO - 🔍 [9/13] Scraping group: https://www.facebook.com/groups/googleseomastermind
-Sep 11 12:02:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:54,321 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:02:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:02:54,321 - INFO - Navigating to group: https://www.facebook.com/groups/googleseomastermind?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:03:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:07,234 - INFO - 📋 Found existing group 15 -> Group_713ac9f57c
-Sep 11 12:03:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:07,249 - INFO - 🆕 No existing posts found - this is a fresh scrape
-Sep 11 12:03:18 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:18,775 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/googleseomastermind using 5 workers...
-Sep 11 12:03:23 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:23,692 - INFO - Scroll 1: Found 21 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:03:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:40,021 - INFO - Scroll 2: Found 28 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 12:03:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:40,310 - INFO - 🔄 Skipping duplicate content (quick hash: a4e14c0727bf)
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,702 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,711 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,711 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,712 - INFO - Finished scraping generator. Total posts yielded: 5.
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,713 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/googleseomastermind
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,713 - INFO - 🔄 Processing 5 posts in batch mode
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,716 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,716 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 12:03:50 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:50,717 - INFO - 🔍 DEBUG - Post content sample: Do squarespace websites rank? Or should i tell the client to rebuild it on wordpress? Do squarespace...
-Sep 11 12:03:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:51,832 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:03:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:51,849 - INFO - 🤖 AI processed post 1: False
-Sep 11 12:03:51 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:51,850 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 12:03:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:52,579 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:03:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:52,589 - INFO - 🤖 AI processed post 2: False
-Sep 11 12:03:52 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:52,589 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 12:03:53 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:53,408 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:03:53 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:53,412 - INFO - 🤖 AI processed post 3: False
-Sep 11 12:03:53 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:53,412 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 12:03:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:54,289 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:03:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:54,299 - INFO - 🤖 AI processed post 4: False
-Sep 11 12:03:54 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:54,299 - INFO - 🚫 Post 4 not relevant - skipping
-Sep 11 12:03:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:55,190 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:03:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:55,199 - INFO - 🤖 AI processed post 5: False
-Sep 11 12:03:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:55,199 - INFO - 🚫 Post 5 not relevant - skipping
-Sep 11 12:03:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:55,200 - INFO - 📭 No relevant posts to save after processing
-Sep 11 12:03:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:03:55,200 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 12:04:27 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:04:27,458 - INFO - 🔍 [10/13] Scraping group: https://www.facebook.com/groups/GoogleAdsMastermind
-Sep 11 12:04:27 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:04:27,460 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:04:27 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:04:27,460 - INFO - Navigating to group: https://www.facebook.com/groups/GoogleAdsMastermind?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:05:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:16,839 - ERROR - Main thread timed out waiting for elements while scraping group https://www.facebook.com/groups/GoogleAdsMastermind.
-Sep 11 12:05:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:16,840 - ERROR - ❌ Error scraping group https://www.facebook.com/groups/GoogleAdsMastermind: cannot access local variable 'should_close_conn' where it is not associated with a value
-Sep 11 12:05:16 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:16,840 - ERROR - ❌ Error scraping group https://www.facebook.com/groups/GoogleAdsMastermind: cannot access local variable 'should_close_conn' where it is not associated with a value
-Sep 11 12:05:19 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:19,074 - INFO - 🔍 [11/13] Scraping group: https://www.facebook.com/groups/seolietuva
-Sep 11 12:05:19 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:19,081 - INFO - 🔍 Most recent post in database: 24953116717626933
-Sep 11 12:05:19 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:19,081 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:05:19 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:19,081 - INFO - Navigating to group: https://www.facebook.com/groups/seolietuva?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:05:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:40,393 - INFO - 📋 Found existing group 17 -> Group_cb6f9fd6df
-Sep 11 12:05:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:40,413 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 12:05:53 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:53,853 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/seolietuva using 5 workers...
-Sep 11 12:05:55 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:05:55,744 - INFO - Scroll 1: Found 22 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,092 - INFO - 🛑 Found duplicate content (hash: eac90892...)
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,127 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,128 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,128 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,183 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,184 - INFO - Finished scraping generator. Total posts yielded: 0.
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,184 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,184 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/seolietuva
-Sep 11 12:06:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:12,184 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 12:06:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:44,965 - INFO - 🔍 [12/13] Scraping group: https://www.facebook.com/groups/1599694093510363
-Sep 11 12:06:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:44,967 - INFO - 🔍 Most recent post in database: 4195194777293602
-Sep 11 12:06:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:44,967 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:06:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:06:44,967 - INFO - Navigating to group: https://www.facebook.com/groups/1599694093510363?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:07:03 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:03,341 - INFO - 📋 Found existing group 18 -> Group_1599694093510363
-Sep 11 12:07:03 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:03,364 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 12:07:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:08,391 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/1599694093510363 using 5 workers...
-Sep 11 12:07:13 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:13,823 - INFO - Scroll 1: Found 22 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:07:29 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:29,002 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 12:07:30 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:30,888 - INFO - Scroll 2: Found 22 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 12:07:31 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:31,110 - INFO - 🔄 Skipping duplicate content (quick hash: 0a8a4539eb0b)
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,370 - INFO - 🛑 Found duplicate content (hash: 2aa92384...)
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,374 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,375 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,375 - INFO - Scroll attempts finished or target reached. Waiting for 5 remaining tasks...
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,375 - INFO - Yielding 3 posts in reverse order (newest gets highest ID)
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,375 - INFO - Finished scraping generator. Total posts yielded: 3.
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,375 - WARNING - Generator finished, but only yielded 3 posts, less than requested 5.
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,378 - INFO - 📊 Found 3 new posts in group https://www.facebook.com/groups/1599694093510363
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,379 - INFO - 🔄 Processing 3 posts in batch mode
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,379 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,379 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 12:07:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:44,379 - INFO - 🔍 DEBUG - Post content sample: Esu Junior Marketing Specialistė Sparkle way studio įkūrėja Padedu prekiniams ženklams augti sociali...
-Sep 11 12:07:45 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:45,384 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:07:45 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:45,401 - INFO - 🤖 AI processed post 1: False
-Sep 11 12:07:45 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:45,401 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 12:07:46 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:46,331 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:07:46 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:46,340 - INFO - 🤖 AI processed post 2: False
-Sep 11 12:07:46 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:46,340 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 12:07:47 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:47,137 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:07:47 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:47,140 - INFO - 🤖 AI processed post 3: False
-Sep 11 12:07:47 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:47,141 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 12:07:47 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:47,141 - INFO - 📭 No relevant posts to save after processing
-Sep 11 12:07:47 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:07:47,141 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 12:08:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:17,710 - INFO - 🔍 [13/13] Scraping group: https://www.facebook.com/groups/marketingaslt
-Sep 11 12:08:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:17,713 - INFO - 🔍 Most recent post in database: 1296900588779808
-Sep 11 12:08:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:17,713 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 12:08:17 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:17,713 - INFO - Navigating to group: https://www.facebook.com/groups/marketingaslt?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 12:08:33 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:33,719 - INFO - 📋 Found existing group 19 -> Group_7107de3ed1
-Sep 11 12:08:33 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:33,720 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 12:08:40 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:40,502 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/marketingaslt using 5 workers...
-Sep 11 12:08:44 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:08:44,950 - INFO - Scroll 1: Found 13 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,276 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,284 - INFO - 🛑 Found duplicate content (hash: 67fc448e...)
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,284 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,284 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,284 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,285 - INFO - Yielding 3 posts in reverse order (newest gets highest ID)
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,286 - INFO - Finished scraping generator. Total posts yielded: 3.
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,286 - WARNING - Generator finished, but only yielded 3 posts, less than requested 5.
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,286 - INFO - 📊 Found 3 new posts in group https://www.facebook.com/groups/marketingaslt
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,286 - INFO - 🔄 Processing 3 posts in batch mode
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,290 - INFO - 🔍 DEBUG - System prompt: You are a helpful assistant that processes Facebook posts....
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,291 - INFO - 🔍 DEBUG - User prompt: Return only posts where people are looking for one of the following services providers: Google Ads, ...
-Sep 11 12:09:05 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:05,291 - INFO - 🔍 DEBUG - Post content sample: 840 € vertės dovana nemokamai? ChatGPT Plus (GPT-5 + o3) Gemini Pro Claude Pro Grok 4 Žr. daugiau...
-Sep 11 12:09:06 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:06,116 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:09:06 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:06,123 - INFO - 🤖 AI processed post 1: False
-Sep 11 12:09:06 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:06,123 - INFO - 🚫 Post 1 not relevant - skipping
-Sep 11 12:09:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:07,264 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:09:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:07,269 - INFO - 🤖 AI processed post 2: False
-Sep 11 12:09:07 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:07,270 - INFO - 🚫 Post 2 not relevant - skipping
-Sep 11 12:09:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:08,312 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 12:09:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:08,316 - INFO - 🤖 AI processed post 3: False
-Sep 11 12:09:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:08,321 - INFO - 🚫 Post 3 not relevant - skipping
-Sep 11 12:09:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:08,321 - INFO - 📭 No relevant posts to save after processing
-Sep 11 12:09:08 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:08,951 - INFO - 🧹 Scraper manager cleaned up
-Sep 11 12:09:11 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:11,431 - INFO - 🎯 Found 13 groups to scrape
-Sep 11 12:09:11 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:11,433 - INFO - 🆕 Creating browser for scraping
-Sep 11 12:09:11 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:11,440 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
-Sep 11 12:09:11 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:11,440 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
-Sep 11 12:09:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:41,604 - ERROR - Failed to create remote debugging WebDriver: Chrome remote debugging failed to start
-Sep 11 12:09:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:41,605 - WARNING - Remote debugging failed: Could not initialize remote debugging WebDriver: Chrome remote debugging failed to start
-Sep 11 12:09:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:41,605 - INFO - ====== WebDriver manager ======
-Sep 11 12:09:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:41,649 - INFO - Get LATEST chromedriver version for google-chrome
-Sep 11 12:09:41 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:41,836 - INFO - About to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-Sep 11 12:09:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:42,011 - INFO - Driver downloading response is 200
-Sep 11 12:09:42 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:42,680 - INFO - Get LATEST chromedriver version for google-chrome
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,186 - INFO - Get LATEST chromedriver version for google-chrome
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,402 - INFO - Driver has been saved in cache [/root/.wdm/drivers/chromedriver/linux64/114.0.5735.90]
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,405 - INFO - 🔧 Set executable permissions on ChromeDriver
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,443 - INFO - ✅ ChromeDriver test successful
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,640 - ERROR - Traditional WebDriver failed: Message: unknown error: Chrome failed to start: exited normally.
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]:   (unknown error: DevToolsActivePort file doesn't exist)
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]:   (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: Stacktrace:
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #0 0x649c81f784e3 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #1 0x649c81ca7c76 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #2 0x649c81cd0d78 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #3 0x649c81ccd029 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #4 0x649c81d0bccc <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #5 0x649c81d0b47f <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #6 0x649c81d02de3 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #7 0x649c81cd82dd <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #8 0x649c81cd934e <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #9 0x649c81f383e4 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #10 0x649c81f3c3d7 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #11 0x649c81f46b20 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #12 0x649c81f3d023 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #13 0x649c81f0b1aa <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #14 0x649c81f616b8 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #15 0x649c81f61847 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #16 0x649c81f71243 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #17 0x742e2589caa4 <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: #18 0x742e25929c3c <unknown>
-Sep 11 12:09:43 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:43,682 - WARNING - Unsupported architecture:
-Sep 11 12:09:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:49,486 - INFO - 🥷 WebDriver traces removed successfully
-Sep 11 12:09:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:49,512 - INFO - ✅ System ChromeDriver created successfully
-Sep 11 12:09:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:49,512 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
-Sep 11 12:09:49 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:09:49,512 - INFO - 🍪 Cookie file exists - loading...
+]Sep 11 12:44:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:44:12,254 - INFO - 🎯 Found 13 groups to scrape
+Sep 11 12:44:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:44:12,256 - INFO - 🆕 Creating browser for scraping
+Sep 11 12:44:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:44:12,263 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
+Sep 11 12:44:12 ufrg.l.dedikuoti.lt scrapius[120122]: 2025-09-11 12:44:12,263 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: Stopping scrapius.service - Scrapius Facebook Scraper Bot...
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: scrapius.service: Failed to kill control group /system.slice/scrapius.service, ignoring: Invalid argument
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: scrapius.service: Deactivated successfully.
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: Stopped scrapius.service - Scrapius Facebook Scraper Bot.
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: scrapius.service: Consumed 57min 5.082s CPU time, 1.4G memory peak, 0B memory swap peak.
+Sep 11 12:44:18 ufrg.l.dedikuoti.lt systemd[1]: Started scrapius.service - Scrapius Facebook Scraper Bot.
+Sep 11 12:44:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:23,931 - INFO - Database 'insights.db' initialized with Groups and Posts tables created or verified.
+Sep 11 12:44:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:23,933 - INFO - ✅ Database initialized
+Sep 11 12:44:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:23,933 - INFO - 🤖 Scrapius Telegram Bot initialized
+Sep 11 12:44:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:23,935 - INFO - 📊 Adaptive scheduling: 6 scrapes/hour, 14.0min intervals
+Sep 11 12:44:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:23,935 - INFO - 🚀 Scrapius bot started - entering main loop
+Sep 11 12:44:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:26,175 - INFO - 📊 Hourly limit changed from 6 to 5 - regenerating schedule
+Sep 11 12:44:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:44:26,177 - INFO - 📊 Adaptive scheduling: 5 scrapes/hour, 14.0min intervals
+Sep 11 12:59:30 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:59:30,011 - INFO - 🎯 Found 13 groups to scrape
+Sep 11 12:59:30 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:59:30,012 - INFO - 🆕 Creating browser for scraping
+Sep 11 12:59:30 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:59:30,022 - INFO - 🔍 Found Chrome at: /usr/bin/google-chrome
+Sep 11 12:59:30 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 12:59:30,022 - INFO - 🚀 Starting Chrome with remote debugging on port 9222
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,180 - ERROR - Failed to create remote debugging WebDriver: Chrome remote debugging failed to start
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,180 - WARNING - Remote debugging failed: Could not initialize remote debugging WebDriver: Chrome remote debugging failed to start
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,241 - INFO - ====== WebDriver manager ======
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,273 - INFO - Get LATEST chromedriver version for google-chrome
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,502 - INFO - About to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+Sep 11 13:00:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:00,700 - INFO - Driver downloading response is 200
+Sep 11 13:00:01 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:01,391 - INFO - Get LATEST chromedriver version for google-chrome
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:02,251 - INFO - Get LATEST chromedriver version for google-chrome
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:02,512 - INFO - Driver has been saved in cache [/root/.wdm/drivers/chromedriver/linux64/114.0.5735.90]
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:02,521 - INFO - 🔧 Set executable permissions on ChromeDriver
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:02,537 - INFO - ✅ ChromeDriver test successful
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:02,939 - ERROR - Traditional WebDriver failed: Message: unknown error: Chrome failed to start: exited normally.
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]:   (unknown error: DevToolsActivePort file doesn't exist)
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]:   (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x619fb346d4e3 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x619fb319cc76 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x619fb31c5d78 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x619fb31c2029 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x619fb3200ccc <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x619fb320047f <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x619fb31f7de3 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x619fb31cd2dd <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x619fb31ce34e <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x619fb342d3e4 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x619fb34313d7 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x619fb343bb20 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x619fb3432023 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x619fb34001aa <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x619fb34566b8 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x619fb3456847 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x619fb3466243 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x74a02a29caa4 <unknown>
+Sep 11 13:00:02 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x74a02a329c3c <unknown>
+Sep 11 13:00:03 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:03,531 - WARNING - Unsupported architecture:
+Sep 11 13:00:08 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:08,741 - INFO - 🥷 WebDriver traces removed successfully
+Sep 11 13:00:08 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:08,741 - INFO - ✅ System ChromeDriver created successfully
+Sep 11 13:00:08 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:08,741 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
+Sep 11 13:00:08 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:08,741 - INFO - 🍪 Cookie file exists - loading...
+Sep 11 13:00:14 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:14,521 - INFO - ✅ Cookies loaded successfully
+Sep 11 13:00:14 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:14,560 - INFO - Checking Facebook session validity...
+Sep 11 13:00:22 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:22,652 - INFO - ✅ Scraper manager initialized successfully
+Sep 11 13:00:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:26,529 - INFO - 🔍 [1/13] Scraping group: https://www.facebook.com/groups/165457490610070
+Sep 11 13:00:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:26,531 - INFO - 🔍 Most recent post in database: 2163749150780884
+Sep 11 13:00:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:26,531 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:00:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:26,532 - INFO - Navigating to group: https://www.facebook.com/groups/165457490610070?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:00:40 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:40,661 - INFO - 📋 Found existing group 7 -> Group_165457490610070
+Sep 11 13:00:40 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:40,677 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:00:54 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:00:54,369 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/165457490610070 using 5 workers...
+Sep 11 13:01:02 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:02,269 - INFO - Scroll 1: Found 29 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:01:27 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:27,979 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:01:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:46,982 - INFO - Scroll 2: Found 40 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:01:47 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:47,329 - INFO - 🔄 Skipping duplicate content (quick hash: c3495f02e73e)
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:50,700 - WARNING - ❌ Error clicking 'See more' for 2163765294112603: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (593, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu x18d9i69 x1g0dm76 xpdmqnj x1n2onr6">...</div>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:01:50 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:56,263 - WARNING - ❌ Error clicking 'See more' for 2163756957446770: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (1155, 480). Other element would receive the click: <div class="x9f619 x1ja2u2z x78zum5 x1n2onr6 x1r8uery x1iyjqo2 xs83m0k xeuugli xl56j7k x6s0dn4 xozqiw3 x1q0g3np xpdmqnj x1g0dm76 xexx8yu x1lxpwgx x165d6jo x4cne27 xifccgj xn3w4p2 xuxw1ft">...</div>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:01:56 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:01:59,961 - WARNING - ❌ Error clicking 'See more' for 2163504347472031: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w xjqpnuy xc5r6h4 xqeqjp1 x1phubyo x13fuv20 x18b5jzi x1q0q8m5 x1t7ytsu x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xdl72j9 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak x2lwn1j xeuugli xexx8yu x18d9i69 x1c1uobl x1n2onr6 x16tdsg8 x1hl2dhg xggy1nq x1ja2u2z x1t137rt x1fmog5m xu25z0z x140muxe xo1y3bh x3nfvp2 x87ps6o x1lku1pv x1a2a7pz x6s0dn4 xi81zsa x1q0g3np x1iyjqo2 xs83m0k x1icxu4v" role="button" tabindex="0">...</div> is not clickable at point (869, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:01:59 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:04,318 - WARNING - ❌ Error clicking 'See more' for 2163708420784957: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w xjqpnuy xc5r6h4 xqeqjp1 x1phubyo x13fuv20 x18b5jzi x1q0q8m5 x1t7ytsu x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xdl72j9 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak x2lwn1j xeuugli xexx8yu x18d9i69 x1c1uobl x1n2onr6 x16tdsg8 x1hl2dhg xggy1nq x1ja2u2z x1t137rt x1fmog5m xu25z0z x140muxe xo1y3bh x3nfvp2 x87ps6o x1lku1pv x1a2a7pz x6s0dn4 xi81zsa x1q0g3np x1iyjqo2 xs83m0k x1icxu4v" role="button" tabindex="0">...</div> is not clickable at point (869, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:02:04 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,218 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,218 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,241 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,242 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,242 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/165457490610070
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,242 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,249 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 19
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,250 - INFO - 💾 Saved post 1 to database with ID 19 (AI pending)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,253 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 20
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,257 - INFO - 💾 Saved post 2 to database with ID 20 (AI pending)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,268 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 21
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,268 - INFO - 💾 Saved post 3 to database with ID 21 (AI pending)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,311 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 22
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,313 - INFO - 💾 Saved post 4 to database with ID 22 (AI pending)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,348 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 23
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,348 - INFO - 💾 Saved post 5 to database with ID 23 (AI pending)
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,348 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,349 - ERROR - ❌ Error getting unprocessed posts from Group_165457490610070: no such column: ai_relevant
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,349 - ERROR - ❌ Error getting newly relevant posts from Group_165457490610070: no such column: ai_relevant
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,349 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,349 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:02:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:07,349 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:02:39 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:39,659 - INFO - 🔍 [2/13] Scraping group: https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas
+Sep 11 13:02:39 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:39,661 - INFO - 🔍 Most recent post in database: 1292627902509210
+Sep 11 13:02:39 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:39,661 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:02:39 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:39,661 - INFO - Navigating to group: https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:02:58 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:58,480 - INFO - 📋 Found existing group 8 -> Group_c560f0066a
+Sep 11 13:02:58 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:02:58,510 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:03:17 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:03:17,639 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas using 5 workers...
+Sep 11 13:03:24 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:03:24,262 - INFO - Scroll 1: Found 18 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:03:45 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:03:45,338 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:04:05 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:05,278 - INFO - Scroll 2: Found 43 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:04:05 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:05,561 - INFO - 🔄 Skipping duplicate content (quick hash: 0a8a4539eb0b)
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:11,609 - WARNING - ❌ Error clicking 'See more' for 1293482279090439: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (970, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:04:11 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:20,192 - WARNING - ❌ Error clicking 'See more' for 1293394789099188: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (774, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:04:20 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,701 - WARNING - ❌ Error clicking 'See more' for 1293239719114695: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (593, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu x18d9i69 x1g0dm76 xpdmqnj x1n2onr6">...</div>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,750 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,758 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,791 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,791 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,792 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,792 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,802 - INFO - ✅ Added new post to Posts_Group_c560f0066a with ID 5
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,803 - INFO - 💾 Saved post 1 to database with ID 5 (AI pending)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,811 - INFO - ✅ Added new post to Posts_Group_c560f0066a with ID 6
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,811 - INFO - 💾 Saved post 2 to database with ID 6 (AI pending)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,821 - INFO - ✅ Added new post to Posts_Group_c560f0066a with ID 7
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,821 - INFO - 💾 Saved post 3 to database with ID 7 (AI pending)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,879 - INFO - ✅ Added new post to Posts_Group_c560f0066a with ID 8
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,879 - INFO - 💾 Saved post 4 to database with ID 8 (AI pending)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,918 - INFO - ✅ Added new post to Posts_Group_c560f0066a with ID 9
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,918 - INFO - 💾 Saved post 5 to database with ID 9 (AI pending)
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,918 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,920 - ERROR - ❌ Error getting unprocessed posts from Group_c560f0066a: no such column: ai_relevant
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,921 - ERROR - ❌ Error getting newly relevant posts from Group_c560f0066a: no such column: ai_relevant
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,921 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,921 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:04:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:26,921 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:04:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:59,131 - INFO - 🔍 [3/13] Scraping group: https://www.facebook.com/groups/ivykiai.aktualijos
+Sep 11 13:04:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:59,132 - INFO - 🔍 Most recent post in database: 1464633148107912
+Sep 11 13:04:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:59,132 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:04:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:04:59,133 - INFO - Navigating to group: https://www.facebook.com/groups/ivykiai.aktualijos?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:05:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:07,051 - INFO - 📋 Found existing group 9 -> Group_10aa321b60
+Sep 11 13:05:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:07,051 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:05:25 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:25,652 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/ivykiai.aktualijos using 5 workers...
+Sep 11 13:05:38 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:38,351 - INFO - Scroll 1: Found 13 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:05:55 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:55,761 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:05:57 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:57,645 - INFO - Scroll 2: Found 26 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:05:57 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:05:57,936 - INFO - 🔄 Skipping duplicate content (quick hash: c3495f02e73e)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,730 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,732 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,760 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,760 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,760 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/ivykiai.aktualijos
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,760 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,769 - INFO - ✅ Added new post to Posts_Group_10aa321b60 with ID 7
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,770 - INFO - 💾 Saved post 1 to database with ID 7 (AI pending)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,778 - INFO - ✅ Added new post to Posts_Group_10aa321b60 with ID 8
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,779 - INFO - 💾 Saved post 2 to database with ID 8 (AI pending)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,781 - INFO - ✅ Added new post to Posts_Group_10aa321b60 with ID 9
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,781 - INFO - 💾 Saved post 3 to database with ID 9 (AI pending)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,818 - INFO - ✅ Added new post to Posts_Group_10aa321b60 with ID 10
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,818 - INFO - 💾 Saved post 4 to database with ID 10 (AI pending)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,875 - INFO - ✅ Added new post to Posts_Group_10aa321b60 with ID 11
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,876 - INFO - 💾 Saved post 5 to database with ID 11 (AI pending)
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,876 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,876 - ERROR - ❌ Error getting unprocessed posts from Group_10aa321b60: no such column: ai_relevant
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,876 - ERROR - ❌ Error getting newly relevant posts from Group_10aa321b60: no such column: ai_relevant
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,876 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,878 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:06:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:23,878 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:06:56 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:56,442 - INFO - 🔍 [4/13] Scraping group: https://www.facebook.com/groups/skaitmeninismarketingaslt
+Sep 11 13:06:56 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:56,449 - INFO - 🔍 Most recent post in database: 1286138642977637
+Sep 11 13:06:56 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:56,449 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:06:56 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:06:56,449 - INFO - Navigating to group: https://www.facebook.com/groups/skaitmeninismarketingaslt?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:07:17 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:17,032 - INFO - 📋 Found existing group 10 -> Group_61ae7a75ca
+Sep 11 13:07:17 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:17,038 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:07:25 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:25,223 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/skaitmeninismarketingaslt using 5 workers...
+Sep 11 13:07:32 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:32,801 - INFO - Scroll 1: Found 17 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:07:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:50,792 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:07:54 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:54,013 - INFO - Scroll 2: Found 27 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:07:54 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:07:54,323 - INFO - 🔄 Skipping duplicate content (quick hash: 552ff93b18ef)
+Sep 11 13:08:12 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:12,849 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:08:12 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:12,849 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,404 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,428 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,428 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/skaitmeninismarketingaslt
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,437 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,460 - INFO - ✅ Added new post to Posts_Group_61ae7a75ca with ID 5
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,460 - INFO - 💾 Saved post 1 to database with ID 5 (AI pending)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,473 - INFO - ✅ Added new post to Posts_Group_61ae7a75ca with ID 6
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,473 - INFO - 💾 Saved post 2 to database with ID 6 (AI pending)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,503 - INFO - ✅ Added new post to Posts_Group_61ae7a75ca with ID 7
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,503 - INFO - 💾 Saved post 3 to database with ID 7 (AI pending)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,548 - INFO - ✅ Added new post to Posts_Group_61ae7a75ca with ID 8
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,549 - INFO - 💾 Saved post 4 to database with ID 8 (AI pending)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,563 - INFO - ✅ Added new post to Posts_Group_61ae7a75ca with ID 9
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,566 - INFO - 💾 Saved post 5 to database with ID 9 (AI pending)
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,579 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,580 - ERROR - ❌ Error getting unprocessed posts from Group_61ae7a75ca: no such column: ai_relevant
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,580 - ERROR - ❌ Error getting newly relevant posts from Group_61ae7a75ca: no such column: ai_relevant
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,580 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,580 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:08:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:13,580 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:08:45 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:45,841 - INFO - 🔍 [5/13] Scraping group: https://www.facebook.com/groups/7572597017
+Sep 11 13:08:45 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:45,842 - INFO - 🔍 Most recent post in database: 10164188050797018
+Sep 11 13:08:45 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:45,842 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:08:45 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:45,842 - INFO - Navigating to group: https://www.facebook.com/groups/7572597017?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:08:54 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:54,151 - INFO - 📋 Found existing group 11 -> Group_7572597017
+Sep 11 13:08:54 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:08:54,170 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:09:07 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:07,752 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/7572597017 using 5 workers...
+Sep 11 13:09:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:18,052 - INFO - Scroll 1: Found 24 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:38,518 - WARNING - ❌ Error clicking 'See more' for 10164210200907018: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (686, 490). Other element would receive the click: <span class="x193iq5w xeuugli x13faqbe x1vvkbs xlh3980 xvmahel x1n0sxbx x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x4zkp8e x3x7a5m x6prxxf xvq8zen x1s688f xi81zsa" dir="auto">...</span>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:09:38 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:38,602 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:09:58 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:58,931 - INFO - Scroll 2: Found 38 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:09:59 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:09:59,283 - INFO - 🔄 Skipping duplicate content (quick hash: 4e2a3269b766)
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:05,671 - WARNING - ❌ Error clicking 'See more' for 10164209806072018: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w xjqpnuy xc5r6h4 xqeqjp1 x1phubyo x13fuv20 x18b5jzi x1q0q8m5 x1t7ytsu x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xdl72j9 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak x2lwn1j xeuugli xexx8yu x18d9i69 x1c1uobl x1n2onr6 x16tdsg8 x1hl2dhg xggy1nq x1ja2u2z x1t137rt x1fmog5m xu25z0z x140muxe xo1y3bh x3nfvp2 x87ps6o x1lku1pv x1a2a7pz x6s0dn4 xi81zsa x1q0g3np x1iyjqo2 xs83m0k x1icxu4v" role="button" tabindex="0">...</div> is not clickable at point (869, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:10:05 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:12,471 - WARNING - ❌ Error clicking 'See more' for 10164209095247018: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (797, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:10:12 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,559 - WARNING - ❌ Error clicking 'See more' for 10164205477652018: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (738, 490). Other element would receive the click: <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x78zum5 x1nhvcw1 x1n2onr6">...</div>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,588 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,600 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,618 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,619 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,619 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/7572597017
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,619 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,627 - INFO - ✅ Added new post to Posts_Group_7572597017 with ID 3
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,628 - INFO - 💾 Saved post 1 to database with ID 3 (AI pending)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,634 - INFO - ✅ Added new post to Posts_Group_7572597017 with ID 4
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,634 - INFO - 💾 Saved post 2 to database with ID 4 (AI pending)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,643 - INFO - ✅ Added new post to Posts_Group_7572597017 with ID 5
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,643 - INFO - 💾 Saved post 3 to database with ID 5 (AI pending)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,680 - INFO - ✅ Added new post to Posts_Group_7572597017 with ID 6
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,680 - INFO - 💾 Saved post 4 to database with ID 6 (AI pending)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,719 - INFO - ✅ Added new post to Posts_Group_7572597017 with ID 7
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,720 - INFO - 💾 Saved post 5 to database with ID 7 (AI pending)
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,720 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,720 - ERROR - ❌ Error getting unprocessed posts from Group_7572597017: no such column: ai_relevant
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,722 - ERROR - ❌ Error getting newly relevant posts from Group_7572597017: no such column: ai_relevant
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,722 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,722 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:10:19 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:19,722 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:10:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:52,011 - INFO - 🔍 [6/13] Scraping group: https://www.facebook.com/groups/svetaines
+Sep 11 13:10:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:52,012 - INFO - 🔍 Most recent post in database: 25230018003305888
+Sep 11 13:10:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:52,013 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:10:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:52,013 - INFO - Navigating to group: https://www.facebook.com/groups/svetaines?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:10:58 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:58,594 - INFO - 📋 Found existing group 12 -> Group_3d82f7b1dd
+Sep 11 13:10:58 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:10:58,594 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:11:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:18,212 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/svetaines using 5 workers...
+Sep 11 13:11:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:26,064 - INFO - Scroll 1: Found 16 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,764 - INFO - 🛑 Found duplicate content (hash: 4aee9309...)
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,771 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,771 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,771 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,821 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,822 - INFO - Finished scraping generator. Total posts yielded: 0.
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,822 - WARNING - Generator finished, but only yielded 0 posts, less than requested 5.
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,822 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/svetaines
+Sep 11 13:11:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:11:50,823 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:12:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:23,063 - INFO - 🔍 [7/13] Scraping group: https://www.facebook.com/groups/juodairbalta
+Sep 11 13:12:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:23,064 - INFO - 🔍 Most recent post in database: 24237659299267859
+Sep 11 13:12:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:23,064 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:12:23 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:23,064 - INFO - Navigating to group: https://www.facebook.com/groups/juodairbalta?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:12:41 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:41,095 - INFO - 📋 Found existing group 13 -> Group_b7423ca4ec
+Sep 11 13:12:41 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:12:41,131 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:13:00 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:00,862 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/juodairbalta using 5 workers...
+Sep 11 13:13:03 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:03,973 - INFO - Scroll 1: Found 18 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:13:22 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:22,400 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:13:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:26,535 - INFO - Scroll 2: Found 25 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:13:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:26,762 - INFO - 🔄 Skipping duplicate content (quick hash: e4bbc2101501)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,391 - INFO - 🛑 Found duplicate content (hash: dafe7578...)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,401 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,401 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,401 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,438 - INFO - Yielding 4 posts in reverse order (newest gets highest ID)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,438 - INFO - Finished scraping generator. Total posts yielded: 4.
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,438 - WARNING - Generator finished, but only yielded 4 posts, less than requested 5.
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,439 - INFO - 📊 Found 4 new posts in group https://www.facebook.com/groups/juodairbalta
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,439 - INFO - 🔄 Processing 4 posts with new approach: Save → AI → Notify
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,445 - INFO - ✅ Added new post to Posts_Group_b7423ca4ec with ID 3
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,445 - INFO - 💾 Saved post 1 to database with ID 3 (AI pending)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,455 - INFO - ✅ Added new post to Posts_Group_b7423ca4ec with ID 4
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,455 - INFO - 💾 Saved post 2 to database with ID 4 (AI pending)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,464 - INFO - ✅ Added new post to Posts_Group_b7423ca4ec with ID 5
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,465 - INFO - 💾 Saved post 3 to database with ID 5 (AI pending)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,492 - INFO - ✅ Added new post to Posts_Group_b7423ca4ec with ID 6
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,492 - INFO - 💾 Saved post 4 to database with ID 6 (AI pending)
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,492 - INFO - 💾 Saved 4 posts to database. Now processing with AI...
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,494 - ERROR - ❌ Error getting unprocessed posts from Group_b7423ca4ec: no such column: ai_relevant
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,494 - ERROR - ❌ Error getting newly relevant posts from Group_b7423ca4ec: no such column: ai_relevant
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,494 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,494 - INFO - 🎉 Complete: 4 posts saved and processed
+Sep 11 13:13:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:13:46,500 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:14:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:18,803 - INFO - 🔍 [8/13] Scraping group: https://www.facebook.com/groups/spauskcia
+Sep 11 13:14:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:18,804 - INFO - 🔍 Most recent post in database: 3067987906713393
+Sep 11 13:14:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:18,805 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:14:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:18,805 - INFO - Navigating to group: https://www.facebook.com/groups/spauskcia?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:14:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:26,263 - INFO - 📋 Found existing group 14 -> Group_12479b7059
+Sep 11 13:14:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:26,265 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 11 13:14:41 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:41,380 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/spauskcia using 5 workers...
+Sep 11 13:14:50 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:14:50,891 - INFO - Scroll 1: Found 21 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,743 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,743 - INFO - 🛑 Found duplicate content (hash: dccf0674...)
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,744 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,744 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,744 - INFO - Scroll attempts finished or target reached. Waiting for 2 remaining tasks...
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,804 - INFO - Yielding 2 posts in reverse order (newest gets highest ID)
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,805 - INFO - Finished scraping generator. Total posts yielded: 2.
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,805 - WARNING - Generator finished, but only yielded 2 posts, less than requested 5.
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,805 - INFO - 📊 Found 2 new posts in group https://www.facebook.com/groups/spauskcia
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,805 - INFO - 🔄 Processing 2 posts with new approach: Save → AI → Notify
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,814 - INFO - ✅ Added new post to Posts_Group_12479b7059 with ID 4
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,815 - INFO - 💾 Saved post 1 to database with ID 4 (AI pending)
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,824 - INFO - ✅ Added new post to Posts_Group_12479b7059 with ID 5
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,825 - INFO - 💾 Saved post 2 to database with ID 5 (AI pending)
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,825 - INFO - 💾 Saved 2 posts to database. Now processing with AI...
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,825 - ERROR - ❌ Error getting unprocessed posts from Group_12479b7059: no such column: ai_relevant
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,831 - ERROR - ❌ Error getting newly relevant posts from Group_12479b7059: no such column: ai_relevant
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,831 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,831 - INFO - 🎉 Complete: 2 posts saved and processed
+Sep 11 13:15:13 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:13,831 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:15:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:46,165 - INFO - 🔍 [9/13] Scraping group: https://www.facebook.com/groups/googleseomastermind
+Sep 11 13:15:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:46,173 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:15:46 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:15:46,174 - INFO - Navigating to group: https://www.facebook.com/groups/googleseomastermind?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 11 13:16:04 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:04,184 - INFO - 📋 Found existing group 15 -> Group_713ac9f57c
+Sep 11 13:16:04 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:04,190 - INFO - 🆕 No existing posts found - this is a fresh scrape
+Sep 11 13:16:12 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:12,120 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/googleseomastermind using 5 workers...
+Sep 11 13:16:18 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:18,365 - INFO - Scroll 1: Found 28 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:26,682 - WARNING - ❌ Error clicking 'See more' for 1949139509266537: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xzsf02u x1s688f" role="button" tabindex="0">...</div> is not clickable at point (798, 490). Other element would receive the click: <span class="x193iq5w xeuugli x13faqbe x1vvkbs xlh3980 xvmahel x1n0sxbx x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x4zkp8e x3x7a5m x6prxxf xvq8zen xo1l8bm xzsf02u x1yc453h" dir="auto">...</span>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:16:26 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:16:32 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:32,535 - INFO - Scroll 2: Found 28 potential posts. Scraped: 3/5. Active tasks: 1.
+Sep 11 13:16:32 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:32,840 - INFO - 🔄 Skipping duplicate content (quick hash: a4e14c0727bf)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,246 - WARNING - ❌ Error clicking 'See more' for 1948867809293707: Message: element click intercepted: Element <div class="x1i10hfl xjbqb8w xjqpnuy xc5r6h4 xqeqjp1 x1phubyo x13fuv20 x18b5jzi x1q0q8m5 x1t7ytsu x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xdl72j9 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak x2lwn1j xeuugli xexx8yu x18d9i69 x1c1uobl x1n2onr6 x16tdsg8 x1hl2dhg xggy1nq x1ja2u2z x1t137rt x1fmog5m xu25z0z x140muxe xo1y3bh x3nfvp2 x87ps6o x1lku1pv x1a2a7pz x6s0dn4 xi81zsa x1q0g3np x1iyjqo2 xs83m0k x1icxu4v" role="button" tabindex="0">...</div> is not clickable at point (869, 490). Other element would receive the click: <div dir="auto" style="text-align: start;">...</div>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]:   (Session info: chrome=140.0.7339.82); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: Stacktrace:
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #0 0x55906940394a <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #1 0x559068e788a0 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #2 0x559068ed13bc <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #3 0x559068ecf21b <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #4 0x559068ecc8c2 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #5 0x559068ecbfa5 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #6 0x559068ebe78b <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #7 0x559068ef0032 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #8 0x559068ebe107 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #9 0x559068ef01fe <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #10 0x559068f15c23 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #11 0x559068eefe03 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #12 0x559068ebc968 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #13 0x559068ebd5e1 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #14 0x5590693c7548 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #15 0x5590693cb272 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #16 0x5590693ae313 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #17 0x5590693cbdc5 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #18 0x55906939349f <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #19 0x5590693f0158 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #20 0x5590693f0332 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #21 0x559069402a53 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #22 0x721cc429caa4 <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: #23 0x721cc4329c3c <unknown>
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,303 - INFO - Target of 5 posts reached. Finalizing...
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,311 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,363 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,363 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,363 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/googleseomastermind
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,363 - INFO - 🔄 Processing 5 posts with new approach: Save → AI → Notify
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,373 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 1
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,373 - INFO - 💾 Saved post 1 to database with ID 1 (AI pending)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,416 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 2
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,419 - INFO - 💾 Saved post 2 to database with ID 2 (AI pending)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,452 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 3
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,452 - INFO - 💾 Saved post 3 to database with ID 3 (AI pending)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,490 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 4
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,490 - INFO - 💾 Saved post 4 to database with ID 4 (AI pending)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,521 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 5
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,522 - INFO - 💾 Saved post 5 to database with ID 5 (AI pending)
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,522 - INFO - 💾 Saved 5 posts to database. Now processing with AI...
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,531 - ERROR - ❌ Error getting unprocessed posts from Group_713ac9f57c: no such column: ai_relevant
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,531 - ERROR - ❌ Error getting newly relevant posts from Group_713ac9f57c: no such column: ai_relevant
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,531 - INFO - 📱 No newly relevant posts to notify
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,531 - INFO - 🎉 Complete: 5 posts saved and processed
+Sep 11 13:16:52 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:16:52,531 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 11 13:17:25 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:17:25,073 - INFO - 🔍 [10/13] Scraping group: https://www.facebook.com/groups/GoogleAdsMastermind
+Sep 11 13:17:25 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:17:25,074 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 11 13:17:25 ufrg.l.dedikuoti.lt scrapius[122098]: 2025-09-11 13:17:25,074 - INFO - Navigating to group: https://www.facebook.com/groups/GoogleAdsMastermind?sorting_setting=CHRONOLOGICAL (chronological sorting)
 
