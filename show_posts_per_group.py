@@ -25,13 +25,14 @@ def show_posts_per_group():
         total_posts = 0
         
         for group in groups:
-            group_id, group_url, table_suffix = group
+            group_id = group['group_id']
+            group_url = group['group_url']
+            table_suffix = group['table_name']
             posts_table = f"Posts_{table_suffix}"
             
-            # Get post count
+            # Get post count (already included in the group dict)
             cursor = conn.cursor()
-            cursor.execute(f"SELECT COUNT(*) FROM {posts_table}")
-            post_count = cursor.fetchone()[0]
+            post_count = group.get('post_count', 0)
             
             # Get AI processed count (if column exists)
             try:
