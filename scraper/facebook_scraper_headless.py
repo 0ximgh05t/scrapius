@@ -1073,23 +1073,28 @@ def scrape_authenticated_group(
                         except Exception:
                             pass  # If early check fails, continue with normal processing
 
-                    # First, try to click "See more" to expand content
+                    # Try to click "See more" to expand content (optimized approach)
                     try:
                         see_more_button = WebDriverWait(post_element, 1).until(
-                            EC.element_to_be_clickable(SEE_MORE_BUTTON_XPATH_S)
+                            EC.presence_of_element_located(SEE_MORE_BUTTON_XPATH_S)
                         )
+                        
+                        # Use JavaScript click first (most reliable for Facebook)
                         driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", see_more_button)
                         time.sleep(0.2)
-                        see_more_button = WebDriverWait(post_element, 1).until(EC.element_to_be_clickable(see_more_button))
-                        see_more_button.click()
-                        time.sleep(0.5)
-                        # Expanded post content
-                        pass
+                        driver.execute_script("arguments[0].click();", see_more_button)
+                        time.sleep(0.3)
+                        
                     except (TimeoutException, NoSuchElementException):
-                        # No expansion needed
+                        # No "See more" button found - content is already expanded
                         pass
                     except Exception as e_sm:
-                        logging.warning(f"❌ Error clicking 'See more' for {temp_post_id or temp_post_url}: {e_sm}")
+                        # Only try fallback if JavaScript click fails
+                        try:
+                            see_more_button.click()
+                            time.sleep(0.3)
+                        except Exception:
+                            logging.warning(f"❌ Could not click 'See more' for {temp_post_id or temp_post_url}: {e_sm}")
                     
                     # NOW get the HTML content (after clicking "See more" if it existed)
                     post_html_content = post_element.get_attribute('outerHTML')
