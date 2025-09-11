@@ -46,11 +46,18 @@ def show_posts_per_group():
             except:
                 ai_info = " | AI: columns not found"
             
-            # Get latest post date
+            # Get latest post date (convert UTC to EEST)
             try:
                 cursor.execute(f"SELECT MAX(scraped_at) FROM {posts_table}")
-                latest = cursor.fetchone()[0]
-                latest_info = f" | Latest: {latest}" if latest else " | Latest: None"
+                latest_utc = cursor.fetchone()[0]
+                if latest_utc:
+                    from datetime import datetime, timedelta
+                    # Convert UTC to EEST (GMT+3)
+                    latest_dt = datetime.fromisoformat(latest_utc.replace('Z', ''))
+                    latest_eest = latest_dt + timedelta(hours=3)
+                    latest_info = f" | Latest: {latest_eest.strftime('%Y-%m-%d %H:%M:%S')} EEST"
+                else:
+                    latest_info = " | Latest: None"
             except:
                 latest_info = ""
             
