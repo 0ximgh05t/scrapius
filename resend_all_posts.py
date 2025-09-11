@@ -109,7 +109,7 @@ def resend_post_to_telegram(post: Dict, bot_token: str, chat_ids: List[str], del
         content = post.get('post_content_raw', '')
         
         # Clean and truncate content
-        clean_content = content.replace('See more', '').replace('Show more', '').strip()
+        clean_content = content.replace('See more', '').replace('Show more', '').replace('… Žr. daugiau', '').replace('Žr. daugiau', '').strip()
         short_text = clean_content[:300] + '...' if len(clean_content) > 300 else clean_content
         
         # Use post URL or group URL as fallback

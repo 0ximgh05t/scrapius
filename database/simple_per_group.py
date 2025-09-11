@@ -112,7 +112,9 @@ def create_group_posts_table(db_conn: sqlite3.Connection, table_suffix: str) -> 
                 post_url TEXT,
                 post_content_raw TEXT,
                 scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                content_hash TEXT UNIQUE
+                content_hash TEXT UNIQUE,
+                ai_relevant INTEGER DEFAULT NULL,
+                ai_processed_at TIMESTAMP DEFAULT NULL
             )
         ''')
         
@@ -124,6 +126,22 @@ def create_group_posts_table(db_conn: sqlite3.Connection, table_suffix: str) -> 
             # Column already exists, which is fine
             pass
         
+        # Add ai_relevant column if it doesn't exist (for existing tables)
+        try:
+            cursor.execute(f"ALTER TABLE {posts_table} ADD COLUMN ai_relevant INTEGER DEFAULT NULL")
+            logging.info(f"✅ Added ai_relevant column to {posts_table}")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        
+        # Add ai_processed_at column if it doesn't exist (for existing tables)
+        try:
+            cursor.execute(f"ALTER TABLE {posts_table} ADD COLUMN ai_processed_at TIMESTAMP DEFAULT NULL")
+            logging.info(f"✅ Added ai_processed_at column to {posts_table}")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        
         db_conn.commit()
         logging.info(f"✅ Created table {posts_table}")
         return True
@@ -131,6 +149,130 @@ def create_group_posts_table(db_conn: sqlite3.Connection, table_suffix: str) -> 
     except sqlite3.Error as e:
         logging.error(f"❌ Error creating group table: {e}")
         db_conn.rollback()
+        return False
+
+def create_processed_posts_table(db_conn: sqlite3.Connection, table_suffix: str) -> bool:
+    """
+    Create a table to track ALL processed posts (regardless of AI filtering).
+    This fixes the bug where we reprocess the same posts over and over.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Safe table name suffix (e.g., 'Group_501702489979518')
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        cursor = db_conn.cursor()
+        processed_table = f"Processed_{table_suffix}"
+        
+        cursor.execute(f'''
+            CREATE TABLE IF NOT EXISTS {processed_table} (
+                content_hash TEXT PRIMARY KEY,
+                facebook_post_id TEXT,
+                processed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                was_ai_relevant BOOLEAN DEFAULT FALSE
+            )
+        ''')
+        
+        db_conn.commit()
+        logging.info(f"✅ Created processed posts table {processed_table}")
+        return True
+        
+    except sqlite3.Error as e:
+        logging.error(f"❌ Error creating processed posts table: {e}")
+        db_conn.rollback()
+        return False
+
+def mark_post_as_processed(db_conn: sqlite3.Connection, table_suffix: str, content_hash: str, facebook_post_id: str = None, was_relevant: bool = False) -> bool:
+    """
+    Mark a post as processed, regardless of whether AI deemed it relevant.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Group table suffix
+        content_hash: Content hash of the processed post
+        facebook_post_id: Facebook post ID (if available)
+        was_relevant: Whether AI deemed this post relevant
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        cursor = db_conn.cursor()
+        processed_table = f"Processed_{table_suffix}"
+        
+        cursor.execute(f'''
+            INSERT OR REPLACE INTO {processed_table} 
+            (content_hash, facebook_post_id, was_ai_relevant) 
+            VALUES (?, ?, ?)
+        ''', (content_hash, facebook_post_id, was_relevant))
+        
+        db_conn.commit()
+        return True
+        
+    except sqlite3.Error as e:
+        logging.error(f"❌ Error marking post as processed: {e}")
+        db_conn.rollback()
+        return False
+
+def get_most_recent_processed_hash(db_conn: sqlite3.Connection, table_suffix: str) -> str | None:
+    """
+    Get the most recent PROCESSED post content hash (not just AI-filtered ones).
+    This is the correct function to use for incremental scraping.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Group table suffix
+        
+    Returns:
+        Most recent processed content hash or None if no posts processed
+    """
+    try:
+        cursor = db_conn.cursor()
+        processed_table = f"Processed_{table_suffix}"
+        
+        cursor.execute(f"""
+            SELECT content_hash FROM {processed_table} 
+            WHERE content_hash IS NOT NULL AND content_hash != ''
+            ORDER BY processed_at DESC
+            LIMIT 1
+        """)
+        
+        result = cursor.fetchone()
+        return result[0] if result else None
+        
+    except sqlite3.Error as e:
+        logging.error(f"❌ Error getting most recent processed hash from {table_suffix}: {e}")
+        return None
+
+def is_post_already_processed(db_conn: sqlite3.Connection, table_suffix: str, content_hash: str) -> bool:
+    """
+    Check if a post has already been processed (regardless of AI filtering).
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Group table suffix
+        content_hash: Content hash to check
+        
+    Returns:
+        True if already processed, False otherwise
+    """
+    try:
+        cursor = db_conn.cursor()
+        processed_table = f"Processed_{table_suffix}"
+        
+        cursor.execute(f"""
+            SELECT 1 FROM {processed_table} 
+            WHERE content_hash = ?
+            LIMIT 1
+        """, (content_hash,))
+        
+        return cursor.fetchone() is not None
+        
+    except sqlite3.Error as e:
+        logging.error(f"❌ Error checking if post processed: {e}")
         return False
 
 def get_or_create_group(db_conn: sqlite3.Connection, group_url: str, group_name: str = None, driver=None) -> Tuple[int, str]:
@@ -264,7 +406,7 @@ def add_post_to_group(db_conn: sqlite3.Connection, table_suffix: str, post_data:
                 db_conn.commit()
                 return existing[0], True  # Return True to indicate it was updated (treat as new)
         
-        # Insert new post
+        # Insert new post (ai_relevant will be NULL until AI processes it)
         cursor.execute(f"""
             INSERT OR IGNORE INTO {posts_table} (
                 facebook_post_id, post_url, post_content_raw, content_hash
@@ -505,6 +647,120 @@ def content_hash_exists(db_conn: sqlite3.Connection, table_suffix: str, content_
         
     except sqlite3.Error:
         return False
+
+def get_unprocessed_posts(db_conn: sqlite3.Connection, table_suffix: str, limit: int = 50) -> List[Dict]:
+    """
+    Get posts that haven't been processed by AI yet.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Table suffix (e.g., 'Group_501702489979518')
+        limit: Maximum number of posts to return
+        
+    Returns:
+        List of unprocessed posts
+    """
+    try:
+        cursor = db_conn.cursor()
+        posts_table = f"Posts_{table_suffix}"
+        
+        cursor.execute(f"""
+            SELECT internal_post_id, facebook_post_id, post_url, post_content_raw, content_hash
+            FROM {posts_table}
+            WHERE ai_relevant IS NULL
+            ORDER BY internal_post_id ASC
+            LIMIT ?
+        """, (limit,))
+        
+        rows = cursor.fetchall()
+        posts = []
+        for row in rows:
+            posts.append({
+                'internal_post_id': row[0],
+                'facebook_post_id': row[1],
+                'post_url': row[2],
+                'content_text': row[3],
+                'content_hash': row[4]
+            })
+        
+        return posts
+        
+    except Exception as e:
+        logging.error(f"❌ Error getting unprocessed posts from {table_suffix}: {e}")
+        return []
+
+def update_ai_result(db_conn: sqlite3.Connection, table_suffix: str, internal_post_id: int, 
+                    is_relevant: bool, ai_summary: str = None) -> bool:
+    """
+    Update AI processing results for a specific post.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Table suffix (e.g., 'Group_501702489979518')
+        internal_post_id: Internal post ID
+        is_relevant: Whether AI determined post is relevant
+        ai_summary: Optional AI summary
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        cursor = db_conn.cursor()
+        posts_table = f"Posts_{table_suffix}"
+        
+        cursor.execute(f"""
+            UPDATE {posts_table}
+            SET ai_relevant = ?, ai_processed_at = CURRENT_TIMESTAMP
+            WHERE internal_post_id = ?
+        """, (1 if is_relevant else 0, internal_post_id))
+        
+        db_conn.commit()
+        return cursor.rowcount > 0
+        
+    except Exception as e:
+        logging.error(f"❌ Error updating AI result for post {internal_post_id}: {e}")
+        return False
+
+def get_newly_relevant_posts(db_conn: sqlite3.Connection, table_suffix: str, 
+                           since_minutes: int = 5) -> List[Dict]:
+    """
+    Get posts that were recently marked as relevant by AI.
+    
+    Args:
+        db_conn: Database connection
+        table_suffix: Table suffix (e.g., 'Group_501702489979518')
+        since_minutes: How many minutes back to look
+        
+    Returns:
+        List of newly relevant posts
+    """
+    try:
+        cursor = db_conn.cursor()
+        posts_table = f"Posts_{table_suffix}"
+        
+        cursor.execute(f"""
+            SELECT internal_post_id, facebook_post_id, post_url, post_content_raw
+            FROM {posts_table}
+            WHERE ai_relevant = 1 
+            AND ai_processed_at >= datetime('now', '-{since_minutes} minutes')
+            ORDER BY internal_post_id ASC
+        """)
+        
+        rows = cursor.fetchall()
+        posts = []
+        for row in rows:
+            posts.append({
+                'internal_post_id': row[0],
+                'facebook_post_id': row[1],
+                'post_url': row[2],
+                'content_text': row[3]
+            })
+        
+        return posts
+        
+    except Exception as e:
+        logging.error(f"❌ Error getting newly relevant posts from {table_suffix}: {e}")
+        return []
 
 # Helper function for Telegram bot
 def get_latest_post_url(db_conn: sqlite3.Connection, table_suffix: str) -> Optional[str]:

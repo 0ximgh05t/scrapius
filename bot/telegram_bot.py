@@ -75,18 +75,26 @@ class ScrapiusTelegramBot:
             return False
     
     def next_scheduled_times(self, now: datetime, limit: int) -> List[datetime]:
-        """Return scheduled times spread across the next hour with jitter."""
+        """Return ADAPTIVE scheduled times that don't reset every hour."""
         import random
         
         limit = max(1, limit)
-        slot_len = 60.0 / limit
         times = []
         
-        # Start from the next slot, not immediately
-        for i in range(limit):
-            start = (i + 1) * slot_len  # +1 to avoid immediate execution
-            jitter = random.uniform(0, min(5, slot_len * 0.1))  # Small jitter only
-            times.append(now + timedelta(minutes=start + jitter))
+        # ADAPTIVE SCHEDULING: Base interval on actual performance
+        # If we have 5 scrapes/hour but each takes 12+ minutes, adapt!
+        estimated_scrape_time = 12  # minutes (based on your logs)
+        min_interval = max(estimated_scrape_time + 2, 60.0 / limit)  # At least scrape_time + buffer
+        
+        logging.info(f"📊 Adaptive scheduling: {limit} scrapes/hour, {min_interval:.1f}min intervals")
+        
+        # Schedule next scrapes with realistic intervals
+        for i in range(min(limit, 3)):  # Limit queue to 3 to prevent massive backlogs
+            next_time = now + timedelta(minutes=(i + 1) * min_interval)
+            # Small jitter to avoid exact timing conflicts
+            jitter = random.uniform(0, 2)
+            times.append(next_time + timedelta(minutes=jitter))
+        
         return times
     
     async def handle_telegram_updates(self, conn) -> None:
@@ -174,7 +182,15 @@ class ScrapiusTelegramBot:
         if not self.schedule_times or now >= self.schedule_times[0]:
             if self.schedule_times:
                 self.schedule_times.pop(0)
+                # Add one more scrape to the queue to maintain flow
+                if len(self.schedule_times) < 2:  # Keep at least 2 in queue
+                    last_time = self.schedule_times[-1] if self.schedule_times else now
+                    estimated_scrape_time = 12  # minutes
+                    next_scrape = last_time + timedelta(minutes=estimated_scrape_time + 2)
+                    self.schedule_times.append(next_scrape)
+                    logging.info(f"📅 Added next scrape at {next_scrape.strftime('%H:%M:%S')}")
             else:
+                # Generate initial schedule
                 self.schedule_times = self.next_scheduled_times(now, self.hourly_limit)
             return True
         
@@ -182,6 +198,7 @@ class ScrapiusTelegramBot:
     
     async def run_scrape_cycle(self, conn) -> None:
         """Run a complete scrape cycle for all groups."""
+        scrape_start_time = datetime.now(timezone.utc)
         try:
             # Get groups and reliability settings
             groups_rows = list_all_groups(conn)
@@ -224,6 +241,11 @@ class ScrapiusTelegramBot:
             logging.error(f"❌ Error in scrape cycle: {e}")
         finally:
             await self.scraper_manager.cleanup()
+            # Log scrape cycle performance
+            scrape_end_time = datetime.now(timezone.utc)
+            duration = (scrape_end_time - scrape_start_time).total_seconds() / 60
+            next_scheduled = self.schedule_times[0].strftime('%H:%M:%S') if self.schedule_times else "None"
+            logging.info(f"⏱️ Scrape cycle completed in {duration:.1f} minutes. Next scheduled: {next_scheduled}")
     
     async def run(self) -> None:
         """Main bot loop."""

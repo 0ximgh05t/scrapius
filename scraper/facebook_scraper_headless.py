@@ -96,7 +96,7 @@ POST_PERMALINK_XPATH_S = (By.XPATH, ".//a[contains(@href, '/posts/')] | .//abbr/
 POST_TIMESTAMP_FALLBACK_XPATH_S = (By.XPATH, ".//abbr | .//a/span[@data-lexical-text='true']")
 FEED_OR_SCROLLER_S = (By.CSS_SELECTOR, "div[role='feed'], div[data-testid='post_scroller']")
 FEED_OR_SCROLLER_XPATH_S = (By.XPATH, "//div[@role='feed'] | //div[@data-testid='post_scroller']")
-SEE_MORE_BUTTON_XPATH_S = (By.XPATH, ".//div[@role='button'][contains(., 'See more') or contains(., 'Show more')] | .//a[contains(., 'See more') or contains(., 'Show more')]")
+SEE_MORE_BUTTON_XPATH_S = (By.XPATH, ".//div[@role='button'][contains(., 'See more') or contains(., 'Show more') or contains(., 'Žr. daugiau')] | .//a[contains(., 'See more') or contains(., 'Show more') or contains(., 'Žr. daugiau')]")
 
 POST_CONTAINER_BS = 'div.x1yztbdb.x1n2onr6.xh8yej3.x1ja2u2z, div[role="article"]'
 

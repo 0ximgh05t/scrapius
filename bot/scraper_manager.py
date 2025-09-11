@@ -118,7 +118,7 @@ class ScraperManager:
         logging.info(f"🔍 [{group_index + 1}/{total_groups}] Scraping group: {group_url}")
         
         try:
-            # SUPER SIMPLE CHECK: Get most recent Facebook post ID from database
+            # Get most recent post hash from database (now includes ALL posts)
             from database.simple_per_group import get_most_recent_facebook_post_id, get_most_recent_post_content_hash
             most_recent_fb_id = get_most_recent_facebook_post_id(conn, table_name)
             most_recent_hash = get_most_recent_post_content_hash(conn, table_name)
@@ -147,8 +147,8 @@ class ScraperManager:
             
             logging.info(f"📊 Found {len(posts)} new posts in group {group_url}")
             
-            # NEW ARCHITECTURE: Process all posts first, then send notifications
-            await self._process_posts_batch(
+            # NEW ARCHITECTURE: Save posts first, then AI process, then notify
+            await self._save_and_process_posts(
                 posts, group_id, table_name, conn, 
                 bot_token, chat_ids, reliability
             )
@@ -157,7 +157,7 @@ class ScraperManager:
             logging.error(f"❌ Error scraping group {group_url}: {e}")
             raise
     
-    async def _process_posts_batch(
+    async def _save_and_process_posts(
         self,
         posts: List[Dict],
         group_id: int,
@@ -167,14 +167,14 @@ class ScraperManager:
         chat_ids: List[str],
         reliability: Dict
     ) -> None:
-        """Process all posts in batch: save to DB first, then send notifications in order."""
+        """NEW APPROACH: Save posts first, then AI process, then notify."""
         if not posts:
             return
             
-        logging.info(f"🔄 Processing {len(posts)} posts in batch mode")
+        logging.info(f"🔄 Processing {len(posts)} posts with new approach: Save → AI → Notify")
         
-        # STEP 1: Process all posts and collect results (no notifications yet)
-        processed_results = []
+        # STEP 1: Save ALL posts to database immediately (no AI processing yet)
+        saved_posts = []
         
         for post_index, post in enumerate(posts):
             try:
@@ -186,132 +186,56 @@ class ScraperManager:
                 if not content or not content_hash:
                     logging.warning(f"⚠️ Skipping post {post_index + 1} with missing content or hash")
                     continue
-                
-                # Check for duplicates BEFORE AI processing
+
+                # Check for duplicates
                 from database.simple_per_group import content_hash_exists
                 if content_hash_exists(conn, table_name, content_hash):
                     logging.info(f"🔄 Skipping duplicate post {post_index + 1} (hash: {content_hash[:12]}...)")
                     continue
-                
-                # AI Processing
-                ai_result = None
-                try:
-                    # Get AI prompts from database or config
-                    from config import get_bot_runner_settings
-                    from database.crud import botsettings_get
-                    
-                    # Get default prompts
-                    default_system, default_user, _, _ = get_bot_runner_settings()
-                    
-                    # Get current prompts from database (if set)
-                    system_prompt = botsettings_get(conn, 'bot_system', default_system)
-                    user_prompt = botsettings_get(conn, 'bot_user', default_user)
-                    
-                    # DEBUG: Log what prompts are being used (first post only)
-                    if post_index == 0:
-                        logging.info(f"🔍 DEBUG - System prompt: {system_prompt[:100]}...")
-                        logging.info(f"🔍 DEBUG - User prompt: {user_prompt[:100]}...")
-                        logging.info(f"🔍 DEBUG - Post content sample: {content[:100]}...")
-                    
-                    # Create post dict for AI processing (NO AUTHOR per user requirement)
-                    post_dict = {'content_text': content, 'post_url': post_url}
-                    is_relevant, summary = decide_and_summarize_for_post(
-                        post_dict, 
-                        system_prompt,
-                        user_prompt
-                    )
-                    ai_result = {
-                        'relevant': is_relevant,
-                        'summary': summary,
-                        'title': "Relevant Post"  # No author in title
-                    }
-                    logging.info(f"🤖 AI processed post {post_index + 1}: {is_relevant}")
-                except Exception as e:
-                    logging.error(f"❌ AI processing error for post {post_index + 1}: {e}")
-                    continue
-                
-                # Only process relevant posts
-                if not ai_result.get('relevant', False):
-                    logging.info(f"🚫 Post {post_index + 1} not relevant - skipping")
-                    continue
-                
-                # Prepare post data for database
+
+                # Prepare post data for database (NO AI processing yet)
                 post_data_dict = {
                     'facebook_post_id': post.get('facebook_post_id'),
                     'post_url': post_url,
                     'content_text': content,
                     'content_hash': content_hash
+                    # ai_relevant will be NULL until AI processes it
                 }
                 
-                # Store for batch processing
-                processed_results.append({
-                    'post_data': post_data_dict,
-                    'content': content,
-                    'post_url': post_url,
-                    'ai_result': ai_result,
-                    'post_index': post_index + 1
-                })
-                
-                logging.info(f"✅ Post {post_index + 1} prepared for database insertion")
-                
-            except Exception as e:
-                logging.error(f"❌ Error preparing post {post_index + 1}: {e}")
-                continue
-        
-        if not processed_results:
-            logging.info("📭 No relevant posts to save after processing")
-            return
-        
-        # STEP 2: Save all posts to database in batch
-        logging.info(f"💾 Saving {len(processed_results)} posts to database...")
-        saved_posts = []
-        
-        for result in processed_results:
-            try:
+                # Save to database immediately
                 from database.simple_per_group import add_post_to_group
-                db_result = add_post_to_group(conn, table_name, result['post_data'])
+                db_result = add_post_to_group(conn, table_name, post_data_dict)
                 
-                if db_result and db_result[1]:  # Successfully saved (new post, not update)
+                if db_result and db_result[1]:  # Successfully saved (new post)
                     saved_posts.append({
                         'internal_post_id': db_result[0],
-                        'content': result['content'],
-                        'post_url': result['post_url'],
-                        'ai_result': result['ai_result'],
-                        'post_index': result['post_index']
+                        'content': content,
+                        'post_url': post_url,
+                        'post_index': post_index + 1
                     })
-                    logging.info(f"✅ Saved post {result['post_index']} to database with ID {db_result[0]}")
+                    logging.info(f"💾 Saved post {post_index + 1} to database with ID {db_result[0]} (AI pending)")
                 else:
-                    logging.info(f"📝 Post {result['post_index']} already exists in database - skipping notification")
+                    logging.info(f"📝 Post {post_index + 1} already exists in database")
                     
             except Exception as e:
-                logging.error(f"❌ Error saving post {result['post_index']} to database: {e}")
+                logging.error(f"❌ Error saving post {post_index + 1}: {e}")
                 continue
         
-        # STEP 3: Send notifications for saved posts in correct order
-        if saved_posts:
-            logging.info(f"📱 Sending {len(saved_posts)} notifications in chronological order...")
-            
-            for saved_post in saved_posts:
-                try:
-                    await self._send_post_notification(
-                        saved_post['content'],
-                        'Anonymous',  # No author stored in database
-                        saved_post['post_url'],
-                        saved_post['ai_result'],
-                        bot_token,
-                        chat_ids
-                    )
-                    
-                    logging.info(f"📱 Notification sent for post ID {saved_post['internal_post_id']}")
-                    
-                    # Add delay between notifications
-                    await asyncio.sleep(reliability['post_processing_delay'])
-                    
-                except Exception as e:
-                    logging.error(f"❌ Error sending notification for post ID {saved_post['internal_post_id']}: {e}")
-                    continue
+        if not saved_posts:
+            logging.info("📭 No new posts saved")
+            return
         
-        logging.info(f"🎉 Batch processing complete: {len(saved_posts)} posts saved and notified")
+        logging.info(f"💾 Saved {len(saved_posts)} posts to database. Now processing with AI...")
+        
+        # STEP 2: AI process the unprocessed posts
+        await self._ai_process_unprocessed_posts(conn, table_name, reliability)
+        
+        # STEP 3: Send notifications for newly relevant posts
+        await self._send_notifications_for_new_relevant_posts(
+            conn, table_name, bot_token, chat_ids, reliability
+        )
+        
+        logging.info(f"🎉 Complete: {len(saved_posts)} posts saved and processed")
     
     async def _process_single_post(
         self,
@@ -448,7 +372,7 @@ class ScraperManager:
             # Format notification message using Lithuanian format
             title = "Naujas įrašas"
             # Use actual post content, not AI summary (limit to 300 chars and clean up)
-            clean_content = content.replace('See more', '').replace('Show more', '').strip()
+            clean_content = content.replace('See more', '').replace('Show more', '').replace('… Žr. daugiau', '').replace('Žr. daugiau', '').strip()
             short_text = clean_content[:300] + '...' if len(clean_content) > 300 else clean_content
             
             message = format_post_message(title, short_text, post_url, author, group_name)
@@ -503,3 +427,123 @@ class ScraperManager:
         except Exception as e:
             logging.error(f"❌ Error refreshing session: {e}")
             return False 
+
+    async def _ai_process_unprocessed_posts(
+        self,
+        conn,
+        table_name: str,
+        reliability: Dict,
+        batch_size: int = 10
+    ) -> None:
+        """Process unprocessed posts with AI in batches."""
+        from database.simple_per_group import get_unprocessed_posts, update_ai_result
+        from config import get_bot_runner_settings
+        from database.crud import botsettings_get
+        
+        # Get AI prompts
+        default_system, default_user, _, _ = get_bot_runner_settings()
+        system_prompt = botsettings_get(conn, 'bot_system', default_system)
+        user_prompt = botsettings_get(conn, 'bot_user', default_user)
+        
+        # Process in batches to avoid overwhelming the system
+        processed_count = 0
+        
+        while True:
+            # Get batch of unprocessed posts
+            unprocessed_posts = get_unprocessed_posts(conn, table_name, batch_size)
+            
+            if not unprocessed_posts:
+                break
+                
+            logging.info(f"🤖 AI processing batch of {len(unprocessed_posts)} posts...")
+            
+            for post in unprocessed_posts:
+                try:
+                    # Create post dict for AI processing
+                    post_dict = {
+                        'content_text': post['content_text'], 
+                        'post_url': post['post_url']
+                    }
+                    
+                    # AI processing
+                    is_relevant, summary = decide_and_summarize_for_post(
+                        post_dict, 
+                        system_prompt,
+                        user_prompt
+                    )
+                    
+                    # Update database with AI result
+                    success = update_ai_result(
+                        conn, table_name, post['internal_post_id'], 
+                        is_relevant, summary
+                    )
+                    
+                    if success:
+                        status = "relevant" if is_relevant else "not relevant"
+                        logging.info(f"🤖 AI processed post ID {post['internal_post_id']}: {status}")
+                        processed_count += 1
+                    else:
+                        logging.error(f"❌ Failed to update AI result for post ID {post['internal_post_id']}")
+                        
+                    # Small delay between AI calls to avoid rate limits
+                    await asyncio.sleep(0.5)
+                    
+                except Exception as e:
+                    logging.error(f"❌ AI processing error for post ID {post['internal_post_id']}: {e}")
+                    # Mark as processed but not relevant to avoid reprocessing
+                    update_ai_result(conn, table_name, post['internal_post_id'], False)
+                    continue
+            
+            # Delay between batches
+            if len(unprocessed_posts) == batch_size:  # More batches likely
+                await asyncio.sleep(reliability.get('post_processing_delay', 2))
+        
+        if processed_count > 0:
+            logging.info(f"🤖 AI processing complete: {processed_count} posts processed")
+    
+    async def _send_notifications_for_new_relevant_posts(
+        self,
+        conn,
+        table_name: str,
+        bot_token: str,
+        chat_ids: List[str],
+        reliability: Dict
+    ) -> None:
+        """Send notifications for posts that were recently marked as relevant."""
+        from database.simple_per_group import get_newly_relevant_posts
+        
+        # Get posts marked as relevant in the last 5 minutes
+        newly_relevant = get_newly_relevant_posts(conn, table_name, since_minutes=5)
+        
+        if not newly_relevant:
+            logging.info("📱 No newly relevant posts to notify")
+            return
+            
+        logging.info(f"📱 Sending notifications for {len(newly_relevant)} newly relevant posts...")
+        
+        for post in newly_relevant:
+            try:
+                # Create AI result dict for notification formatting
+                ai_result = {
+                    'relevant': True,
+                    'summary': "AI determined this post is relevant",
+                    'title': "Relevant Post"
+                }
+                
+                await self._send_post_notification(
+                    post['content_text'],
+                    'Anonymous',  # No author stored
+                    post['post_url'],
+                    ai_result,
+                    bot_token,
+                    chat_ids
+                )
+                
+                logging.info(f"📱 Notification sent for post ID {post['internal_post_id']}")
+                
+                # Add delay between notifications
+                await asyncio.sleep(reliability['post_processing_delay'])
+                
+            except Exception as e:
+                logging.error(f"❌ Error sending notification for post ID {post['internal_post_id']}: {e}")
+                continue 
