@@ -742,7 +742,7 @@ def get_newly_relevant_posts(db_conn: sqlite3.Connection, table_suffix: str,
             SELECT internal_post_id, facebook_post_id, post_url, post_content_raw
             FROM {posts_table}
             WHERE ai_relevant = 1 
-            AND ai_processed_at >= datetime('now', '-{since_minutes} minutes')
+            AND scraped_at >= datetime('now', '-{since_minutes} minutes')
             ORDER BY internal_post_id ASC
         """)
         
