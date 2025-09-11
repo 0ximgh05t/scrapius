@@ -147,11 +147,12 @@ class ScraperManager:
             
             logging.info(f"📊 Found {len(posts)} new posts in group {group_url}")
             
-            # NEW ARCHITECTURE: Save posts first, then AI process, then notify
-            await self._save_and_process_posts(
-                posts, group_id, table_name, conn, 
-                bot_token, chat_ids, reliability
-            )
+            # SIMPLE ARCHITECTURE: Process each post immediately (like before)
+            for post_index, post in enumerate(posts):
+                await self._process_single_post(
+                    post, group_id, table_name, conn,
+                    bot_token, chat_ids, reliability
+                )
             
         except Exception as e:
             logging.error(f"❌ Error scraping group {group_url}: {e}")

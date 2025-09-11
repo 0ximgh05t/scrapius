@@ -811,27 +811,6 @@ def scrape_authenticated_group(
         else:
             logging.info(f"🆕 No existing posts found - this is a fresh scrape")
 
-        # SIMPLE CHECK: Get first post content and compare hash with database
-        if most_recent_hash:  # If we have existing posts
-            try:
-                # Find first post element
-                first_post_elements = driver.find_elements(POST_CONTAINER_S[0], POST_CONTAINER_S[1])
-                if first_post_elements:
-                    first_post = first_post_elements[0]
-                    # Get basic text content
-                    first_post_text = first_post.text.strip() if first_post.text else ""
-                    if first_post_text:
-                        # Generate hash same way as in _extract_data_from_post_html
-                        import hashlib
-                        normalized_content = ' '.join(first_post_text.split())
-                        first_post_hash = hashlib.md5(normalized_content.encode('utf-8')).hexdigest()
-                        
-                        if first_post_hash == most_recent_hash:
-                            logging.info(f"🚀 First post content matches most recent - skipping entire group")
-                            return  # Skip entire group
-            except Exception as e:
-                logging.debug(f"Quick check failed: {e}")
-        
         # Enhanced session validation - check for various Facebook security/verification scenarios
         current_url = driver.current_url.lower()
         page_source = driver.page_source.lower()
@@ -1055,24 +1034,6 @@ def scrape_authenticated_group(
                     # Process all posts regardless of URL availability
                     # URLs are nice to have but not required for content processing
                     
-                    # EARLY DUPLICATE CHECK: Get basic content before "See more" clicking
-                    if most_recent_hash:
-                        try:
-                            # Get basic text content without expanding
-                            basic_text = post_element.text.strip()[:200] if post_element.text else ""
-                            if basic_text:
-                                # Quick hash check - if this matches recent hash, skip expensive operations
-                                import hashlib
-                                basic_normalized = ' '.join(basic_text.split())
-                                basic_hash = hashlib.md5(basic_normalized.encode('utf-8')).hexdigest()
-                                if basic_hash == most_recent_hash:
-                                    logging.info(f"🚀 Early duplicate detected - skipping 'See more' click for {temp_post_id or 'unknown'}")
-                                    duplicate_found = True
-                                    extracted_count = num_posts  # Force completion
-                                    break
-                        except Exception:
-                            pass  # If early check fails, continue with normal processing
-
                     # Try to click "See more" to expand content (optimized approach)
                     try:
                         see_more_button = WebDriverWait(post_element, 1).until(
