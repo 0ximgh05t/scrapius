@@ -897,7 +897,16 @@ def scrape_authenticated_group(
         MAX_CONSECUTIVE_NO_POSTS = 3
         MAX_WORKERS = 5
         
-        logging.info(f"Starting to scrape up to {num_posts} posts from {group_url} using {MAX_WORKERS} workers...")
+        # OPTION 2 IMPLEMENTATION: Remove artificial post limit for incremental scraping
+        # When we have most_recent_hash, let duplicate detection be the stopping point
+        if most_recent_hash:
+            effective_post_limit = 1000  # Very high limit - duplicate detection will stop us
+            logging.info(f"🔄 Incremental scraping mode: will scrape until duplicate found (limit: {effective_post_limit})")
+        else:
+            effective_post_limit = num_posts  # Use original limit for fresh scrapes
+            logging.info(f"🆕 Fresh scraping mode: will scrape up to {effective_post_limit} posts")
+        
+        logging.info(f"Starting to scrape from {group_url} using {MAX_WORKERS} workers...")
 
         scroll_attempt = 0
         last_on_page_post_count = 0
@@ -908,7 +917,7 @@ def scrape_authenticated_group(
         with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             active_futures: List[concurrent.futures.Future] = []
 
-            while extracted_count < num_posts and scroll_attempt < max_scroll_attempts:
+            while extracted_count < effective_post_limit and scroll_attempt < max_scroll_attempts:
                 scroll_attempt += 1
                 
                 driver.execute_script("window.scrollBy(0, window.innerHeight * 0.8);")
@@ -994,14 +1003,14 @@ def scrape_authenticated_group(
                         break
                 
                 last_on_page_post_count = len(current_post_elements)
-                logging.info(f"Scroll {scroll_attempt}: Found {last_on_page_post_count} potential posts. Scraped: {extracted_count}/{num_posts}. Active tasks: {len(active_futures)}.")
+                logging.info(f"Scroll {scroll_attempt}: Found {last_on_page_post_count} potential posts. Scraped: {extracted_count}/{effective_post_limit}. Active tasks: {len(active_futures)}.")
 
                 # Track how many posts we've submitted for processing
                 posts_submitted_this_batch = 0
                 
                 for post_element in current_post_elements:
-                    if extracted_count >= num_posts: break
-                    if posts_submitted_this_batch >= num_posts: break  # Don't over-process
+                    if extracted_count >= effective_post_limit: break
+                    if posts_submitted_this_batch >= effective_post_limit: break  # Don't over-process
 
                     temp_post_url, temp_post_id, is_candidate = _get_post_identifiers_from_element(driver, post_element, group_url)
 
@@ -1073,7 +1082,7 @@ def scrape_authenticated_group(
                 completed_futures_in_batch = [f for f in active_futures if f.done()]
                 for future in completed_futures_in_batch:
                     active_futures.remove(future)
-                    if extracted_count >= num_posts: continue
+                    if extracted_count >= effective_post_limit: continue
 
                     try:
                         result = future.result(timeout=1)
@@ -1083,13 +1092,13 @@ def scrape_authenticated_group(
                                 logging.info(f"🛑 Found duplicate content (hash: {most_recent_hash[:8]}...)")
                                 logging.info(f"🎯 Incremental scraping complete - stopping at duplicate")
                                 duplicate_found = True
-                                extracted_count = num_posts  # Force completion
+                                extracted_count = effective_post_limit  # Force completion
                                 break
                             
                             # Only add NON-duplicate posts
                             collected_posts.append(result)
                             extracted_count += 1
-                            logging.debug(f"Collected post {extracted_count}/{num_posts} (ID: {result.get('facebook_post_id')}) by worker.")
+                            logging.debug(f"Collected post {extracted_count}/{effective_post_limit} (ID: {result.get('facebook_post_id')}) by worker.")
                             
                             # Log progress for incremental scraping
                             if extracted_count == 1 and most_recent_hash:
@@ -1101,8 +1110,8 @@ def scrape_authenticated_group(
                     except Exception as e_future:
                         logging.error(f"Error processing a post in worker thread: {e_future}", exc_info=True)
                 
-                if extracted_count >= num_posts:
-                    logging.info(f"Target of {num_posts} posts reached. Finalizing...")
+                if extracted_count >= effective_post_limit:
+                    logging.info(f"Target of {effective_post_limit} posts reached. Finalizing...")
                     break
             
             logging.info(f"Scroll attempts finished or target reached. Waiting for {len(active_futures)} remaining tasks...")
@@ -1110,7 +1119,7 @@ def scrape_authenticated_group(
             # Collect results in submission order to preserve Facebook chronological order
             final_results = []
             for future in active_futures:
-                if extracted_count >= num_posts or duplicate_found: break
+                if extracted_count >= effective_post_limit or duplicate_found: break
                 try:
                     result = future.result(timeout=30)
                     if result:
@@ -1123,7 +1132,7 @@ def scrape_authenticated_group(
                             
                         final_results.append(result)
                         extracted_count += 1
-                        logging.debug(f"Collected post {extracted_count}/{num_posts} (ID: {result.get('facebook_post_id')}) in submission order.")
+                        logging.debug(f"Collected post {extracted_count}/{effective_post_limit} (ID: {result.get('facebook_post_id')}) in submission order.")
                 except Exception as e_final_future:
                     logging.error(f"Error in final collection from worker: {e_final_future}", exc_info=True)
             
@@ -1136,8 +1145,8 @@ def scrape_authenticated_group(
             yield post
         
         logging.info(f"Finished scraping generator. Total posts yielded: {len(collected_posts)}.")
-        if len(collected_posts) < num_posts:
-             logging.warning(f"Generator finished, but only yielded {len(collected_posts)} posts, less than requested {num_posts}.")
+        if len(collected_posts) < effective_post_limit:
+             logging.warning(f"Generator finished, but only yielded {len(collected_posts)} posts, less than requested {effective_post_limit}.")
 
     except TimeoutException:
         logging.error(f"Main thread timed out waiting for elements while scraping group {group_url}.")

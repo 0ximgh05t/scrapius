@@ -373,7 +373,7 @@ Current Settings:
             if posts < 1 or posts > 50:
                 raise ValueError("Posts out of range")
             botsettings_set(conn, 'max_posts_per_group', str(posts))
-            send_telegram_message(bot_token, chat_id, f"✅ <b>Posts per group set:</b> {posts}", parse_mode="HTML")
+            send_telegram_message(bot_token, chat_id, f"✅ <b>Posts per group set:</b> {posts}\n\n💡 <i>Note: For incremental scraping, duplicate detection overrides this limit</i>", parse_mode="HTML")
         except:
             send_telegram_message(bot_token, chat_id, "❌ <b>Invalid number.</b> Use 1-50", parse_mode="HTML")
     
