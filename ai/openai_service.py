@@ -33,7 +33,7 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
     Returns (send, summary).
     """
     client = get_openai_client()
-    content = post.get('post_content_raw') or post.get('content_text') or ""
+    content = post.get('post_content_raw') or post.get('content_text') or post.get('content') or ""
     url = post.get('post_url', '')
     author = post.get('post_author_name', '')
 
@@ -54,7 +54,7 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
         )
     usr = (
         (user_prompt or "Decide if this is relevant.").strip()
-        + f"\n\nAuthor: {author}\nURL: {url}\nContent:\n{content}"
+        + f"\n\nContent:\n{content}"
     )[:6000]
 
     resp = client.chat.completions.create(
