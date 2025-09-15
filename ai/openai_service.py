@@ -67,29 +67,15 @@ def decide_and_summarize_for_post(post: Dict, system_prompt: str, user_prompt: s
     )
     text = resp.choices[0].message.content if resp.choices else ""
     
-    # DEBUG: Show what we're sending and receiving
-    print(f"🔍 FULL SYSTEM MESSAGE SENT TO AI:")
-    print(f'"{sys}"')
-    print()
-    print(f"🔍 FULL USER MESSAGE SENT TO AI:")
-    print(f'"{usr}"')
-    print()
-    print(f"🔍 RAW AI RESPONSE:")
-    print(f'"{text}"')
-    print()
-    
     try:
         data = json.loads(text)
         send = bool(data.get("send", False))
         summary = str(data.get("summary", ""))
-        print(f"🔍 PARSED JSON: send={send}, summary='{summary}'")
         return send, summary
     except Exception as e:
-        print(f"🔍 JSON PARSE ERROR: {e}")
-        print(f"🔍 Trying fallback parsing...")
+        logging.error(f"JSON parse error in AI response: {e}")
         # Fallback: simple heuristic
         lowered = (text or "").lower()
         send = "\"send\": true" in lowered or "\"send\":true" in lowered or lowered.strip().startswith("send")
         summary = text if send else ""
-        print(f"🔍 FALLBACK RESULT: send={send}, summary='{summary}'")
         return send, summary 
