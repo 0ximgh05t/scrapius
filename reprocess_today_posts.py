@@ -110,12 +110,17 @@ async def reprocess_posts_smart():
         
         for i, post in enumerate(posts, 1):
             try:
-                # Show progress
-                logging.info(f"🔄 [{i}/{len(posts)}] Processing post ID {post['internal_post_id']} from {post['scraped_at']}")
+                # Show progress with content glimpse
+                content_preview = post['content_text'][:150].replace('\n', ' ').strip()
+                if len(post['content_text']) > 150:
+                    content_preview += "..."
                 
-                # Create post dict for AI
+                logging.info(f"🔄 [{i}/{len(posts)}] Processing post ID {post['internal_post_id']} from {post['scraped_at']}")
+                logging.info(f"   📝 Content ({len(post['content_text'])} chars): \"{content_preview}\"")
+                
+                # Create post dict for AI - USE FULL CONTENT!
                 post_dict = {
-                    'content': post['content_text'][:500] + "..." if len(post['content_text']) > 500 else post['content_text'],
+                    'content': post['content_text'],  # FULL content, no truncation!
                     'author': 'Anonymous',
                     'url': post['post_url']
                 }
