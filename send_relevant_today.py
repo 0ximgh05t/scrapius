@@ -114,6 +114,12 @@ async def send_relevant_posts():
             content = post['content_text']
             clean_content = content.replace('See more', '').replace('Show more', '').replace('… Žr. daugiau', '').replace('Žr. daugiau', '').strip()
             
+            # Escape HTML characters that might break Telegram parsing
+            clean_content_for_telegram = (clean_content
+                .replace('<', '&lt;')
+                .replace('>', '&gt;')
+                .replace('&', '&amp;'))
+            
             # Show post preview
             print(f"\n📋 POST {i}/{len(posts)} - ID: {post['internal_post_id']}")
             print(f"🏷️  GROUP: {post['group_name']}")
@@ -148,7 +154,7 @@ async def send_relevant_posts():
             
             # Format message for Telegram
             message = f"🔥 <b>Relevant Post from {post['group_name']}</b>\n\n"
-            message += f"{clean_content}\n\n"
+            message += f"{clean_content_for_telegram}\n\n"
             if post['post_url']:
                 message += f"🔗 <a href=\"{post['post_url']}\">View Post</a>\n"
             message += f"📅 {post['scraped_at']}"
