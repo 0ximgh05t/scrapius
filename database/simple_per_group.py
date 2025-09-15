@@ -406,17 +406,40 @@ def add_post_to_group(db_conn: sqlite3.Connection, table_suffix: str, post_data:
                 db_conn.commit()
                 return existing[0], True  # Return True to indicate it was updated (treat as new)
         
-        # Insert new post (ai_relevant will be NULL until AI processes it)
-        cursor.execute(f"""
-            INSERT OR IGNORE INTO {posts_table} (
-                facebook_post_id, post_url, post_content_raw, content_hash
-            ) VALUES (?, ?, ?, ?)
-        """, (
-            post_data.get('facebook_post_id'),
-            post_data.get('post_url'),
-            post_data.get('content_text'),
-            post_data.get('content_hash')
-        ))
+        # Extract AI result if provided
+        ai_result = post_data.get('ai_result')
+        ai_relevant = None
+        ai_processed_at = None
+        
+        if ai_result and isinstance(ai_result, dict):
+            ai_relevant = 1 if ai_result.get('relevant', False) else 0
+            ai_processed_at = 'CURRENT_TIMESTAMP'
+        
+        # Insert new post with AI results if available
+        if ai_result:
+            cursor.execute(f"""
+                INSERT OR IGNORE INTO {posts_table} (
+                    facebook_post_id, post_url, post_content_raw, content_hash, ai_relevant, ai_processed_at
+                ) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            """, (
+                post_data.get('facebook_post_id'),
+                post_data.get('post_url'),
+                post_data.get('content_text'),
+                post_data.get('content_hash'),
+                ai_relevant
+            ))
+        else:
+            # Insert without AI results (will be processed later)
+            cursor.execute(f"""
+                INSERT OR IGNORE INTO {posts_table} (
+                    facebook_post_id, post_url, post_content_raw, content_hash
+                ) VALUES (?, ?, ?, ?)
+            """, (
+                post_data.get('facebook_post_id'),
+                post_data.get('post_url'),
+                post_data.get('content_text'),
+                post_data.get('content_hash')
+            ))
         
         if cursor.rowcount > 0:
             post_id = cursor.lastrowid
