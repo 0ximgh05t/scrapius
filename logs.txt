@@ -1,39 +1,441 @@
-Sep 11 16:31:19 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:19,985 - INFO - ✅ System ChromeDriver created successfully
-Sep 11 16:31:19 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:19,985 - INFO - 🍪 Attempting to load cookies from: /root/scrapius/fb_cookies.json
-Sep 11 16:31:19 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:19,985 - INFO - 🍪 Cookie file exists - loading...
-Sep 11 16:31:38 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:38,597 - INFO - ✅ Cookies loaded successfully
-Sep 11 16:31:38 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:38,597 - INFO - Checking Facebook session validity...
-Sep 11 16:31:58 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:31:58,456 - INFO - ✅ Scraper manager initialized successfully
-Sep 11 16:32:02 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:02,524 - INFO - 🔍 [1/13] Scraping group: https://www.facebook.com/groups/165457490610070
-Sep 11 16:32:02 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:02,532 - INFO - 🔍 Most recent post in database: 2163973547425111
-Sep 11 16:32:02 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:02,532 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
-Sep 11 16:32:02 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:02,532 - INFO - Navigating to group: https://www.facebook.com/groups/165457490610070?sorting_setting=CHRONOLOGICAL (chronological sorting)
-Sep 11 16:32:25 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:25,666 - INFO - 📋 Found existing group 7 -> Group_165457490610070
-Sep 11 16:32:25 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:25,667 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
-Sep 11 16:32:32 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:32,789 - INFO - Starting to scrape up to 5 posts from https://www.facebook.com/groups/165457490610070 using 5 workers...
-Sep 11 16:32:34 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:34,926 - INFO - Scroll 1: Found 24 potential posts. Scraped: 0/5. Active tasks: 0.
-Sep 11 16:32:44 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:44,223 - INFO - ✅ First post is new - continuing incremental scrape
-Sep 11 16:32:46 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:46,069 - INFO - Scroll 2: Found 24 potential posts. Scraped: 3/5. Active tasks: 1.
-Sep 11 16:32:46 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:46,296 - INFO - 🔄 Skipping duplicate content (quick hash: c3495f02e73e)
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,498 - INFO - 🛑 Found duplicate content (hash: 42b8d229...)
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,500 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,500 - INFO - Target of 5 posts reached. Finalizing...
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,500 - INFO - Scroll attempts finished or target reached. Waiting for 4 remaining tasks...
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,746 - INFO - Yielding 4 posts in reverse order (newest gets highest ID)
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,747 - INFO - Finished scraping generator. Total posts yielded: 4.
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,747 - WARNING - Generator finished, but only yielded 4 posts, less than requested 5.
-Sep 11 16:32:54 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:54,747 - INFO - 📊 Found 4 new posts in group https://www.facebook.com/groups/165457490610070
-Sep 11 16:32:57 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:57,184 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 16:32:57 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:57,188 - INFO - 🤖 AI processed post: False
-Sep 11 16:32:57 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:57,197 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 30
-Sep 11 16:32:58 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:58,284 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 16:32:58 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:58,289 - INFO - 🤖 AI processed post: False
-Sep 11 16:32:58 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:58,298 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 31
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,205 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,209 - INFO - 🤖 AI processed post: False
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,215 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 32
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,895 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,898 - INFO - 🤖 AI processed post: False
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,908 - INFO - ✅ Added new post to Posts_Group_165457490610070 with ID 33
-Sep 11 16:32:59 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:32:59,908 - INFO - ⏳ Waiting 30s before next group (reliability)
-Sep 11 16:33:32 ufrg.l.dedikuoti.lt scrapius[126581]: 2025-09-11 16:33:32,151 - INFO - 🔍 [2/13] Scraping group: https://www.facebook.com/groups/marketingsirsocialiniutinkluadministravimas
+Sep 15 07:52:13 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:13,982 - INFO - 📊 Found 7 new posts in group https://www.facebook.com/groups/googleseomastermind
+Sep 15 07:52:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:15,017 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:15,025 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:15,032 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 13
+Sep 15 07:52:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:16,005 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:16,015 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:16,022 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 14
+Sep 15 07:52:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:16,994 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:17 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:17,006 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:17 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:17,015 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 15
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,144 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,147 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,154 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 16
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,813 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,816 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:18,825 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 17
+Sep 15 07:52:19 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:19,822 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:19 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:19,844 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:19 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:19,848 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 18
+Sep 15 07:52:20 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:20,625 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:52:20 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:20,645 - INFO - 🤖 AI processed post: False
+Sep 15 07:52:20 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:20,653 - INFO - ✅ Added new post to Posts_Group_713ac9f57c with ID 19
+Sep 15 07:52:20 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:20,654 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:52:52 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:52,883 - INFO - 🔍 [10/20] Scraping group: https://www.facebook.com/groups/GoogleAdsMastermind
+Sep 15 07:52:52 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:52,886 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:52:52 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:52:52,886 - INFO - Navigating to group: https://www.facebook.com/groups/GoogleAdsMastermind?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:53:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:14,293 - INFO - 📋 Found existing group 16 -> Group_49391181d3
+Sep 15 07:53:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:14,304 - INFO - 📝 Scraping group name (first time)...
+Sep 15 07:53:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:15,084 - INFO - 🔍 Starting group name extraction. Current URL: https://www.facebook.com/groups/GoogleAdsMastermind?sorting_setting=CHRONOLOGICAL
+Sep 15 07:53:17 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:17,536 - INFO - ✅ Scraped group name: 'Google Ads (AdWords) Mastermind' using selector: h1[dir="auto"] span a
+Sep 15 07:53:17 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:17,568 - INFO - ✅ Updated group name to: 'Google Ads (AdWords) Mastermind'
+Sep 15 07:53:17 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:17,568 - INFO - 🆕 No existing posts found - this is a fresh scrape
+Sep 15 07:53:25 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:25,006 - INFO - 🆕 Fresh scraping mode: will scrape up to 5 posts
+Sep 15 07:53:25 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:25,008 - INFO - Starting to scrape from https://www.facebook.com/groups/GoogleAdsMastermind using 5 workers...
+Sep 15 07:53:30 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:30,096 - INFO - Scroll 1: Found 32 potential posts. Scraped: 0/5. Active tasks: 0.
+Sep 15 07:53:41 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:41,332 - INFO - Scroll 2: Found 32 potential posts. Scraped: 2/5. Active tasks: 1.
+Sep 15 07:53:41 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:41,598 - INFO - 🔄 Skipping duplicate content (quick hash: 0a8a4539eb0b)
+Sep 15 07:53:54 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:54,757 - INFO - Target of 5 posts reached. Finalizing...
+Sep 15 07:53:54 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:54,764 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 15 07:53:55 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:55,287 - INFO - Yielding 5 posts in reverse order (newest gets highest ID)
+Sep 15 07:53:55 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:55,287 - INFO - Finished scraping generator. Total posts yielded: 5.
+Sep 15 07:53:55 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:55,368 - INFO - 📊 Found 5 new posts in group https://www.facebook.com/groups/GoogleAdsMastermind
+Sep 15 07:53:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:57,343 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:53:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:57,348 - INFO - 🤖 AI processed post: False
+Sep 15 07:53:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:57,357 - INFO - ✅ Added new post to Posts_Group_49391181d3 with ID 1
+Sep 15 07:53:58 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:58,286 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:53:58 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:58,295 - INFO - 🤖 AI processed post: False
+Sep 15 07:53:58 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:58,302 - INFO - ✅ Added new post to Posts_Group_49391181d3 with ID 2
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,227 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🤖 Starting Scrapius - Clean Architecture Version
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: ⚠️ Telegram API connection error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 PARSED: send=False, summary=
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 POST CONTENT: ...
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 🔍 RAW AI RESPONSE: {"send":false,"summary":""}
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,236 - INFO - 🤖 AI processed post: False
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,245 - INFO - ✅ Added new post to Posts_Group_49391181d3 with ID 3
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,878 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,885 - INFO - 🤖 AI processed post: False
+Sep 15 07:53:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:53:59,891 - INFO - ✅ Added new post to Posts_Group_49391181d3 with ID 4
+Sep 15 07:54:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:00,646 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:54:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:00,652 - INFO - 🤖 AI processed post: False
+Sep 15 07:54:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:00,656 - INFO - ✅ Added new post to Posts_Group_49391181d3 with ID 5
+Sep 15 07:54:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:00,656 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:54:32 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:32,907 - INFO - 🔍 [11/20] Scraping group: https://www.facebook.com/groups/seolietuva
+Sep 15 07:54:32 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:32,908 - INFO - 🔍 Most recent post in database: 24954621817476423
+Sep 15 07:54:32 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:32,908 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:54:32 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:32,908 - INFO - Navigating to group: https://www.facebook.com/groups/seolietuva?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:54:46 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:46,127 - INFO - 📋 Found existing group 17 -> Group_cb6f9fd6df
+Sep 15 07:54:46 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:46,137 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 07:54:54 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:54,483 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 07:54:54 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:54,486 - INFO - Starting to scrape from https://www.facebook.com/groups/seolietuva using 5 workers...
+Sep 15 07:54:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:54:57,768 - INFO - Scroll 1: Found 14 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,927 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,930 - INFO - 🛑 Found duplicate content (hash: 38dc1528...)
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,931 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,931 - INFO - Target of 1000 posts reached. Finalizing...
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,931 - INFO - Scroll attempts finished or target reached. Waiting for 3 remaining tasks...
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,935 - INFO - Yielding 2 posts in reverse order (newest gets highest ID)
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,935 - INFO - Finished scraping generator. Total posts yielded: 2.
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,936 - WARNING - Generator finished, but only yielded 2 posts, less than requested 1000.
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,946 - INFO - 📊 Found 2 new posts in group https://www.facebook.com/groups/seolietuva
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,946 - INFO - 🔄 Skipping duplicate post (hash: 8a6db852150f...)
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,947 - INFO - 🔄 Skipping duplicate post (hash: eac908928067...)
+Sep 15 07:55:15 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:15,947 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:55:48 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:48,348 - INFO - 🔍 [12/20] Scraping group: https://www.facebook.com/groups/1599694093510363
+Sep 15 07:55:48 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:48,355 - INFO - 🔍 Most recent post in database: 4196456460500767
+Sep 15 07:55:48 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:48,355 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:55:48 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:55:48,356 - INFO - Navigating to group: https://www.facebook.com/groups/1599694093510363?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:56:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:06,757 - INFO - 📋 Found existing group 18 -> Group_1599694093510363
+Sep 15 07:56:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:06,762 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 07:56:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:14,136 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 07:56:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:14,138 - INFO - Starting to scrape from https://www.facebook.com/groups/1599694093510363 using 5 workers...
+Sep 15 07:56:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:16,596 - INFO - Scroll 1: Found 16 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,245 - INFO - 🛑 Found duplicate content (hash: 7b067a9c...)
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,246 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,246 - INFO - Target of 1000 posts reached. Finalizing...
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,246 - INFO - Scroll attempts finished or target reached. Waiting for 6 remaining tasks...
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,251 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,252 - INFO - Finished scraping generator. Total posts yielded: 0.
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,252 - WARNING - Generator finished, but only yielded 0 posts, less than requested 1000.
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,257 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/1599694093510363
+Sep 15 07:56:33 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:56:33,257 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:57:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:05,738 - INFO - 🔍 [13/20] Scraping group: https://www.facebook.com/groups/marketingaslt
+Sep 15 07:57:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:05,744 - INFO - 🔍 Most recent post in database: 1301411101662090
+Sep 15 07:57:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:05,744 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:57:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:05,744 - INFO - Navigating to group: https://www.facebook.com/groups/marketingaslt?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:57:21 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:21,897 - INFO - 📋 Found existing group 19 -> Group_7107de3ed1
+Sep 15 07:57:21 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:21,897 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 07:57:27 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:27,756 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 07:57:27 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:27,758 - INFO - Starting to scrape from https://www.facebook.com/groups/marketingaslt using 5 workers...
+Sep 15 07:57:30 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:30,964 - INFO - Scroll 1: Found 13 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,826 - INFO - 🛑 Found duplicate content (hash: b6001922...)
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,833 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,833 - INFO - Target of 1000 posts reached. Finalizing...
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,833 - INFO - Scroll attempts finished or target reached. Waiting for 5 remaining tasks...
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,834 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,834 - INFO - Finished scraping generator. Total posts yielded: 0.
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,835 - WARNING - Generator finished, but only yielded 0 posts, less than requested 1000.
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,835 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/marketingaslt
+Sep 15 07:57:45 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:57:45,835 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:58:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:18,106 - INFO - 🔍 [14/20] Scraping group: https://www.facebook.com/groups/1551399819056177
+Sep 15 07:58:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:18,114 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:58:18 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:18,114 - INFO - Navigating to group: https://www.facebook.com/groups/1551399819056177?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:58:29 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:29,366 - INFO - 📋 Found existing group 20 -> Group_1551399819056177
+Sep 15 07:58:29 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:29,382 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 07:58:36 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:36,810 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 07:58:36 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:36,814 - INFO - Starting to scrape from https://www.facebook.com/groups/1551399819056177 using 5 workers...
+Sep 15 07:58:42 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:58:42,076 - INFO - Scroll 1: Found 17 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,442 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,442 - INFO - 🛑 Found duplicate content (hash: e110a5b3...)
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,442 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,442 - INFO - Target of 1000 posts reached. Finalizing...
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,442 - INFO - Scroll attempts finished or target reached. Waiting for 7 remaining tasks...
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,451 - INFO - Yielding 1 posts in reverse order (newest gets highest ID)
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,451 - INFO - Finished scraping generator. Total posts yielded: 1.
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,451 - WARNING - Generator finished, but only yielded 1 posts, less than requested 1000.
+Sep 15 07:59:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:02,451 - INFO - 📊 Found 1 new posts in group https://www.facebook.com/groups/1551399819056177
+Sep 15 07:59:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:03,413 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 07:59:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:03,416 - INFO - 🤖 AI processed post: False
+Sep 15 07:59:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:03,424 - INFO - ✅ Added new post to Posts_Group_1551399819056177 with ID 6
+Sep 15 07:59:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:03,424 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 07:59:35 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:35,677 - INFO - 🔍 [15/20] Scraping group: https://www.facebook.com/groups/533304468936676
+Sep 15 07:59:35 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:35,685 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 07:59:35 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:35,685 - INFO - Navigating to group: https://www.facebook.com/groups/533304468936676?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 07:59:51 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:51,067 - INFO - 📋 Found existing group 21 -> Group_533304468936676
+Sep 15 07:59:51 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:51,078 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 07:59:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:59,013 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 07:59:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 07:59:59,035 - INFO - Starting to scrape from https://www.facebook.com/groups/533304468936676 using 5 workers...
+Sep 15 08:00:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:00:05,138 - INFO - Scroll 1: Found 18 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 08:00:32 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:00:32,542 - INFO - ✅ First post is new - continuing incremental scrape
+Sep 15 08:00:34 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:00:34,365 - INFO - Scroll 2: Found 32 potential posts. Scraped: 7/1000. Active tasks: 1.
+Sep 15 08:00:34 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:00:34,628 - INFO - 🔄 Skipping duplicate content (quick hash: a4e14c0727bf)
+Sep 15 08:01:23 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:01:23,764 - INFO - Scroll 3: Found 36 potential posts. Scraped: 12/1000. Active tasks: 1.
+Sep 15 08:01:56 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:01:56,714 - INFO - Scroll 4: Found 36 potential posts. Scraped: 14/1000. Active tasks: 1.
+Sep 15 08:02:27 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:27,174 - INFO - Scroll 5: Found 36 potential posts. Scraped: 14/1000. Active tasks: 1.
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,713 - INFO - No new posts found for 3 consecutive scrolls. Stopping scroll.
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,715 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,715 - INFO - Yielding 14 posts in reverse order (newest gets highest ID)
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,716 - INFO - Finished scraping generator. Total posts yielded: 14.
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,716 - WARNING - Generator finished, but only yielded 14 posts, less than requested 1000.
+Sep 15 08:02:57 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:57,716 - INFO - 📊 Found 14 new posts in group https://www.facebook.com/groups/533304468936676
+Sep 15 08:02:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:59,098 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:02:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:59,108 - INFO - 🤖 AI processed post: False
+Sep 15 08:02:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:02:59,124 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 17
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,065 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,074 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,084 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 18
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,964 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,974 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:00 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:00,982 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 19
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,026 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,037 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,045 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 20
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,045 - INFO - 🔄 Skipping duplicate post (hash: 87a863de0fa1...)
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,736 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,743 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:02 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:02,748 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 21
+Sep 15 08:03:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:03,448 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:03,453 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:03 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:03,458 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 22
+Sep 15 08:03:04 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:04,182 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:04 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:04,184 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:04 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:04,191 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 23
+Sep 15 08:03:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:05,045 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:05,056 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:05,062 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 24
+Sep 15 08:03:05 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:05,063 - INFO - 🔄 Skipping duplicate post (hash: 87a863de0fa1...)
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,044 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,055 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,064 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 25
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,894 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,904 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:06 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:06,912 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 26
+Sep 15 08:03:07 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:07,626 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:07 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:07,635 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:07 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:07,645 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 27
+Sep 15 08:03:09 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:09,421 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Sep 15 08:03:09 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:09,425 - INFO - 🤖 AI processed post: False
+Sep 15 08:03:09 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:09,433 - INFO - ✅ Added new post to Posts_Group_533304468936676 with ID 28
+Sep 15 08:03:09 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:09,434 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 08:03:41 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:41,693 - INFO - 🔍 [16/20] Scraping group: https://www.facebook.com/groups/9946615872128060
+Sep 15 08:03:41 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:41,694 - INFO - 🚀 Skipping virtual display - not needed for direct scraping
+Sep 15 08:03:41 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:41,694 - INFO - Navigating to group: https://www.facebook.com/groups/9946615872128060?sorting_setting=CHRONOLOGICAL (chronological sorting)
+Sep 15 08:03:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:59,646 - INFO - 📋 Found existing group 22 -> Group_9946615872128060
+Sep 15 08:03:59 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:03:59,675 - INFO - 🔄 Incremental scraping: will stop when finding duplicate content
+Sep 15 08:04:04 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:04,686 - INFO - 🔄 Incremental scraping mode: will scrape until duplicate found (limit: 1000)
+Sep 15 08:04:04 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:04,692 - INFO - Starting to scrape from https://www.facebook.com/groups/9946615872128060 using 5 workers...
+Sep 15 08:04:08 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:08,525 - INFO - Scroll 1: Found 10 potential posts. Scraped: 0/1000. Active tasks: 0.
+Sep 15 08:04:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:14,436 - INFO - 🔄 Skipping duplicate content (quick hash: 3ee5721ba83d)
+Sep 15 08:04:14 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:14,817 - INFO - 🔄 Skipping duplicate content (quick hash: 3ee5721ba83d)
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,417 - INFO - 🛑 Found duplicate content (hash: ce99fd7a...)
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,417 - INFO - 🎯 Incremental scraping complete - stopping at duplicate
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,417 - INFO - Target of 1000 posts reached. Finalizing...
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,417 - INFO - Scroll attempts finished or target reached. Waiting for 1 remaining tasks...
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,418 - INFO - Yielding 0 posts in reverse order (newest gets highest ID)
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,418 - INFO - Finished scraping generator. Total posts yielded: 0.
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,418 - WARNING - Generator finished, but only yielded 0 posts, less than requested 1000.
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,423 - INFO - 📭 No new posts found in group https://www.facebook.com/groups/9946615872128060
+Sep 15 08:04:16 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:16,423 - INFO - ⏳ Waiting 30s before next group (reliability)
+Sep 15 08:04:48 ufrg.l.dedikuoti.lt scrapius[159173]: 2025-09-15 08:04:48,676 - INFO - 🔍 [17/20] Scraping group: https://www.facebook.com/groups/1905427629672476
