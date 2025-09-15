@@ -26,8 +26,8 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-def get_all_unprocessed_posts_today() -> List[Dict]:
-    """Get all unprocessed posts from today, ordered by scraped_at (oldest first)."""
+def get_all_posts_today() -> List[Dict]:
+    """Get ALL posts from today, ordered by scraped_at (oldest first)."""
     conn = get_db_connection()
     if not conn:
         return []
@@ -44,7 +44,7 @@ def get_all_unprocessed_posts_today() -> List[Dict]:
         for table_name in table_names:
             posts_table = f"Posts_{table_name}"
             
-            # Get unprocessed posts from today for this group
+            # Get ALL posts from today for this group (regardless of AI status)
             cursor.execute(f"""
                 SELECT 
                     internal_post_id,
@@ -54,7 +54,6 @@ def get_all_unprocessed_posts_today() -> List[Dict]:
                     '{table_name}' as table_suffix
                 FROM {posts_table}
                 WHERE DATE(scraped_at) = DATE('now')
-                AND ai_relevant IS NULL
                 ORDER BY scraped_at ASC
             """)
             
@@ -71,7 +70,7 @@ def get_all_unprocessed_posts_today() -> List[Dict]:
         # Sort all posts by scraped_at (oldest first)
         all_posts.sort(key=lambda x: x['scraped_at'])
         
-        logging.info(f"📋 Found {len(all_posts)} unprocessed posts from today")
+        logging.info(f"📋 Found {len(all_posts)} posts from today (will reprocess all)")
         return all_posts
         
     except Exception as e:
@@ -83,10 +82,10 @@ def get_all_unprocessed_posts_today() -> List[Dict]:
 async def reprocess_posts_smart():
     """Smart reprocessing with delays and progress tracking."""
     
-    # Get all unprocessed posts
-    posts = get_all_unprocessed_posts_today()
+    # Get all posts from today
+    posts = get_all_posts_today()
     if not posts:
-        logging.info("✅ No unprocessed posts found!")
+        logging.info("✅ No posts found from today!")
         return
     
     # Get AI prompts
@@ -182,7 +181,7 @@ async def reprocess_posts_smart():
 if __name__ == "__main__":
     print("🤖 Smart Post Reprocessing Tool")
     print("=" * 50)
-    print("This will reprocess all unprocessed posts from today")
+    print("This will reprocess ALL posts from today (including previously processed ones)")
     print("Processing order: Oldest to newest")
     print("Delay: 2 seconds between posts")
     print("=" * 50)
