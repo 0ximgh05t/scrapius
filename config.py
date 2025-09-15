@@ -152,19 +152,20 @@ def get_reliability_settings(conn=None) -> dict:
             post_delay = float(botsettings_get(conn, 'post_delay', '1.0'))
             max_posts = int(botsettings_get(conn, 'max_posts_per_group', '10'))
         except:
-            # Fallback to env vars if database read fails
-            group_delay = int(os.getenv("BOT_GROUP_DELAY", "30"))
-            post_delay = float(os.getenv("BOT_POST_DELAY", "1.0"))
+            # Fallback to env vars if database read fails - OPTIMIZED DEFAULTS
+            group_delay = int(os.getenv("BOT_GROUP_DELAY", "10"))  # Reduced from 30s
+            post_delay = float(os.getenv("BOT_POST_DELAY", "0.5"))  # Reduced from 1.0s
             max_posts = int(os.getenv("BOT_MAX_POSTS", "10"))
     else:
-        group_delay = int(os.getenv("BOT_GROUP_DELAY", "30"))
-        post_delay = float(os.getenv("BOT_POST_DELAY", "1.0"))
+        # OPTIMIZED DEFAULTS for faster scraping
+        group_delay = int(os.getenv("BOT_GROUP_DELAY", "10"))  # Reduced from 30s
+        post_delay = float(os.getenv("BOT_POST_DELAY", "0.5"))  # Reduced from 1.0s
         max_posts = int(os.getenv("BOT_MAX_POSTS", "10"))
     
     return {
-        # Delays between operations (seconds)
+        # Delays between operations (seconds) - OPTIMIZED
         'group_delay': group_delay,
-        'scroll_delay': float(os.getenv("BOT_SCROLL_DELAY", "3.0")),  # 3s between scrolls
+        'scroll_delay': float(os.getenv("BOT_SCROLL_DELAY", "1.5")),  # Reduced from 3.0s
         'post_processing_delay': post_delay,
         
         # Retry settings
@@ -176,9 +177,9 @@ def get_reliability_settings(conn=None) -> dict:
         'stale_element_max_retries': int(os.getenv("BOT_STALE_RETRIES", "3")),
         'session_check_interval': int(os.getenv("BOT_SESSION_CHECK", "300")),  # 5 minutes
         
-        # Conservative limits
+        # Conservative limits - OPTIMIZED
         'max_posts_per_group': max_posts,
-        'page_load_timeout': int(os.getenv("BOT_PAGE_TIMEOUT", "45")),  # Increased timeout
+        'page_load_timeout': int(os.getenv("BOT_PAGE_TIMEOUT", "20")),  # Reduced from 45s
     }
 
 def get_working_hours_settings(conn=None) -> dict:

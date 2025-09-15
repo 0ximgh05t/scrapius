@@ -921,7 +921,7 @@ def scrape_authenticated_group(
                 scroll_attempt += 1
                 
                 driver.execute_script("window.scrollBy(0, window.innerHeight * 0.8);")
-                time.sleep(1.5)
+                time.sleep(1.0)  # Optimized from 1.5s
 
                 try:
                     WebDriverWait(driver, 15).until(

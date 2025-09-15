@@ -486,8 +486,8 @@ class ScraperManager:
                     else:
                         logging.error(f"❌ Failed to update AI result for post ID {post['internal_post_id']}")
                         
-                    # Small delay between AI calls to avoid rate limits
-                    await asyncio.sleep(0.5)
+                    # Small delay between AI calls to avoid rate limits - OPTIMIZED
+                    await asyncio.sleep(0.2)
                     
                 except Exception as e:
                     logging.error(f"❌ AI processing error for post ID {post['internal_post_id']}: {e}")
