@@ -396,8 +396,8 @@ Current Settings:
             
             # Check group limit
             existing_groups = list_all_groups(conn)
-            if len(existing_groups) >= 20:
-                send_telegram_message(bot_token, chat_id, "⚠️ <b>Group limit reached!</b> Max 5 groups. Remove one first.", parse_mode="HTML")
+            if len(existing_groups) >= 100:
+                send_telegram_message(bot_token, chat_id, "⚠️ <b>Group limit reached!</b> Max 100 groups. Remove one first.", parse_mode="HTML")
                 return
             
             group_id, table_suffix = get_or_create_group(conn, norm_url, f"Group from {norm_url}")
